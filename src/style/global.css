@@ -1,0 +1,32 @@
+/* use border-box by default, but allow overrides */
+*    { box-sizing: inherit;      }
+body { box-sizing: "border-box"; }
+
+/* ---- page structure ---------------------------------- */
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  
+  background-color: rgb(106, 155, 228);
+  font-family: ui-rounded, 'Hiragino Maru Gothic ProN', Quicksand, Comfortaa, Manjari, 'Arial Rounded MT', 'Arial Rounded MT Bold', Calibri, source-sans-pro, sans-serif; 
+}
+
+.layout-block {
+  margin: var(--gap-2) 0;
+  padding: var(--gap-2);
+  background-color: white;
+  border: 1px solid black;
+}
+
+/* ---- columns ----------------------------------------- */
+
+.column-normal {
+  margin: 0 auto;
+}
+
+.column-normal {
+  max-width: var(--column-normal-max-width);
+  min-width: var(--column-normal-min-width);
+}

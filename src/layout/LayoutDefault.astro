@@ -1,0 +1,31 @@
+---
+import IncludeCss from "./IncludeCss.astro";
+
+interface Props {
+	pageTitle: string,
+	theme?: string|undefined,
+}
+
+const { pageTitle, theme } = Astro.props;
+---
+
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <title>{pageTitle}</title>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/style/global.css" />
+		<meta name="viewport" content="width=device-width" />
+    <IncludeCss />
+  </head>
+	<body class={theme ? `theme-${theme}` : "theme-default"}>
+    <slot />
+  </body>
+</html>
+
+<style>
+
+</style>

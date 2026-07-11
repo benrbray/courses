@@ -1,0 +1,40 @@
+---
+import NavCourses from '@components/NavCourses.astro';
+import ColumnNormal from '@layout/ColumnNormal.astro';
+import LayoutBlock from '@layout/LayoutBlock.astro';
+import LayoutDefault from '@layout/LayoutDefault.astro';
+
+import { getCollection } from 'astro:content';
+import { type CollectionEntry, render } from 'astro:content';
+
+export async function getStaticPaths() {
+	const course = await getCollection("course")
+	return course.map((course) => ({
+		params: { id: course.id },
+		props: course,
+	}));
+}
+type Props = CollectionEntry<'course'>;
+
+const course = Astro.props;
+const { Content } = await render(course);
+---
+
+<LayoutDefault
+	pageTitle={`${course.data.subject} ${course.data.number}`}
+	theme={course.data.theme}
+>
+	<ColumnNormal>
+		<!-- nav -->
+		<NavCourses />
+		<!-- header -->
+		<LayoutBlock>
+			<h1>{course.data.subject} {course.data.number}</h1>
+			<h2>{course.data.title}</h2>
+		</LayoutBlock>
+		<!-- main -->
+		<LayoutBlock>
+			<Content />
+		</LayoutBlock>
+	</ColumnNormal>
+</LayoutDefault>
