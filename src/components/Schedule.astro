@@ -1,0 +1,23 @@
+---
+interface Props {
+}
+
+const { } = Astro.props;
+---
+
+<table class="course-schedule">
+  <colgroup>
+    <col style="width: 2em">
+    <col style="width: 8em">
+    <col style="width: 8em">
+    <col style="width: auto">
+  </colgroup>
+  <slot />
+</table>
+
+<style>
+.course-schedule {
+  border-collapse: collapse;
+  width: 100%;
+}
+</style>

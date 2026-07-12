@@ -5,7 +5,15 @@ title: Web Application Programming
 theme: brown
 ---
 
+import Schedule from "@components/Schedule.astro"
+import ScheduleEntry from "@components/ScheduleEntry.astro"
+import ScheduleWeek from "@components/ScheduleWeek.astro"
+import ScheduleHoliday from "@components/ScheduleHoliday.astro"
+
 ## Course Description
+
+- **Credit Hours:** 4
+- **Prerequisites:** Minimum grade of C- in <abbr title="Computer Systems and Low-Level Programming">CIS 2107</abbr> and <abbr title="Data Structures">CIS 2168</abbr>.
 
 Prerequisites:  
 
@@ -18,18 +26,223 @@ Prerequisites:
 
 ## Schedule
 
+## Resources
+
+- Marijn Haverbeke, [Eloquent JavaScript](https://eloquentjavascript.net/), (*4th edition*)
+- [Modern JavaScript Tutorial](https://javascript.info/)
+- [Mozilla Developer Network](https://developer.mozilla.org/en-US/)
+
 ## Course Description
+
+This course is an introduction to modern, full-stack web application development.  You will learn to build 
+
+Prerequisites:
+
+* Familiarity with
+
+As a software engineer, you will be responsible fo
+
+
+This course will introduce at least three new programming languages (JavaScript, TypeScript, and C\#) in addition to the Java and C or Python you have already learned.  You will learn to recognize when a language 
+
+We will introduce at least three new programming languages (JavaScript, TypeScript, and C\#) and study 
+
+## Course Topics
+
+Software Engineering
+
+- Git and Version Control
+- Command Line Fluency
+- Separation of Concerns
+- Using the browser inspector
 
 Frontend
 
-- HTML and the DOM
-- CSS (selectors, `flex`, `grid`)
+- HTML
+  - Semantic HTML
+  - Accessibility
+  - `data` attributes
+- CSS
+  - box model
+  - measurements (`pt`, `px`, `em`, `rem`)
+  - margin and padding
+  - `flexbox` and `grid` layouts
+  - adaptive webpages
+- Images and SVG
+- Document Object Model
+- Canvas
+- Audio and Video
+
+JavaScript Programming
+
+- lambda functions
+- `===` and `!==`
+- objects, prototypes, and classes
+- callbacks and higher-order functions
+- closures and scope
+- objects
+- `this`
+- `async`/`await` and Promises
+- events
+- Fetch API
+- Temporal API
+- `npm`
+
+TypeScript Programming
+
+- interfaces
+- record types
+- structural types
+- polymorphism
+
+Design Patterns
+
+- Model, View, Controller
+- Requests and Response
+- JSON
+- APIs and REST
+- HTTPS and HTTP
 
 Backend
 
+- C#
+- Logins & Password Security
+- Sessions
+  - Browser Refresh
+- Idempotent Requests, Form Resubmission
 
+Web Concepts
+
+- Cookies
+- Local Storage
+
+Database Concepts
+
+- SQL
+
+Reactive Web Pages
+
+Advanced Topics
+
+- Server Side Rendering vs. Client Side Rendering
+- Web Workers
+- Web Sockets
+- WebGL
+- WASM
+
+Dark Patterns
+
+- Websites without URLs
+- Back button hijacking
+- Async request that blocks page navigation
+- Scroll Hijacking
+
+## Project Ideas
+
+### Project 1:  HTML/CSS
+
+### Project 2:  JavaScript
+
+### Project 3:  Chrome Extension
+
+### Project 4:  Multiplayer Game
+
+### Ideas
+- Chrome/Firefox Extension
+- Calendar
+- Collaborative Text Editor
+- Online Multiplayer Game
+- Fix a website that is annoying to use
 
 ## Class Format
+
+## Assumed Knowledge
+
+Object-Oriented Programming
+
+* classes, inheritance, interfaces
+* 
+
+Data Structures & Algorithms
+
+* stacks, queues, lists
+
+## Course Schedule
+
+
+## Schedule
+
+<Schedule>
+  <ScheduleWeek weekNumber={1} weekTitle="Basic HTML and CSS" />
+  <ScheduleEntry date="2026-08-31">
+    Course Introduction, HTML, CSS
+  </ScheduleEntry>
+  <ScheduleEntry date="2026-09-02">Block, Inline</ScheduleEntry>
+  <ScheduleEntry date="2026-09-04">CSS</ScheduleEntry>
+  
+  <ScheduleWeek weekNumber={2} weekTitle="Advanced Page Layouts" />
+  <ScheduleEntry date="2026-09-07">Flexbox Layout</ScheduleEntry>
+  <ScheduleEntry date="2026-09-09">Grid Layout</ScheduleEntry>
+  <ScheduleEntry date="2026-09-11">-</ScheduleEntry>
+  
+  <ScheduleWeek weekNumber={3} weekTitle="-" />
+  <ScheduleEntry date="2026-09-14">-</ScheduleEntry>
+  <ScheduleEntry date="2026-09-16">-</ScheduleEntry>
+  <ScheduleEntry date="2026-09-18">-</ScheduleEntry>
+  
+  <ScheduleWeek weekNumber={4} weekTitle="-" />
+  <ScheduleEntry date="2026-09-21"><ScheduleHoliday>No Class (*National Holiday:* Respect for the Aged Day)</ScheduleHoliday></ScheduleEntry>
+  <ScheduleEntry date="2026-09-23">-</ScheduleEntry>
+  <ScheduleEntry date="2026-09-25"><ScheduleHoliday>No Class (*National Holiday:* Autumnal Equinox Day)</ScheduleHoliday></ScheduleEntry>
+  
+  <ScheduleWeek weekNumber={5} weekTitle="-" />
+  <ScheduleEntry date="2026-09-28">-</ScheduleEntry>
+  <ScheduleEntry date="2026-09-30">-</ScheduleEntry>
+  <ScheduleEntry date="2026-10-02">-</ScheduleEntry>
+  
+  <ScheduleWeek weekNumber={6} weekTitle="-" />
+  <ScheduleEntry date="2026-10-05">-</ScheduleEntry>
+  <ScheduleEntry date="2026-10-07">-</ScheduleEntry>
+  <ScheduleEntry date="2026-10-08">-</ScheduleEntry>
+  
+  <ScheduleWeek weekNumber={7} weekTitle="-" />
+  <ScheduleEntry date="2026-10-12"><ScheduleHoliday>No Class (*National Holiday:* Health Sports Day)</ScheduleHoliday></ScheduleEntry>
+  <ScheduleEntry date="2026-10-14">-</ScheduleEntry>
+  <ScheduleEntry date="2026-10-16">-</ScheduleEntry>
+  
+  <ScheduleWeek weekNumber={8} weekTitle="-" />
+  <ScheduleEntry date="2026-10-19">-</ScheduleEntry>
+  <ScheduleEntry date="2026-10-21">-</ScheduleEntry>
+  <ScheduleEntry date="2026-10-23"><ScheduleHoliday>No Class (*National Holiday:* Labor Thanksgiving Day)</ScheduleHoliday></ScheduleEntry>
+  
+  <ScheduleWeek weekNumber={9} weekTitle="-" />
+  <ScheduleEntry date="2026-10-26">-</ScheduleEntry>
+  <ScheduleEntry date="2026-10-28">-</ScheduleEntry>
+  <ScheduleEntry date="2026-10-30">-</ScheduleEntry>
+  
+  <ScheduleWeek weekNumber={10} weekTitle="-" />
+  <ScheduleEntry date="2026-11-02">-</ScheduleEntry>
+  <ScheduleEntry date="2026-11-04">-</ScheduleEntry>
+  <ScheduleEntry date="2026-11-06">-</ScheduleEntry>
+  
+  <ScheduleWeek weekNumber={11} weekTitle="-" />
+  <ScheduleEntry date="2026-11-09">-</ScheduleEntry>
+  <ScheduleEntry date="2026-11-11">-</ScheduleEntry>
+  <ScheduleEntry date="2026-11-13">-</ScheduleEntry>
+  
+  <ScheduleWeek weekNumber={12} weekTitle="-" />
+  <ScheduleEntry date="2026-11-16">-</ScheduleEntry>
+  <ScheduleEntry date="2026-11-18">-</ScheduleEntry>
+  <ScheduleEntry date="2026-11-20">-</ScheduleEntry>
+  
+  <ScheduleWeek weekNumber={13} weekTitle="-" />
+  <ScheduleEntry date="2026-11-23">-</ScheduleEntry>
+  <ScheduleEntry date="2026-11-25">-</ScheduleEntry>
+  <ScheduleEntry date="2026-11-27">-</ScheduleEntry>
+  
+  <ScheduleWeek weekNumber={14} weekTitle="Review" />
+  <ScheduleEntry date="2026-11-30">Last Day of Class</ScheduleEntry>
+</Schedule>
 
 ## Computer Setup Instructions
 
@@ -41,5 +254,7 @@ Installing PostgreSQL
 ## Reading
 
 ## Homework
+
+The starter code for each assignment will be hosted on **GitHub**.
 
 ## Projects

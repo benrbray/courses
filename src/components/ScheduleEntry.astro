@@ -1,0 +1,25 @@
+---
+import { Temporal } from "@js-temporal/polyfill"
+interface Props {
+  date: string,
+}
+
+const { date } = Astro.props;
+
+let plainDate = Temporal.PlainDate.from(date)
+let weekdays = ['Su', 'M', 'Tu', 'W', 'Th', 'F', 'Sa'];
+---
+
+<tr>
+  <td>{weekdays[plainDate.dayOfWeek]}</td>
+  <td>{plainDate.toLocaleString("en-US", { month: "short", day: "numeric" })}</td>
+  <td>-</td>
+  <td><slot /></td>
+</tr>
+
+<style>
+td {
+  padding: var(--gap-0);
+  border-bottom: 1px solid black;
+}
+</style>

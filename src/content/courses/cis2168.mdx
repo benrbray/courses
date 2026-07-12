@@ -5,10 +5,37 @@ title: Data Structures
 theme: circles
 ---
 
+import Schedule from "@components/Schedule.astro"
+import ScheduleEntry from "@components/ScheduleEntry.astro"
+import ScheduleWeek from "@components/ScheduleWeek.astro"
+import ScheduleHoliday from "@components/ScheduleHoliday.astro"
+
 ## Course Description
 
-Prerequisites:  
+- **Credit Hours:** 4
+- **Prerequisites:**  Minimum grade of C- in <abbr title="Program Design and Abstraction">CIS 1068</abbr> and <abbr title="Mathematical Concepts in Computing I">CIS 1066</abbr> and <abbr title="Precalculus">MATH 1022</abbr>
 
+A continuation of CIS 1068. Program style organization and design with continued emphasis on the object-oriented design paradigm. Understanding and use of data abstraction through Java classes and class libraries. Understanding and use of the following Abstract Data Types:
+
+* strings
+* stacks, queues, priority queues
+* lists, linked lists
+* binary trees, heaps
+* hash tables.
+
+Introduction to expression evaluation and other applications. Introduction to recursion and comparative analysis of searching and sorting algorithms and data structures. 
+
+Sorting algorithms include:
+
+* insertion sort
+* mergesort
+* heapsort
+* quicksort
+
+Other algorithms include:
+
+* binary search
+* hashing and Huffman coding
 
 ## Instructor
 
@@ -16,7 +43,101 @@ Prerequisites:
 - *Office Location:* Hillside
 - *Office Hours:* MWF
 
+## Assumed Knowledge
+
+You should be comfortable programming in Java and either Python or C.  We will not spend time reviewing basic syntax.  I can recommend the following resources if you need review:
+
+CIS 1068 (Program Design and Abstraction)
+
+* Object-Oriented Programming (classes, inheritance, interfaces)
+* Strings
+* Arrays, Vectors
+* Streams
+* Files and IO
+
+CIS 1166 (Math Concepts in Computing I)
+
+* Predicates and Propositions
+* Mathematical Sets and Set Operations
+* Functions and Mappings
+* Big-O Notation and Growth of Functions
+* Algorithms, Integers, and Matrices
+* Mathematical Induction and Recursive Definitions
+* Combinations, Permutations, Binary Coefficients
+* Discrete Probability, Expected Value, Variance
+* Writing Mathematical Proofs
+
 ## Schedule
+
+<Schedule>
+  <ScheduleWeek weekNumber={1} weekTitle="Introduction" />
+  <ScheduleEntry date="2026-08-31">Course Introduction</ScheduleEntry>
+  <ScheduleEntry date="2026-09-02">Abstract Data Types</ScheduleEntry>
+  <ScheduleEntry date="2026-09-04">Interfaces</ScheduleEntry>
+  
+  <ScheduleWeek weekNumber={2} weekTitle="Fundamentals" />
+  <ScheduleEntry date="2026-09-07">Data Structure:  Stacks</ScheduleEntry>
+  <ScheduleEntry date="2026-09-09">Data Structure:  Queues</ScheduleEntry>
+  <ScheduleEntry date="2026-09-11">Solving Problems with Stacks and Queues</ScheduleEntry>
+  
+  <ScheduleWeek weekNumber={3} weekTitle="Analysis of Algorithms" />
+  <ScheduleEntry date="2026-09-14">Measuring Performance</ScheduleEntry>
+  <ScheduleEntry date="2026-09-16">Big-O Notation, Worst Case, Average Case</ScheduleEntry>
+  <ScheduleEntry date="2026-09-18">Union Find</ScheduleEntry>
+  
+  <ScheduleWeek weekNumber={4} weekTitle="-" />
+  <ScheduleEntry date="2026-09-21"><ScheduleHoliday>No Class (*National Holiday:* Respect for the Aged Day)</ScheduleHoliday></ScheduleEntry>
+  <ScheduleEntry date="2026-09-23">-</ScheduleEntry>
+  <ScheduleEntry date="2026-09-25"><ScheduleHoliday>No Class (*National Holiday:* Autumnal Equinox Day)</ScheduleHoliday></ScheduleEntry>
+  
+  <ScheduleWeek weekNumber={5} weekTitle="-" />
+  <ScheduleEntry date="2026-09-28">-</ScheduleEntry>
+  <ScheduleEntry date="2026-09-30">-</ScheduleEntry>
+  <ScheduleEntry date="2026-10-02">-</ScheduleEntry>
+  
+  <ScheduleWeek weekNumber={6} weekTitle="-" />
+  <ScheduleEntry date="2026-10-05">-</ScheduleEntry>
+  <ScheduleEntry date="2026-10-07">-</ScheduleEntry>
+  <ScheduleEntry date="2026-10-08">-</ScheduleEntry>
+  
+  <ScheduleWeek weekNumber={7} weekTitle="-" />
+  <ScheduleEntry date="2026-10-12"><ScheduleHoliday>No Class (*National Holiday:* Health Sports Day)</ScheduleHoliday></ScheduleEntry>
+  <ScheduleEntry date="2026-10-14">-</ScheduleEntry>
+  <ScheduleEntry date="2026-10-16">-</ScheduleEntry>
+  
+  <ScheduleWeek weekNumber={8} weekTitle="-" />
+  <ScheduleEntry date="2026-10-19">-</ScheduleEntry>
+  <ScheduleEntry date="2026-10-21">-</ScheduleEntry>
+  <ScheduleEntry date="2026-10-23"><ScheduleHoliday>No Class (*National Holiday:* Labor Thanksgiving Day)</ScheduleHoliday></ScheduleEntry>
+  
+  <ScheduleWeek weekNumber={9} weekTitle="???" />
+  <ScheduleEntry date="2026-10-26">-</ScheduleEntry>
+  <ScheduleEntry date="2026-10-28">-</ScheduleEntry>
+  <ScheduleEntry date="2026-10-30">-</ScheduleEntry>
+  
+  <ScheduleWeek weekNumber={10} weekTitle="TypeScript" />
+  <ScheduleEntry date="2026-11-02">-</ScheduleEntry>
+  <ScheduleEntry date="2026-11-04">-</ScheduleEntry>
+  <ScheduleEntry date="2026-11-06">-</ScheduleEntry>
+  
+  <ScheduleWeek weekNumber={11} weekTitle="TypeScript" />
+  <ScheduleEntry date="2026-11-09">-</ScheduleEntry>
+  <ScheduleEntry date="2026-11-11">-</ScheduleEntry>
+  <ScheduleEntry date="2026-11-13">-</ScheduleEntry>
+  
+  <ScheduleWeek weekNumber={12} weekTitle="TypeScript" />
+  <ScheduleEntry date="2026-11-16">-</ScheduleEntry>
+  <ScheduleEntry date="2026-11-18">-</ScheduleEntry>
+  <ScheduleEntry date="2026-11-20">-</ScheduleEntry>
+  
+  <ScheduleWeek weekNumber={13} weekTitle="TypeScript" />
+  <ScheduleEntry date="2026-11-23">-</ScheduleEntry>
+  <ScheduleEntry date="2026-11-25">-</ScheduleEntry>
+  <ScheduleEntry date="2026-11-27">-</ScheduleEntry>
+  
+  <ScheduleWeek weekNumber={14} weekTitle="Review" />
+  <ScheduleEntry date="2026-11-30">Last Day of Class</ScheduleEntry>
+</Schedule>
 
 ## Computer Setup
 

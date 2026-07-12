@@ -1,0 +1,20 @@
+---
+interface Props {
+  weekNumber: number,
+  weekTitle: string,
+}
+
+const { weekNumber, weekTitle } = Astro.props
+---
+
+<tr>
+  <td class="schedule-week" colspan="4">Week {weekNumber} ({weekTitle})</td>
+</tr>
+
+<style>
+.schedule-week {
+  text-align: center;
+  font-weight: bold;
+  background-color: rgb(230, 230, 230);
+}
+</style>

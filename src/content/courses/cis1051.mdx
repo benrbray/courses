@@ -5,6 +5,11 @@ title: Problem Solving & Programming with Python
 theme: waves
 ---
 
+import Schedule from "@components/Schedule.astro"
+import ScheduleEntry from "@components/ScheduleEntry.astro"
+import ScheduleWeek from "@components/ScheduleWeek.astro"
+import ScheduleHoliday from "@components/ScheduleHoliday.astro"
+
 ## Course Description
 
 Prerequisites:  
@@ -23,6 +28,63 @@ Prerequisites:
 Installing Thonny IDE
 
 Installing Py5 and Java JDK
+
+
+## Schedule
+
+<Schedule>
+  <ScheduleWeek weekNumber={1} weekTitle="???" />
+  <ScheduleEntry date="2026-09-01">-</ScheduleEntry>
+  <ScheduleEntry date="2026-09-03">-</ScheduleEntry>
+  
+  <ScheduleWeek weekNumber={2} weekTitle="???" />
+  <ScheduleEntry date="2026-09-08">-</ScheduleEntry>
+  <ScheduleEntry date="2026-09-10">-</ScheduleEntry>
+  
+  <ScheduleWeek weekNumber={3} weekTitle="???" />
+  <ScheduleEntry date="2026-09-15">-</ScheduleEntry>
+  <ScheduleEntry date="2026-09-17">-</ScheduleEntry>
+  
+  <ScheduleWeek weekNumber={4} weekTitle="???" />
+  <ScheduleEntry date="2026-09-22"><ScheduleHoliday>No Class (*National Holiday:* Bridge Holiday)</ScheduleHoliday></ScheduleEntry>
+  <ScheduleEntry date="2026-09-24">-</ScheduleEntry>
+  
+  <ScheduleWeek weekNumber={5} weekTitle="???" />
+  <ScheduleEntry date="2026-09-29">-</ScheduleEntry>
+  <ScheduleEntry date="2026-10-01">-</ScheduleEntry>
+  
+  <ScheduleWeek weekNumber={6} weekTitle="???" />
+  <ScheduleEntry date="2026-10-06">-</ScheduleEntry>
+  <ScheduleEntry date="2026-10-08">-</ScheduleEntry>
+  
+  <ScheduleWeek weekNumber={7} weekTitle="???" />
+  <ScheduleEntry date="2026-10-13">-</ScheduleEntry>
+  <ScheduleEntry date="2026-10-15">-</ScheduleEntry>
+  
+  <ScheduleWeek weekNumber={8} weekTitle="???" />
+  <ScheduleEntry date="2026-10-20">-</ScheduleEntry>
+  <ScheduleEntry date="2026-10-22">-</ScheduleEntry>
+  
+  <ScheduleWeek weekNumber={9} weekTitle="???" />
+  <ScheduleEntry date="2026-10-27">-</ScheduleEntry>
+  <ScheduleEntry date="2026-10-29">-</ScheduleEntry>
+  
+  <ScheduleWeek weekNumber={10} weekTitle="???" />
+  <ScheduleEntry date="2026-11-03"><ScheduleHoliday>No Class (*National Holiday:* Culture Day)</ScheduleHoliday></ScheduleEntry>
+  <ScheduleEntry date="2026-11-05">-</ScheduleEntry>
+  
+  <ScheduleWeek weekNumber={11} weekTitle="???" />
+  <ScheduleEntry date="2026-11-10">-</ScheduleEntry>
+  <ScheduleEntry date="2026-11-12">-</ScheduleEntry>
+  
+  <ScheduleWeek weekNumber={12} weekTitle="???" />
+  <ScheduleEntry date="2026-11-17">-</ScheduleEntry>
+  <ScheduleEntry date="2026-11-19">-</ScheduleEntry>
+  
+  <ScheduleWeek weekNumber={13} weekTitle="???" />
+  <ScheduleEntry date="2026-11-24">-</ScheduleEntry>
+  <ScheduleEntry date="2026-11-26">-</ScheduleEntry>
+</Schedule>
 
 ## Reading
 
