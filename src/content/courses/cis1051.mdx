@@ -9,10 +9,11 @@ import Schedule from "@components/Schedule.astro"
 import ScheduleEntry from "@components/ScheduleEntry.astro"
 import ScheduleWeek from "@components/ScheduleWeek.astro"
 import ScheduleHoliday from "@components/ScheduleHoliday.astro"
+import ScheduleExam from "@components/ScheduleExam.astro"
 
 ## Course Description
 
-Prerequisites:  
+This course introduces computer programming using Python, a computer language which is widely used in industry, scientific research, game programming and web applications. Students will learn how to design a program to solve a problem using procedural programming constructs such as loops, branching structures, and functions. Students will write programs that are testable (using assertions) and maintainable (using good programming style, naming conventions, indentation, and comments). Topics covered also include the general characteristics of computers, techniques of problem solving, and algorithm specification. Students are also introduced to software engineering practices, including unit testing techniques, debugging techniques, and version control management.
 
 
 ## Instructor
@@ -33,57 +34,57 @@ Installing Py5 and Java JDK
 ## Schedule
 
 <Schedule>
-  <ScheduleWeek weekNumber={1} weekTitle="???" />
-  <ScheduleEntry date="2026-09-01">-</ScheduleEntry>
-  <ScheduleEntry date="2026-09-03">-</ScheduleEntry>
+  <ScheduleWeek weekNumber={1} weekTitle="Introduction" />
+  <ScheduleEntry date="2026-09-01">Introduction; Values, Types, and Expressions</ScheduleEntry>
+  <ScheduleEntry date="2026-09-03">If/Else and Bool</ScheduleEntry>
   
-  <ScheduleWeek weekNumber={2} weekTitle="???" />
-  <ScheduleEntry date="2026-09-08">-</ScheduleEntry>
-  <ScheduleEntry date="2026-09-10">-</ScheduleEntry>
+  <ScheduleWeek weekNumber={2} weekTitle="If/Else" />
+  <ScheduleEntry date="2026-09-08">Strings and String Operations</ScheduleEntry>
+  <ScheduleEntry date="2026-09-10">**Lab 1:** Introduction to Graphics with Py5</ScheduleEntry>
   
-  <ScheduleWeek weekNumber={3} weekTitle="???" />
-  <ScheduleEntry date="2026-09-15">-</ScheduleEntry>
-  <ScheduleEntry date="2026-09-17">-</ScheduleEntry>
+  <ScheduleWeek weekNumber={3} />
+  <ScheduleEntry date="2026-09-15">While Loops</ScheduleEntry>
+  <ScheduleEntry date="2026-09-17">For Loops</ScheduleEntry>
   
-  <ScheduleWeek weekNumber={4} weekTitle="???" />
+  <ScheduleWeek weekNumber={4} />
   <ScheduleEntry date="2026-09-22"><ScheduleHoliday>No Class (*National Holiday:* Bridge Holiday)</ScheduleHoliday></ScheduleEntry>
-  <ScheduleEntry date="2026-09-24">-</ScheduleEntry>
+  <ScheduleEntry date="2026-09-24">**Lab 2:** Drawing with Loops</ScheduleEntry>
   
-  <ScheduleWeek weekNumber={5} weekTitle="???" />
-  <ScheduleEntry date="2026-09-29">-</ScheduleEntry>
-  <ScheduleEntry date="2026-10-01">-</ScheduleEntry>
+  <ScheduleWeek weekNumber={5} />
+  <ScheduleEntry date="2026-09-29">Functions</ScheduleEntry>
+  <ScheduleEntry date="2026-10-01">**Lab 3:** Drawing with Functions</ScheduleEntry>
   
-  <ScheduleWeek weekNumber={6} weekTitle="???" />
-  <ScheduleEntry date="2026-10-06">-</ScheduleEntry>
-  <ScheduleEntry date="2026-10-08">-</ScheduleEntry>
+  <ScheduleWeek weekNumber={6} />
+  <ScheduleEntry date="2026-10-06">Sequences (Lists, Tuples, Ranges, Strings) and Mutability </ScheduleEntry>
+  <ScheduleEntry date="2026-10-08"><ScheduleExam>Test #1</ScheduleExam></ScheduleEntry>
   
-  <ScheduleWeek weekNumber={7} weekTitle="???" />
-  <ScheduleEntry date="2026-10-13">-</ScheduleEntry>
-  <ScheduleEntry date="2026-10-15">-</ScheduleEntry>
+  <ScheduleWeek weekNumber={7} />
+  <ScheduleEntry date="2026-10-13">Dictionaries</ScheduleEntry>
+  <ScheduleEntry date="2026-10-15">**Lab 4:** Game Entities with Dictionaries</ScheduleEntry>
   
-  <ScheduleWeek weekNumber={8} weekTitle="???" />
-  <ScheduleEntry date="2026-10-20">-</ScheduleEntry>
-  <ScheduleEntry date="2026-10-22">-</ScheduleEntry>
+  <ScheduleWeek weekNumber={8} />
+  <ScheduleEntry date="2026-10-20">Nested Data Structures, Part I</ScheduleEntry>
+  <ScheduleEntry date="2026-10-22">Nested Data Structures, Part II (Grocery Store Example)</ScheduleEntry>
   
-  <ScheduleWeek weekNumber={9} weekTitle="???" />
-  <ScheduleEntry date="2026-10-27">-</ScheduleEntry>
-  <ScheduleEntry date="2026-10-29">-</ScheduleEntry>
+  <ScheduleWeek weekNumber={9} />
+  <ScheduleEntry date="2026-10-27">Review</ScheduleEntry>
+  <ScheduleEntry date="2026-10-29"><ScheduleExam>Test #2</ScheduleExam></ScheduleEntry>
   
-  <ScheduleWeek weekNumber={10} weekTitle="???" />
+  <ScheduleWeek weekNumber={10} />
   <ScheduleEntry date="2026-11-03"><ScheduleHoliday>No Class (*National Holiday:* Culture Day)</ScheduleHoliday></ScheduleEntry>
-  <ScheduleEntry date="2026-11-05">-</ScheduleEntry>
+  <ScheduleEntry date="2026-11-05">Files and Directories</ScheduleEntry>
   
-  <ScheduleWeek weekNumber={11} weekTitle="???" />
-  <ScheduleEntry date="2026-11-10">-</ScheduleEntry>
+  <ScheduleWeek weekNumber={11} />
+  <ScheduleEntry date="2026-11-10">Recursion</ScheduleEntry>
   <ScheduleEntry date="2026-11-12">-</ScheduleEntry>
   
-  <ScheduleWeek weekNumber={12} weekTitle="???" />
-  <ScheduleEntry date="2026-11-17">-</ScheduleEntry>
-  <ScheduleEntry date="2026-11-19">-</ScheduleEntry>
+  <ScheduleWeek weekNumber={12} />
+  <ScheduleEntry date="2026-11-17">Graphics with Py5 (Fireworks) </ScheduleEntry>
+  <ScheduleEntry date="2026-11-19">Graphics with Py5 (Asteroids Game)</ScheduleEntry>
   
-  <ScheduleWeek weekNumber={13} weekTitle="???" />
-  <ScheduleEntry date="2026-11-24">-</ScheduleEntry>
-  <ScheduleEntry date="2026-11-26">-</ScheduleEntry>
+  <ScheduleWeek weekNumber={13} />
+  <ScheduleEntry date="2026-11-24">Introduction to Classes</ScheduleEntry>
+  <ScheduleEntry date="2026-11-26">Review</ScheduleEntry>
 </Schedule>
 
 ## Reading
