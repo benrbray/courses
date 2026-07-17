@@ -27,6 +27,13 @@ import { glob } from "astro/loaders";
 // 	priority: z.enum(["normal", "low"]).default("normal")
 // });
 
+const post = defineCollection({
+	loader: glob({ pattern: "*/[^_]*.{md,mdx}", base: "./src/content/courses" }),
+	schema: z.object({
+		title: z.string(),
+	})
+})
+
 const course = defineCollection({
 	// loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: "./src/content/post" }),
 	loader: glob({ pattern: '[^_]*.{md,mdx}', base: "./src/content/courses" }),
@@ -39,5 +46,5 @@ const course = defineCollection({
 });
 
 export const collections = {
-	course,
+	course, post
 };

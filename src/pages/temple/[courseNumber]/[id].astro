@@ -1,0 +1,55 @@
+---
+import NavCourses from '@components/NavCourses.astro';
+import ColumnNormal from '@layout/ColumnNormal.astro';
+import LayoutBlock from '@layout/LayoutBlock.astro';
+import LayoutDefault from '@layout/LayoutDefault.astro';
+
+import { getCollection } from 'astro:content';
+import { type CollectionEntry, render } from 'astro:content';
+
+export async function getStaticPaths() {
+	const posts = await getCollection("post")
+
+	return posts.map((post) => {
+		// assume post.id has the format
+		// cisXXXX/slug
+		const parts = post.id.split("/")
+		const courseNumber = parts[0]
+		const slug = parts[1]
+
+		console.log("------")
+		console.log(courseNumber, post)
+		console.log("------")
+
+		return {
+			params: { courseNumber: courseNumber, id: slug },
+			props: post
+		};
+	});
+}
+
+type Props = CollectionEntry<'post'>;
+
+const params = Astro.params;
+const post = Astro.props;
+const { Content } = await render(post);
+---
+
+<LayoutDefault
+	pageTitle={`TITLE`}
+	theme={"brown"}
+>
+	<ColumnNormal>
+		<!-- nav -->
+		<NavCourses />
+		<!-- header -->
+		<LayoutBlock>
+			<h1>{params.courseNumber}</h1>
+			Temple University, Japan Campus
+		</LayoutBlock>
+		<!-- main -->
+		<LayoutBlock>
+			<Content />
+		</LayoutBlock>
+	</ColumnNormal>
+</LayoutDefault>

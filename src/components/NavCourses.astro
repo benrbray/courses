@@ -1,22 +1,36 @@
 ---
 ---
 
-<nav class="nav-courses">
-  <div>Fall 2026 Courses:</div>
-  <div><a href="/temple/cis1051">1051</a></div>
-  <div><a href="/temple/cis2168">2168</a></div>
-  <div><a href="/temple/cis3308">3308</a></div>
+<nav class="nav">
+  <div class="nav-courses">
+    <div><em>Fall 2026</em></div>
+    <div><a href="/temple/cis1051">1051</a></div>
+    <div><a href="/temple/cis2168">2168</a></div>
+    <div><a href="/temple/cis3308">3308</a></div>
+  </div>
 </nav>
 
 <style>
+.nav {
+  display: flex;
+  justify-content: flex-end;
+
+  margin: var(--gap-2) 0;
+}
+
 .nav-courses {
   display: flex;
-  margin: var(--gap-2);
-  gap: var(--gap-1);
+
+  padding: var(--gap-0) var(--gap-1);
+  border-radius: var(--gap-1);
+
+  gap: var(--gap-2);
   font-size: 1.2rem;
   justify-content: flex-end;
 
   font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans';
+
+  background-color: var(--theme-pattern-bg);
 }
 
 .nav-courses div {
