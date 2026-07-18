@@ -1,0 +1,25 @@
+---
+import { getPosts } from "../util/query";
+
+interface Props {
+  courseNumber: string,
+}
+
+const { } = Astro.props;
+const posts = await getPosts()
+---
+
+<div>
+{
+  posts.map(post => {
+    return (<div>
+      <a href={`${post.id}`}>{post.data.title}</a>
+    </div>)
+  })
+}
+<!-- {posts.map(post => {
+  return (<div>
+    <a href={f"${post.id}"}>{post.data.title}</a>
+  </div>)
+})} -->
+</div>
