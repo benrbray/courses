@@ -1,0 +1,120 @@
+---
+title: "Chapter 1: Object Oriented Programming and Class Hierarchies"
+course: cis2168
+---
+
+### Section 1.1
+
+**Goal:**  Write code that can be reused in many different applications.
+
+- An **abstract data type** encapsulates data together with its operations.
+- Public/private access to data and operations
+
+**Implementation:** Java Collections Framework
+
+Interfaces
+
+- Like a contract telling the programmer whicih methods are available
+- Describes the *usage* of an abstract data type rather than the exact implementation
+  - e.g. `LinkedList` and `ArrayList` are two implmentations of the same `List` interface
+  - different implementations may have different performance characteristics
+
+**Example:** ATM
+
+```java
+public interface ATM {
+  // interface methods are public abstract by default
+  boolean verifyPIN(String pin);
+  String selectAccount();
+  boolean withdraw(String account, double amount);
+  void display(String account, double amount, boolean success);
+  void display(String pin, boolean success);
+  void showBalance(Sring account);
+}
+```
+
+- Error:  Missing Implementation for Interface Method
+- Error:  Attempting to Instantiate an Interface
+
+**Example:** Declaring variable of an interface type
+
+### Section 1.2:  Introduction to OOP
+
+- `extends`
+- superclass / subclass
+- `this`
+- `super()`
+  - if the execution of any constructor in a subclass does not invoke a superclass constructor, Java automatically invokes the no parameter constructor for the superclass.
+
+**Example:** `class Notebook extends Computer`
+
+**Concept:** "has-a" vs "is-a" relationships
+
+### Section 1.3:  Overriding, Method Overloading, Polymorphsim
+
+- overriding
+- method overloading
+
+polymorphism
+
+- Example 1.2 array of subclasses of `Computer`
+
+### Section 1.4:  Abstract Classes
+
+An **abstract class** differs from an ordinary _concrete_ class in two ways:
+
+- an abstract class cannot be instantiated
+- an abstract class may declare abstract methods
+
+Abstract classes are like interfaces, in that they are used to define a _contract_ that describes the expected behavior of an abstract data type.  Unlike data types:
+
+- an abstract class can define attributes
+- an abstract class can provide default implmentations of some methods, and leave other methods *abstract* to be defined by the implementor
+
+**Example:** Food Pyramid
+
+```java
+public abstract class Food {
+  // Data Field
+  private double calories;
+  // Abstract Methods
+  public abstract double percentProtein();
+  public abstract double percentFat();
+  public abstract double percentCarbohydrates();
+  // Actual Methods
+  public double getCalories() { return calories; }
+  public void setCalories(double cal) {
+    calories = cal;
+  }
+}
+```
+
+### Section 1.5:  Class `Object` and Casting
+
+```java
+Object thing = Integer.valueOf(25)
+Integer num = thing; // type error!
+```
+
+
+```java
+Object thing = Integer.valueOf(25)
+Integer num = (Integer) thing; // trust me bro!
+```
+
+- downcasting, upcasting
+- casts happen at runtime, so invalid casts cause runtime type errors
+
+**Example 1.7:** protect against invalid casts using `instanceof` checks
+
+**Example 1.8:** Overriding the `Object.equals` method for an `Employee` class
+
+### Section 1.6:  Exception Class Hierarchy
+
+- A **checked exception** is one that java requires you to handle
+- An **unchecked exception** is always a subclass of `RuntimeError`, and it is optional to handle these
+- `try/catch` and `throw`
+
+### Section 1.7:  Packages and Visibility
+
+### Section 1.8:  Shape Class Hierarchy

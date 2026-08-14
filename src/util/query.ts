@@ -8,7 +8,7 @@ export const IS_DEV  = import.meta.env.DEV;
 export const getPosts = (
   filter?: (entry: CollectionEntry<"post">) => boolean
 ) => {
-  return getCollection("post", entry => {
+  return getCollection("post", (entry => {
     return filter ? filter(entry) : true;
-  });
+  }));
 }

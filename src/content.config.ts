@@ -31,6 +31,7 @@ const post = defineCollection({
 	loader: glob({ pattern: "*/[^_]*.{md,mdx}", base: "./src/content/courses" }),
 	schema: z.object({
 		title: z.string(),
+		course: reference("course")
 	})
 })
 

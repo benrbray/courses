@@ -18,6 +18,13 @@ type Props = CollectionEntry<'course'>;
 
 const course = Astro.props;
 const { Content } = await render(course);
+
+
+// get all posts for this course
+const posts = await getCollection("post", _post => {
+	return true
+})
+
 ---
 
 <LayoutDefault
@@ -32,6 +39,11 @@ const { Content } = await render(course);
 			<h1>{course.data.subject} {course.data.number}</h1>
 			<h2>{course.data.title}</h2>
 			Temple University, Japan Campus
+		</LayoutBlock>
+		<LayoutBlock>
+		{posts.map(post => {
+			return <div><a href={`${post.id}`}>{post.data.title}</a></div>
+		})}
 		</LayoutBlock>
 		<!-- main -->
 		<LayoutBlock>
