@@ -4,7 +4,7 @@ import ColumnNormal from '@layout/ColumnNormal.astro';
 import LayoutBlock from '@layout/LayoutBlock.astro';
 import LayoutDefault from '@layout/LayoutDefault.astro';
 
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
 import { type CollectionEntry, render } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -32,12 +32,13 @@ type Props = CollectionEntry<'post'>;
 
 const params = Astro.params;
 const post = Astro.props;
+const course = await getEntry(post.data.course);
 const { Content } = await render(post);
 ---
 
 <LayoutDefault
 	pageTitle={`TITLE`}
-	theme={"brown"}
+	theme={course.data.theme}
 >
 	<ColumnNormal>
 		<!-- nav -->

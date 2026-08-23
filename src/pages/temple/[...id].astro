@@ -6,6 +6,7 @@ import LayoutDefault from '@layout/LayoutDefault.astro';
 
 import { getCollection } from 'astro:content';
 import { type CollectionEntry, render } from 'astro:content';
+import { getCoursePosts } from '../../util/query';
 
 export async function getStaticPaths() {
 	const course = await getCollection("course")
@@ -19,12 +20,8 @@ type Props = CollectionEntry<'course'>;
 const course = Astro.props;
 const { Content } = await render(course);
 
-
 // get all posts for this course
-const posts = await getCollection("post", _post => {
-	return true
-})
-
+const posts = await getCoursePosts(course.id)
 ---
 
 <LayoutDefault

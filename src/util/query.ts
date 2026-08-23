@@ -1,4 +1,4 @@
-import { getCollection, type CollectionEntry } from "astro:content";
+import { getCollection, type CollectionEntry, reference } from "astro:content";
 // import { asyncFilter } from "./async";
 
 export const IS_PROD = import.meta.env.PROD;
@@ -11,4 +11,10 @@ export const getPosts = (
   return getCollection("post", (entry => {
     return filter ? filter(entry) : true;
   }));
+}
+
+export const getCoursePosts = (
+  course: string
+) => {
+  return getPosts((post) => post.data.course.id == course)
 }
