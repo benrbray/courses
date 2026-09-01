@@ -5,5 +5,16 @@ import mdx from '@astrojs/mdx';
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [mdx()]
+  site: 'https://benrbray.com/courses',
+  build: {
+    format: "file"
+  },
+  integrations: [mdx()],
+  vite: {
+    css: {
+      modules: {
+        localsConvention: "camelCase"
+      }
+    },
+  }
 });
