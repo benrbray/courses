@@ -38,7 +38,7 @@ const { Content } = await render(post);
 ---
 
 <LayoutDefault
-	pageTitle={`TITLE`}
+	pageTitle={`${course.data.subject} ${course.data.number}: ${post.data.title}`}
 	theme={course.data.theme}
 >
 	<ColumnNormal>

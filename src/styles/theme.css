@@ -10,6 +10,30 @@
   --column-normal-min-width: 10rem;
 }
 
+/* ---- typesetting ---- */
+
+p {
+  line-height: 1.4em;
+}
+
+/* ---- code ---- */
+
+:not(pre) > code {
+  background: #e6e6e6;
+  padding: 0.1em 0.2em;
+  border-radius: 0.4em;
+  font-size: 0.9em;
+}
+
+/* ---- images ---- */
+
+.layout-block > img {
+  display: block;
+  max-width: 80%;
+  height: min-content;
+  margin: 0 auto;
+}
+
 /* ---- themes ---- */
 
 :root {

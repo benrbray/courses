@@ -1,0 +1,21 @@
+---
+
+---
+
+<div class="image-row">
+  <slot />
+</div>
+
+<style>
+.image-row {
+  display: flex;
+  gap: 1em;
+}
+
+.image-row > :global(img) {
+  flex: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+}
+</style>

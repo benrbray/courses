@@ -1,0 +1,1 @@
+export * as BoxModel1 from "./BoxModel1.astro";

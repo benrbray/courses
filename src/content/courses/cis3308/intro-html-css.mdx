@@ -1,0 +1,63 @@
+---
+title: Introduction to HTML and CSS
+course: cis3308
+---
+
+import BoxModel1 from "./examples/BoxModel1.astro";
+import ImageRow from "@components/ImageRow.astro";
+import { Image } from 'astro:assets';
+
+# Introduction to HTML and CSS
+
+This page is a brief introduction to the most important HTML/CSS concepts, with links to other web pages where you can read about each topic in more detail.
+
+## HTML Elements
+
+## Box Model
+
+Every element of a web page is a **box**.  A box may contain other boxes, or it may be empty.  Every box consists of four layers, from inside to outside:
+
+- **Content:** The main content of the box, including text, images, and any child content.
+- **Padding:** Empty space added between the content and the border, for visual separation.
+- **Border:** A line around the padding and content.
+- **Margin:** Empty space surrounding the border, padding, and content boxes.
+
+The following from LearnWizy, [Box Model & Layout Basics](https://www.learnwizy.com/tutorials/fsjs/class04) shows the four layers of the CSS Box Model.  The four sides of each layer can be controlled individually via properties like `margin-left`, `padding-top`, `border-bottom`, etc..
+
+import imageCssBoxModel from "./images/css-box-model.svg";
+import imageCssContentBox from "./images/css-box-sizing-content.svg";
+import imageCssBorderBox from "./images/css-box-sizing-border.svg";
+
+<Image layout="constrained" src={imageCssBoxModel} alt="layers of the css box model" width={480}/>
+
+## Box Sizing:  `content-box` vs `border-box`
+
+The [`box-sizing`](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/box-sizing) property determines how the width and height of boxes are measured.  The default is `content-box`, which means that the `width` and `height` properties include the content, but not the padding, border, or margin of a box.  For example, `.box { width: 100px; border: 10px solid black; }` will create a box `120px` wide.
+
+With `box-sizing: border-box`, the _width_ and _height_ of boxes will instead control the size of the **border box**.  The size of the _content box_ will be determined by subtracting the padding and border, as shown in the image below.
+
+<ImageRow>
+  <Image layout="constrained" src={imageCssContentBox} alt="layers of the css box model"/>
+  <Image layout="constrained" src={imageCssBorderBox} alt="layers of the css box model"/>
+</ImageRow>
+
+## Layout Algorithms
+
+_Read More:_  MDN, ["Layout Mode"](https://developer.mozilla.org/en-US/docs/Glossary/Layout_mode)
+
+### Block and Inline
+
+### _Normal Flow_ Layout
+
+#### Block Layout
+#### Inline Layout
+
+### _Flexbox_ Layout
+
+### _Grid_ Layout
+
+### Other Layouts
+
+- Table Layout
+- Positioned Layout
+- Float Layout
