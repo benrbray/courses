@@ -1,34 +1,30 @@
 ---
-// import { getPosts } from "../util/query";
-// import { getCollection } from 'astro:content';
+import PostLink from './PostLink.astro';
+import { getCoursePosts } from '../util/query';
 
 interface Props {
   course: string,
 }
 
-const { } = Astro.props;
-// const posts = await getPosts(post => {
-//   const match = (post.data.course.id === course);
-//   console.log("ID", post.data.course, match);
+const { course } = Astro.props;
 
-//   return false;
-// })
+// const posts = await getCollection("post", (_post) => {
+//   let match = _post.data.course.id == course
+//   return match;
+// });
 
-// const _posts = await getCollection("post", (_post) => false);
+const posts = await getCoursePosts(course);
 ---
 
 <div>
-NOTHING
-<!-- {
-  posts.map(post => {
-    return (<div>Title:
-      <a href={`${post.id}`}>{post.data.title}</a>
-    </div>)
-  })
-} -->
-<!-- {posts.map(post => {
-  return (<div>
-    <a href={f"${post.id}"}>{post.data.title}</a>
-  </div>)
-})} -->
+{
+  posts.length > 0 ? 
+    posts.map(post => {
+      return (<div>
+        <PostLink postId={post.id} />
+        {/* <a href={`${post.id}`}>{post.data.title}</a> */}
+      </div>)
+    })
+    : <div>(No Posts Published Yet -- Check Back Later!)</div>
+}
 </div>

@@ -8,9 +8,11 @@ theme: brown
 import Schedule from "@components/Schedule.astro"
 import ScheduleEntry from "@components/ScheduleEntry.astro"
 import ScheduleWeek from "@components/ScheduleWeek.astro"
+import Tentative from "@components/Tentative.astro"
 import ScheduleHoliday from "@components/ScheduleHoliday.astro"
 import ScheduleExam from "@components/ScheduleExam.astro"
 import PostList from "@components/PostList.astro"
+import PostLink from "@components/PostLink.astro"
 
 ## Course Description
 
@@ -20,8 +22,20 @@ import PostList from "@components/PostList.astro"
 ## Instructor
 
 - *Instructor:* Benjamin R. Bray (benrbray@tuj.temple.edu)
-- *Office Location:* Hillside
-- *Office Hours:* MWF
+- *Office Hours:* Fridays 2:00-3:00pm @ Owl Center 3F (free desks)
+
+## Course Description
+
+This project-based course is an introduction to modern, full-stack web development. Due to the small class
+size, we will adjust the pace and content of the course to the interests of participating students.  The main topics will be:
+
+- HTML, CSS
+- JavaScript Programming
+- User Interaction & Events
+- Reactive Web Pages (ReactJS)
+- TypeScript Programming
+- Web Servers, Client-Server Communication
+- Databases, State, Authentication
 
 ## Resources
 
@@ -29,48 +43,11 @@ import PostList from "@components/PostList.astro"
 - [Modern JavaScript Tutorial](https://javascript.info/)
 - [Mozilla Developer Network](https://developer.mozilla.org/en-US/)
 
-## Course Description
-
-This course is an introduction to modern, full-stack web application development.
-
-{/* 
-* JavaScript
-* TypeScript
-* React
-* NodeJS
-
-As a software engineer, you will be responsible fo
-
-
-This course will introduce at least three new programming languages (JavaScript, TypeScript, and C\#) in addition to the Java and C or Python you have already learned.  You will learn to recognize when a language 
-
-We will introduce at least three new programming languages (JavaScript, TypeScript, and C\#) and study  */}
-
-This is a project-based course.  
-
-## Grading
-
-Grades will be based on two components:
-
-- 20% Participation
-- 20% Projects
-- 20% Final Project Proposal
-- 30% Final Project
-- 50% Skill Mastery
-
-The final project will be graded as a traditional assignment, with the rubric to be decided later.
-
-### Mastery Grading
-
-Rather than grading by cumulative points, I have defined the following set of _skills_ that you are expected to master by the end of the semester.  You will have multiple opportunities to demonstrate each skill.
-
-
-## Reading
+## Course Notes
 
 <PostList course={"cis3308"} />
 
-
-## Course Topics
+{/* ## Course Topics
 
 Software Engineering
 
@@ -161,113 +138,76 @@ Dark Patterns
 - Websites without URLs
 - Back button hijacking
 - Async request that blocks page navigation
-- Scroll Hijacking
-
-## Project Ideas
-
-### Project 1:  HTML/CSS
-
-### Project 2:  JavaScript
-
-### Project 3:  Chrome Extension
-
-### Project 4:  Multiplayer Game
-
-### Ideas
-- Chrome/Firefox Extension
-- Calendar
-- Collaborative Text Editor
-- Online Multiplayer Game
-- Fix a website that is annoying to use
+- Scroll Hijacking */}
 
 ## Schedule
 
 <Schedule>
-  <ScheduleWeek weekNumber={1} weekTitle="Basic HTML and CSS" />
-  <ScheduleEntry date="2026-08-31">
-    Course Introduction, HTML, CSS
-  </ScheduleEntry>
-  <ScheduleEntry date="2026-09-02">Block, Inline</ScheduleEntry>
-  <ScheduleEntry date="2026-09-04">CSS</ScheduleEntry>
+  <ScheduleWeek weekNumber={1} />
+  <ScheduleEntry date="2026-08-31">Course Introduction</ScheduleEntry>
+  <ScheduleEntry date="2026-09-02">Version Control with Git and GitHub</ScheduleEntry>
+  <ScheduleEntry date="2026-09-04">HTML and CSS</ScheduleEntry>
   
-  <ScheduleWeek weekNumber={2} weekTitle="Advanced Page Layouts" />
-  <ScheduleEntry date="2026-09-07">Flexbox Layout</ScheduleEntry>
-  <ScheduleEntry date="2026-09-09">Grid Layout</ScheduleEntry>
-  <ScheduleEntry date="2026-09-11">-</ScheduleEntry>
+  <ScheduleWeek weekNumber={2} />
+  <ScheduleEntry date="2026-09-07">Responsive Web Design (Flexbox, Grid)</ScheduleEntry>
+  <ScheduleEntry date="2026-09-09">Responsive Web Design (Flexbox, Grid)</ScheduleEntry>
+  <ScheduleEntry date="2026-09-11"><Tentative>JavaScript</Tentative></ScheduleEntry>
   
-  <ScheduleWeek weekNumber={3} weekTitle="-" />
-  <ScheduleEntry date="2026-09-14">-</ScheduleEntry>
-  <ScheduleEntry date="2026-09-16">-</ScheduleEntry>
-  <ScheduleEntry date="2026-09-18">-</ScheduleEntry>
+  <ScheduleWeek weekNumber={3} />
+  <ScheduleEntry date="2026-09-14"><Tentative>JavaScript</Tentative></ScheduleEntry>
+  <ScheduleEntry date="2026-09-16"><Tentative>TypeScript</Tentative></ScheduleEntry>
+  <ScheduleEntry date="2026-09-18"><Tentative>TypeScript</Tentative></ScheduleEntry>
   
-  <ScheduleWeek weekNumber={4} weekTitle="-" />
+  <ScheduleWeek weekNumber={4} />
   <ScheduleEntry date="2026-09-21"><ScheduleHoliday>No Class (*National Holiday:* Respect for the Aged Day)</ScheduleHoliday></ScheduleEntry>
   <ScheduleEntry date="2026-09-23"><ScheduleHoliday>No Class (*National Holiday:* Autumnal Equinox Day)</ScheduleHoliday></ScheduleEntry>
-  <ScheduleEntry date="2026-09-25">-</ScheduleEntry>
+  <ScheduleEntry date="2026-09-25"><Tentative>User Interactivity & Events</Tentative></ScheduleEntry>
   
-  <ScheduleWeek weekNumber={5} weekTitle="-" />
-  <ScheduleEntry date="2026-09-28">-</ScheduleEntry>
-  <ScheduleEntry date="2026-09-30">-</ScheduleEntry>
-  <ScheduleEntry date="2026-10-02">-</ScheduleEntry>
+  <ScheduleWeek weekNumber={5} />
+  <ScheduleEntry date="2026-09-28"><Tentative>Async/Await</Tentative></ScheduleEntry>
+  <ScheduleEntry date="2026-09-30"><Tentative>React</Tentative></ScheduleEntry>
+  <ScheduleEntry date="2026-10-02"><Tentative>React</Tentative></ScheduleEntry>
   
-  <ScheduleWeek weekNumber={6} weekTitle="-" />
-  <ScheduleEntry date="2026-10-05">-</ScheduleEntry>
-  <ScheduleEntry date="2026-10-07">-</ScheduleEntry>
-  <ScheduleEntry date="2026-10-08">-</ScheduleEntry>
+  <ScheduleWeek weekNumber={6} />
+  <ScheduleEntry date="2026-10-05"><Tentative>Web Servers</Tentative></ScheduleEntry>
+  <ScheduleEntry date="2026-10-07"><Tentative>Web Servers</Tentative></ScheduleEntry>
+  <ScheduleEntry date="2026-10-08"><Tentative>Databases</Tentative></ScheduleEntry>
   
-  <ScheduleWeek weekNumber={7} weekTitle="-" />
+  <ScheduleWeek weekNumber={7} />
   <ScheduleEntry date="2026-10-12"><ScheduleHoliday>No Class (*National Holiday:* Health Sports Day)</ScheduleHoliday></ScheduleEntry>
-  <ScheduleEntry date="2026-10-14">-</ScheduleEntry>
-  <ScheduleEntry date="2026-10-16"><ScheduleExam>Final Project Pitch Deadline</ScheduleExam></ScheduleEntry>
+  <ScheduleEntry date="2026-10-14"><Tentative>Databases</Tentative></ScheduleEntry>
+  <ScheduleEntry date="2026-10-16"><Tentative>Databases</Tentative></ScheduleEntry>
   
-  <ScheduleWeek weekNumber={8} weekTitle="-" />
-  <ScheduleEntry date="2026-10-19">-</ScheduleEntry>
-  <ScheduleEntry date="2026-10-21">-</ScheduleEntry>
-  <ScheduleEntry date="2026-10-23"><ScheduleHoliday>No Class (*National Holiday:* Labor Thanksgiving Day)</ScheduleHoliday></ScheduleEntry>
+  <ScheduleWeek weekNumber={8} />
+  <ScheduleEntry date="2026-10-19"><Tentative>Full Stack Web Applications</Tentative></ScheduleEntry>
+  <ScheduleEntry date="2026-10-21"><Tentative>Full Stack Web Applications</Tentative></ScheduleEntry>
+  <ScheduleEntry date="2026-10-23"><Tentative>Full Stack Web Applications</Tentative></ScheduleEntry>
   
-  <ScheduleWeek weekNumber={9} weekTitle="-" />
-  <ScheduleEntry date="2026-10-26">-</ScheduleEntry>
-  <ScheduleEntry date="2026-10-28">-</ScheduleEntry>
-  <ScheduleEntry date="2026-10-30">-</ScheduleEntry>
+  <ScheduleWeek weekNumber={9} />
+  <ScheduleEntry date="2026-10-26"><Tentative>Authentication, Sessions, State</Tentative></ScheduleEntry>
+  <ScheduleEntry date="2026-10-28"><Tentative>Authentication, Sessions, State</Tentative></ScheduleEntry>
+  <ScheduleEntry date="2026-10-30"><ScheduleExam>Final Project Pitch Deadline</ScheduleExam></ScheduleEntry>
   
-  <ScheduleWeek weekNumber={10} weekTitle="-" />
-  <ScheduleEntry date="2026-11-02">-</ScheduleEntry>
-  <ScheduleEntry date="2026-11-04">-</ScheduleEntry>
-  <ScheduleEntry date="2026-11-06">-</ScheduleEntry>
+  <ScheduleWeek weekNumber={10} />
+  <ScheduleEntry date="2026-11-02">Final Projects</ScheduleEntry>
+  <ScheduleEntry date="2026-11-04">Final Projects</ScheduleEntry>
+  <ScheduleEntry date="2026-11-06">**Final Project Milestone #1**</ScheduleEntry>
   
-  <ScheduleWeek weekNumber={11} weekTitle="-" />
-  <ScheduleEntry date="2026-11-09">-</ScheduleEntry>
-  <ScheduleEntry date="2026-11-11">-</ScheduleEntry>
-  <ScheduleEntry date="2026-11-13">-</ScheduleEntry>
+  <ScheduleWeek weekNumber={11} />
+  <ScheduleEntry date="2026-11-09"><Tentative>Advanced Topics (WebGL)</Tentative></ScheduleEntry>
+  <ScheduleEntry date="2026-11-11"><Tentative>Advanced Topics: (Web Sockets)</Tentative></ScheduleEntry>
+  <ScheduleEntry date="2026-11-13">**Final Project Milestone #2**</ScheduleEntry>
   
-  <ScheduleWeek weekNumber={12} weekTitle="Final Projects" />
-  <ScheduleEntry date="2026-11-16">Final Project</ScheduleEntry>
-  <ScheduleEntry date="2026-11-18">Final Project</ScheduleEntry>
-  <ScheduleEntry date="2026-11-20">Final Project</ScheduleEntry>
+  <ScheduleWeek weekNumber={12} />
+  <ScheduleEntry date="2026-11-16"><Tentative>Advanced Topics: (Web Assembly)</Tentative></ScheduleEntry>
+  <ScheduleEntry date="2026-11-18"><Tentative>Advanced Topics: (Web Assembly)</Tentative></ScheduleEntry>
+  <ScheduleEntry date="2026-11-20">**Final Project Milestone #3**</ScheduleEntry>
   
-  <ScheduleWeek weekNumber={13} weekTitle="Final Projects" />
-  <ScheduleEntry date="2026-11-23">Final Project</ScheduleEntry>
+  <ScheduleWeek weekNumber={13} />
+  <ScheduleEntry date="2026-11-23"><ScheduleHoliday>No Class (*National Holiday:* Labor Thanksgiving Day)</ScheduleHoliday></ScheduleEntry>
   <ScheduleEntry date="2026-11-25">Final Project</ScheduleEntry>
   <ScheduleEntry date="2026-11-27">Final Project</ScheduleEntry>
   
-  <ScheduleWeek weekNumber={14} weekTitle="Final Projects" />
+  <ScheduleWeek weekNumber={14} />
   <ScheduleEntry date="2026-11-30"><ScheduleExam>Final Project Presentations</ScheduleExam></ScheduleEntry>
 </Schedule>
-
-## Computer Setup Instructions
-
-Installing TypeScript
-
-Installing NodeJS
-
-Installing Docker
-
-Installing PostgreSQL
-
-## Reading
-
-## Homework
-
-The starter code for each assignment will be hosted on **GitHub**.
-
-## Projects

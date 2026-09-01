@@ -4,11 +4,12 @@ import ColumnNormal from '@layout/ColumnNormal.astro';
 import LayoutBlock from '@layout/LayoutBlock.astro';
 import LayoutDefault from '@layout/LayoutDefault.astro';
 
-import { getCollection, getEntry } from 'astro:content';
+import { getEntry } from 'astro:content';
 import { type CollectionEntry, render } from 'astro:content';
+import { getPosts } from '../../../util/query';
 
 export async function getStaticPaths() {
-	const posts = await getCollection("post")
+	const posts = await getPosts();
 
 	return posts.map((post) => {
 		// assume post.id has the format

@@ -6,7 +6,7 @@ import LayoutDefault from '@layout/LayoutDefault.astro';
 
 import { getCollection } from 'astro:content';
 import { type CollectionEntry, render } from 'astro:content';
-import { getCoursePosts } from '../../util/query';
+// import { getCoursePosts } from '../../util/query';
 
 export async function getStaticPaths() {
 	const course = await getCollection("course")
@@ -21,7 +21,7 @@ const course = Astro.props;
 const { Content } = await render(course);
 
 // get all posts for this course
-const posts = await getCoursePosts(course.id)
+// const posts = await getCoursePosts(course.id)
 ---
 
 <LayoutDefault
@@ -33,14 +33,8 @@ const posts = await getCoursePosts(course.id)
 		<NavCourses />
 		<!-- header -->
 		<LayoutBlock>
-			<h1>{course.data.subject} {course.data.number}</h1>
-			<h2>{course.data.title}</h2>
+			<h1>{course.data.subject} {course.data.number}: {course.data.title}</h1>
 			Temple University, Japan Campus
-		</LayoutBlock>
-		<LayoutBlock>
-		{posts.map(post => {
-			return <div><a href={`${post.id}`}>{post.data.title}</a></div>
-		})}
 		</LayoutBlock>
 		<!-- main -->
 		<LayoutBlock>

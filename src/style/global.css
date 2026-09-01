@@ -10,7 +10,9 @@ body {
   padding: 0;
   
   background-color: rgb(106, 155, 228);
-  font-family: ui-rounded, 'Hiragino Maru Gothic ProN', Quicksand, Comfortaa, Manjari, 'Arial Rounded MT', 'Arial Rounded MT Bold', Calibri, source-sans-pro, sans-serif; 
+  /* font-family: ui-rounded, 'Hiragino Maru Gothic ProN', Quicksand, Comfortaa, Manjari, 'Arial Rounded MT', 'Arial Rounded MT Bold', Calibri, source-sans-pro, sans-serif;  */
+  font-family: Charter, 'Bitstream Charter', 'Sitka Text', Cambria, serif;
+  font-weight: normal;
 
   font-size: 1.1rem;
 }
@@ -31,4 +33,11 @@ body {
 .column-normal {
   max-width: var(--column-normal-max-width);
   min-width: var(--column-normal-min-width);
+}
+
+/* ---- unpublished ------------------------------------- */
+
+.unpublished {
+  background-color: rgb(255, 255, 173);
+  text-decoration: 2px solid goldenrod underline;
 }

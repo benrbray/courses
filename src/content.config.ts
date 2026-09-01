@@ -31,7 +31,8 @@ const post = defineCollection({
 	loader: glob({ pattern: "*/[^_]*.{md,mdx}", base: "./src/content/courses" }),
 	schema: z.object({
 		title: z.string(),
-		course: reference("course")
+		course: reference("course"),
+		published: z.boolean().default(false),
 	})
 })
 
@@ -42,7 +43,8 @@ const course = defineCollection({
     subject: z.string(),
     number: z.coerce.string(),
 		title: z.string(),
-		theme: z.string().optional()
+		theme: z.string().optional(),
+		published: z.boolean().default(false),
   })
 });
 
