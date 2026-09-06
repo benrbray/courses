@@ -13,6 +13,9 @@ import type {
   GetStaticPaths,
 } from "astro";
 
+// default components available to every page
+import * as Components from "@components/default";
+
 export const getStaticPaths = (async () => {
 	const posts = await getAssignments();
 
@@ -36,7 +39,7 @@ export const getStaticPaths = (async () => {
 	});
 }) satisfies GetStaticPaths;
 
-type Props = CollectionEntry<'post'>;
+type Props = CollectionEntry<'assignment'>;
 
 const params = Astro.params;
 const assignment = Astro.props;
@@ -59,7 +62,7 @@ const { Content } = await render(assignment);
 		<!-- main -->
 		<LayoutBlock>
 			<h1>{assignment.data.title}</h1>
-			<Content />
+			<Content components={Components} />
 		</LayoutBlock>
 	</ColumnNormal>
 </LayoutDefault>

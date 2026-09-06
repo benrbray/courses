@@ -1,0 +1,12 @@
+.submit-instructions {
+  padding: var(--gap-1);
+  background-color: rgb(215, 244, 251);
+  border-radius: 0.5em;
+}
+
+.submit-instructions .submit-label {
+  font-weight: bold;
+}
+
+.submit-instructions .submit-body p:first-child { margin-top: 0; }
+.submit-instructions .submit-body p:last-child  { margin-bottom: 0; }

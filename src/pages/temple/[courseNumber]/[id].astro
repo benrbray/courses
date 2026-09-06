@@ -8,6 +8,9 @@ import { getEntry } from 'astro:content';
 import { type CollectionEntry, render } from 'astro:content';
 import { getPosts } from '../../../util/query';
 
+// default components available to every page
+import * as Components from "@components/default";
+
 export async function getStaticPaths() {
 	const posts = await getPosts();
 
@@ -52,7 +55,7 @@ const { Content } = await render(post);
 		<!-- main -->
 		<LayoutBlock>
 			<h1>{post.data.title}</h1>
-			<Content />
+			<Content components={Components} />
 		</LayoutBlock>
 	</ColumnNormal>
 </LayoutDefault>
