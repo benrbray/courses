@@ -1,14 +1,355 @@
 ---
-title: "Lab #1:  Abstract Data Types"
+title: "Lab #1:  Interfaces and Generics"
 course: cis2168
 kind: lab
+published: true
 ---
+
+import { Image } from "astro:assets"
 
 ## Computer Setup
 
 1. Make sure you have a recent version of Java installed.  I recommend at least JDK 21.  I'm using OpenJDK 25.
 2. Choose and install your favorite text editor for Java.  Personally, I use **Visual Studio Code** with the Java Extension Pack, but feel free to choose **Eclipse**, **NetBeans**, or **IntelliJ**.
 
+## Human-Written Code Only
+
+For all assignments in this course, you are **required** to disable any AI / LLM coding assistants built into your editor.
+
+- **Visual Studio Code:** Under `Settings`, set `chat.disableAIFeatures` to `true`.
+- **IntelliJ:** Follow the instructions to [Restrict or disable AI Assistant features](https://www.jetbrains.com/help/ai-assistant/disable-ai-assistant.html).
+
+{/* ## Problem 1:  Comprehension Questions
+
+1. Can a class `implement` more than one `interface`?
+2. Can a class `extend` more than one class?
+3. Can an `interface` extend another `interface`?
+4. What is the difference between an `abstract class` and an `interface`?
+
+boxed integers?
+equality?
+toString? */}
+
+## Starter Code on GitHub
+
+Starter code for this lab can be found in the [CIS 2168 GitHub Repository](https://github.com/benrbray/cis2168-fall2026).
+
+## Problem 1:  Swap Pairs
+
+Consider the following Java `class` representing **pairs** of values.
+
+```java title="Problem1.java"
+class Pair<L, R> {
+  L left;
+  R right;
+
+  Pair(L left, R right) {
+    this.left = left;
+    this.right = right;
+  }
+
+  L getLeft()  { return this.left;  }
+  R getRight() { return this.right; }
+
+  @Override
+  public String toString() {
+    return "Pair[left=" + this.left +", right=" + this.right + "]";
+  }
+}
+```
+
+Add a generic method named `.swap()` to the `Pair<L, R>` class that returns a new pair with type `Pair<R, L>`. whose left and right values have been _swapped_ (right becomes left, left becomes right).  The example below demonstrates how a user might call the `.swap()` function, along with the expected output.
+
+```java
+Pair<String, Integer> before = new Pair<>("banana", 580);
+Pair<Integer, String> after = before.swap();
+
+System.out.println("Before: " + before);
+System.out.println("After: " + after);
+```
+
+```console title="Expected Output"
+Before: Pair[left=banana, right=580]
+After: Pair[left=580, right=banana]
+```
+
 <Submit>
-**Submit:** Write down the output of the `java --version` command and the name of the text editor you will use.
+**Submit:** A working `Pair.java` file.  Include a `main()` method demonstrating that your solution works.
 </Submit>
+
+## Problem 2:  Bibliography
+
+Typesetting systems such as [Typst](https://typst.app/) and [LaTeX](https://www.latex-project.org/) allow authors to reference other publications using in-text citations.  When the document is compiled, the typesetting software will gather the user's citations, look up key details like _year_, _author_, and _title_ in a bibliographic database, then generate a nicely-formatted bibliography, like below.
+
+import imageBibliography from "../images/bibliography.png";
+
+<FlexRow>
+  <div>
+  ```typst title="document.typ"
+  == Introduction
+
+  Inspired by the work of #cite(<peyton-jones2007>)
+  and #cite(<leijen2014>), this article introduces
+  a new algorithm for type inference that addresses
+  the concerns raised by #cite(<odersky2003>).
+
+  #bibliography("references.bib")
+  ```
+  </div>
+  <div>
+    <Image layout="constrained" src={imageBibliography} alt="an example bibliography rendered with Typst"/>
+  </div>
+</FlexRow>
+
+The following Java class represents a reference to a single publication, with `year`, `title`, and `authorLast` fields.  We will use this class to implement a simple bibliography formatter.
+
+```java {14, 19} title="Bibliography.java"
+class Reference implements Comparable<Reference> {
+  public final Integer year;
+  public final String authorLastName;
+  public final String title;
+
+  Reference(Integer year, String authorLastName, String title) {
+    this.year = year;
+    this.authorLastName = authorLastName;
+    this.title = title;
+  }
+
+  @Override
+  public String toString() {
+    throw new UnsupportedOperationException("Implement Me!");
+  }
+
+  @Override
+  public int compareTo(Reference other) {
+    throw new UnsupportedOperationException("Implement Me!");
+  }
+}
+```
+
+
+### Helper Functions
+
+The following starter code may be helpful for testing your solutions to this problem.
+
+```java title="Bibliography.java"
+public class Bibliography {
+  /// Returns an ArrayList of example citations.
+  public static ArrayList<Reference> getReferenceList() {
+    ArrayList<Reference> references = new ArrayList<Reference>();;
+    
+    references.add(new Reference(1989, "Wadler", "Theorems for Free!"));
+    references.add(new Reference(2001, "Leijen", "Parsec:  Direct Style Monadic Parser Combinators for the Real World"));
+    references.add(new Reference(1991, "Meijer", "Functional Programming with Bananas, Lenses, Envelopes, and Barbed Wire"));
+    references.add(new Reference(1989, "Peyton Jones", "The Spineless Tagless G-Machine"));
+    references.add(new Reference(2014, "Leijen", "Koka: Programming with Row Polymorphic Effect Types"));
+    references.add(new Reference(1989, "Wadler", "How to Make Ad-Hoc Polymorphism Less Ad Hoc"));
+    references.add(new Reference(1993, "Peyton Jones", "A Short Cut to Deforestation"));
+    references.add(new Reference(2003, "Odersky", "A Nominal Theory of Objects with Dependent Types"));
+    references.add(new Reference(2007, "Peyton Jones", "Practical type inference for arbitrary-rank types"));
+    references.add(new Reference(2001, "Wadler", "Featherweight Java:  A Minimal Core Calculus for Java and GJ"));
+    
+    return references;
+  }
+
+  /// Prints a formatted bibliography based on the input list.
+  public static void printBibliography(ArrayList<Reference> references) {
+    System.out.println("BIBLIOGRAPHY");
+    for(var reference : references) {
+      System.out.println(reference);
+    }
+    System.out.println();
+  }
+}
+```
+
+### Part A:  Override `toString()`
+
+Remember that in Java, every class is a subclass of `Object`, and therefore inherits the [`Object.toString()`](https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html#toString--) method.  By default, `Object.toString()` shows the name of the class and something resembling a memory address:
+
+```java
+Reference reference = new Reference(1989, "Wadler", "Theorems for Free!");
+System.out.println(reference);
+// Output: tuj.cis2168.lab01.Reference@7ad041f3
+```
+
+Our bibliography requires a more human-readable representation of each reference.  In the `Reference` class, **override** the `toString()` method to include the author's last name, publication year, and title.  For example:
+
+```java
+Reference reference = new Reference(1989, "Wadler", "Theorems for Free!");
+System.out.println(reference);
+// Desired Output:  Wadler 1989, "Theorems for Free!"
+```
+
+You can use the `getReferences()` and `printBibliography()` functions from earlier to test your solution.
+
+<Submit>
+**Submit:** Add your implementation of `toString()` to the `Reference` class in `Bibliography.java`.
+</Submit>
+
+### Part B:  Implement `Comparable`
+
+Many classes in Java implement the built-in [`java.lang.Comparable<T>`](https://docs.oracle.com/javase/8/docs/api/java/lang/Comparable.html) interface to impose a **default ordering** on their values.  This interface contains a single abstract method `compareTo`, as shown below.
+
+```java
+public interface Comparable<T> {
+  /// if `this > other`, returns a positive number
+  /// if `this < other`, returns a negative number
+  /// otherwise, returns zero
+  int compareTo(T other);
+}
+```
+
+The static [`java.util.Collections.sort()`](https://docs.oracle.com/javase/8/docs/api/java/util/Collections.html) method can be used to sort any `List<T>`, provided that `T` is a class that implements `Comparable<T>`.  Add an implementation of `Comparable<Reference>` to the `Reference` class that works by comparing `authorLastName` first, then `year`, and finally `title`:
+
+- If two publications have different authors, order them alphabetically by `authorLastName`.
+- If two publications have the same `authorLastName`, order them chronologically by `year`.
+- If two publications have the same `authorLastName` and `year`, order them alphabetically by `title`.
+
+The code below can be used to test your solution.  The expected output is also shown below.
+
+```java
+// run this code to test your solution!
+ArrayList<Reference> references = getReferenceList();
+Collections.sort(references);
+printBibliography(references);
+```
+```console title="Expected Output"
+BIBLIOGRAPHY
+Leijen 2001, "Parsec:  Direct Style Monadic Parser Combinators for the Real World"
+Leijen 2014, "Koka: Programming with Row Polymorphic Effect Types"
+Meijer 1991, "Functional Programming with Bananas, Lenses, Envelopes, and Barbed Wire"
+Odersky 2003, "A Nominal Theory of Objects with Dependent Types"
+Peyton Jones 1989, "The Spineless Tagless G-Machine"
+Peyton Jones 1993, "A Short Cut to Deforestation"
+Peyton Jones 2007, "Practical type inference for arbitrary-rank types"
+Wadler 1989, "How to Make Ad-Hoc Polymorphism Less Ad Hoc"
+Wadler 1989, "Theorems for Free!"
+Wadler 2001, "Featherweight Java:  A Minimal Core Calculus for Java and GJ"
+```
+
+<Submit>
+**Submit:** Add your implementation of `Comparable<Reference>` to the `Reference` class in `Bibliography.java`.
+</Submit>
+
+### Example:  `Comparator` Interface
+
+In Java, a class may only provide one implementation for each `interface`, so our `Comparable<T>` approach will not work if we wish to sort the same data in two different ways.  Instead, there is a different interface named `java.util.Comparator<T>`, whose `compare()` method takes _two_ values of type `T` and compares them.
+
+```java
+interface Comparator<T> {
+  /// if `left > right`, returns a positive number
+  /// if `left < right`, returns a negative number
+  /// otherwise, returns zero
+  int compare(T left, T right);
+}
+```
+
+As an example, we could define two different ways to sort a list of numbers by defining two classes `SmallestToLargest` and `LargestToSmallest` that implement `Comparator<T>` in two different ways.
+
+```java
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
+public class IntegerComparatorExample {
+  public void main() {
+    List<Integer> numbers = new ArrayList<Integer>(List.of(5, 10, 4, 20, 3, 1));
+
+    numbers.sort(new SmallestToLargest());
+    System.out.println("SmallestToLargest: " + numbers);
+
+    numbers.sort(new LargestToSmallest());
+    System.out.println("LargestToSmallest: " + numbers);
+  }
+}
+
+class SmallestToLargest implements Comparator<Integer> {
+  public int compare(Integer left, Integer right) {
+    return left - right;
+  }
+}
+
+class LargestToSmallest implements Comparator<Integer> {
+  public int compare(Integer left, Integer right) {
+    return right - left;
+  }
+}
+```
+
+```console title=Output
+SmallestToLargest: [1, 3, 4, 5, 10, 20]
+LargestToSmallest: [20, 10, 5, 4, 3, 1]
+```
+
+### Part C:  Implement `Comparator<Reference>`
+
+Every academic journal has its own preferred style (APA, MLA, Chicago, IEEE, etc.) that determines the order and appearance of bibliography entries.  Suppose we want to extend our implementation to support two different styles:
+
+- **Style A:** References are sorted first by `authorLastName`, then by `year`, and finally by `title`.
+- **Style B:** References are sorted first by `year`, then by `authorLastName`, and finally by `title`.
+
+At the moment, our sorting logic is stored within the `Reference` class itself, as part of our implementation of the `Comparable<Reference>` interface.  This allows us to define a **only one** ordering per class, as Java won't allow a class to implement the same interface twice.  To support more than one sorting method, should instead define multiple **comparators** that implement `Comparator<Reference>` interface.  Here is some starter code:
+
+```java {5, 13}
+/// Sorts by author first, then year, and finally title.
+class AuthorYearTitle implements Comparator<Reference> {
+  @Override
+  public int compare(Reference left, Reference right) {
+    throw new UnsupportedOperationException("Implement Me!");
+  }
+}
+
+/// Sorts by year first, then author, and finally title.
+class YearAuthorTitle implements Comparator<Reference> {
+  @Override
+  public int compare(Reference left, Reference right) {
+    throw new UnsupportedOperationException("Implement Me!");
+  }
+}
+```
+
+<Submit>
+**Submit:** Add implementations for `AuthorYearTitle` and `YearAuthorTitle` to your `Bibliography.java` file.
+</Submit>
+
+### Example Usage:  `AuthorYearTitle`
+
+```java
+// Style A:  Author, Year, Title
+citations.sort(new AuthorYearTitle());
+printBibliography(citations);
+```
+```console title="Expected Output"
+BIBLIOGRAPHY
+Leijen 2001, "Parsec:  Direct Style Monadic Parser Combinators for the Real World"
+Leijen 2014, "Koka: Programming with Row Polymorphic Effect Types"
+Meijer 1991, "Functional Programming with Bananas, Lenses, Envelopes, and Barbed Wire"
+Odersky 2003, "A Nominal Theory of Objects with Dependent Types"
+Peyton Jones 1989, "The Spineless Tagless G-Machine"
+Peyton Jones 1993, "A Short Cut to Deforestation"
+Peyton Jones 2007, "Practical type inference for arbitrary-rank types"
+Wadler 1989, "How to Make Ad-Hoc Polymorphism Less Ad Hoc"
+Wadler 1989, "Theorems for Free!"
+Wadler 2001, "Featherweight Java:  A Minimal Core Calculus for Java and GJ"
+```
+
+### Example Usage:  `YearAuthorTitle`
+
+```java
+// Style B:  Year, Author, Title
+citations.sort(new YearAuthorTitle());
+printBibliography(citations);
+```
+```console title="Expected Output"
+Peyton Jones 1989, "The Spineless Tagless G-Machine"
+Wadler 1989, "How to Make Ad-Hoc Polymorphism Less Ad Hoc"
+Wadler 1989, "Theorems for Free!"
+Meijer 1991, "Functional Programming with Bananas, Lenses, Envelopes, and Barbed Wire"
+Peyton Jones 1993, "A Short Cut to Deforestation"
+Leijen 2001, "Parsec:  Direct Style Monadic Parser Combinators for the Real World"
+Wadler 2001, "Featherweight Java:  A Minimal Core Calculus for Java and GJ"
+Odersky 2003, "A Nominal Theory of Objects with Dependent Types"
+Peyton Jones 2007, "Practical type inference for arbitrary-rank types"
+Leijen 2014, "Koka: Programming with Row Polymorphic Effect Types"
+```

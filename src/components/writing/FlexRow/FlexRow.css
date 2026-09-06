@@ -1,0 +1,21 @@
+@media (max-width: 48rem) {
+  .flex-row {
+    flex-direction: column;
+  }
+}
+
+.flex-row {
+  display: flex;
+  gap: var(--gap-2);
+}
+
+.flex-row > * {
+  flex: 1;
+}
+
+.flex-row img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  min-width: 0;
+}

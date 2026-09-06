@@ -4,6 +4,7 @@ import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 
 import expressiveCode from 'astro-expressive-code';
+import { pluginLineNumbers } from '@expressive-code/plugin-line-numbers'; 
 
 import solidJs from "@astrojs/solid-js";
 
@@ -16,8 +17,14 @@ export default defineConfig({
   },
   integrations: [expressiveCode({
     frames: { showCopyToClipboardButton: false },
+    plugins: [pluginLineNumbers()],
+    defaultProps: {
+      // Optional: Force line numbers on all code blocks automatically
+      showLineNumbers: true, //
+    },
     themes: [
-      "one-light", "one-dark-pro",
+      "github-light-default",
+      "one-light", "one-dark-pro", "solarized-dark",
       "dracula",
       "material-theme", "material-theme-darker", "material-theme-lighter",
       "material-theme-ocean", "material-theme-palenight"
@@ -29,7 +36,8 @@ export default defineConfig({
   }), mdx(), solidJs()],
   markdown: {
     shikiConfig: {
-      theme: "material-theme"
+      // theme: "material-theme"
+      theme: "github-light-default",
       // themes: {
       //   light: "material-theme-darker",
       //   dark: "material-theme",

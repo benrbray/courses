@@ -25,6 +25,10 @@ p {
   font-size: 0.9em;
 }
 
+.expressive-code + .expressive-code {
+  margin-top: var(--gap-1);
+}
+
 /* ---- images ---- */
 
 .layout-block > img {
