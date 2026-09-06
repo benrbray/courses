@@ -1,0 +1,30 @@
+---
+import AssignmentLink from './AssignmentLink.astro';
+import { getCourseAssignments } from '../util/query';
+
+interface Props {
+  course: string,
+}
+
+const { course } = Astro.props;
+
+// const posts = await getCollection("post", (_post) => {
+//   let match = _post.data.course.id == course
+//   return match;
+// });
+
+const assignments = await getCourseAssignments(course);
+---
+
+<div>
+{
+  assignments.length > 0 ? 
+    assignments.map(assignment => {
+      return (<div>
+        <AssignmentLink assignmentId={assignment.id} />
+        {/* <a href={`${post.id}`}>{post.data.title}</a> */}
+      </div>)
+    })
+    : <div>(No Assignments Yet -- Check Back Later!)</div>
+}
+</div>

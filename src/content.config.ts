@@ -36,6 +36,17 @@ const post = defineCollection({
 	})
 })
 
+const assignment = defineCollection({
+	loader: glob({ pattern: "*/assignments/[^_]*.{md,mdx}", base: "./src/content/courses" }),
+	schema: z.object({
+		title: z.string(),
+		course: reference("course"),
+		published: z.boolean().default(false),
+		deadline: z.date().optional(),
+		kind: z.enum(["lab", "homework", "project"])
+	})
+})
+
 const course = defineCollection({
 	// loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: "./src/content/post" }),
 	loader: glob({ pattern: '[^_]*.{md,mdx}', base: "./src/content/courses" }),
@@ -49,5 +60,5 @@ const course = defineCollection({
 });
 
 export const collections = {
-	course, post
+	course, post, assignment
 };

@@ -9,7 +9,6 @@ interface Props {
 const { postId } = Astro.props;
 
 const post = await getEntry({ collection: "post", id: postId })!;
-console.log("//////\n", post, "//////\n")
 ---
 
 <div>

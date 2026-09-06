@@ -1,0 +1,65 @@
+---
+import NavCourses from '@components/NavCourses.astro';
+import ColumnNormal from '@layout/ColumnNormal.astro';
+import LayoutBlock from '@layout/LayoutBlock.astro';
+import LayoutDefault from '@layout/LayoutDefault.astro';
+
+import { getEntry } from 'astro:content';
+import { type CollectionEntry, render } from 'astro:content';
+import { getAssignments } from '@util/query';
+import type {
+  // InferGetStaticParamsType,
+  // InferGetStaticPropsType,
+  GetStaticPaths,
+} from "astro";
+
+export const getStaticPaths = (async () => {
+	const posts = await getAssignments();
+
+	return posts.map((assignment) => {
+		// assume post.id has the format
+		// cisXXXX/assignments/slug
+		const parts = assignment.id.split("/");
+		const slug = parts[2];
+
+		// these params must match the folder structure in pages
+		const params = {
+			courseNumber: assignment.data.course.id,
+			assignmentKind: assignment.data.kind,
+			id: slug
+		};
+
+		return {
+			params,
+			props: assignment
+		};
+	});
+}) satisfies GetStaticPaths;
+
+type Props = CollectionEntry<'post'>;
+
+const params = Astro.params;
+const assignment = Astro.props;
+const course = await getEntry(assignment.data.course);
+const { Content } = await render(assignment);
+---
+
+<LayoutDefault
+	pageTitle={`${course.data.subject} ${course.data.number}: ${assignment.data.title}`}
+	theme={course.data.theme}
+>
+	<ColumnNormal>
+		<!-- nav -->
+		<NavCourses />
+		<!-- header -->
+		<LayoutBlock>
+			<h1>{params.courseNumber}</h1>
+			Temple University, Japan Campus
+		</LayoutBlock>
+		<!-- main -->
+		<LayoutBlock>
+			<h1>{assignment.data.title}</h1>
+			<Content />
+		</LayoutBlock>
+	</ColumnNormal>
+</LayoutDefault>

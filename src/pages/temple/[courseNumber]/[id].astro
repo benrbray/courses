@@ -18,9 +18,9 @@ export async function getStaticPaths() {
 		const courseNumber = parts[0]
 		const slug = parts[1]
 
-		console.log("------")
-		console.log(courseNumber, post)
-		console.log("------")
+		// console.log("------")
+		// console.log(courseNumber, post)
+		// console.log("------")
 
 		return {
 			params: { courseNumber: courseNumber, id: slug },
@@ -51,6 +51,7 @@ const { Content } = await render(post);
 		</LayoutBlock>
 		<!-- main -->
 		<LayoutBlock>
+			<h1>{post.data.title}</h1>
 			<Content />
 		</LayoutBlock>
 	</ColumnNormal>
