@@ -48,8 +48,8 @@ Consider the following Java `class` representing **pairs** of values.
 
 ```java title="Problem1.java"
 class Pair<L, R> {
-  L left;
-  R right;
+  private L left;
+  private R right;
 
   Pair(L left, R right) {
     this.left = left;
@@ -361,3 +361,21 @@ Odersky 2003, "A Nominal Theory of Objects with Dependent Types"
 Peyton Jones 2007, "Practical type inference for arbitrary-rank types"
 Leijen 2014, "Koka: Programming with Row Polymorphic Effect Types"
 ```
+
+## (_Optional_) Problem 3:  Comparator for `Pair<L, R>`
+
+What if we want to lexicographically sort a list of `Pair<L, R>`?  Write an instance of `Comparator<Pair<L, R>>` with the following behavior:
+
+- By default, use the `left` side to order pairs.
+- If two pairs have the same `left` side, use `right` to break the tie.
+
+You can use either `Comparable<T>` or `Comparator<T>` for your solution.
+
+- If using `Comparable<T>`, you may find it helpful to use a [bounded type parameter](https://docs.oracle.com/javase/tutorial/java/generics/bounded.html).
+- If using `Comparator<T>`, you may find it helpful to pass a `Comparator<L>` and `Comparator<R>` into your `Comparator<Pair<L,R>>` constructor.
+
+Along with your implementation, write a script that demonstrates sorting pairs.
+
+## (_Optional_) Problem 4:  Functional Interfaces
+
+Read Baeldung, [Functional Interfaces](https://www.baeldung.com/java-8-functional-interfaces) and rewrite your `Comparator<Reference>` example using lambdas.
