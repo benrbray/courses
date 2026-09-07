@@ -24,6 +24,23 @@ body {
   border: 1px solid black;
 }
 
+/* ---- paragraphs -------------------------------------- */
+
+p:first-child {
+  margin-top: 0;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+/* ---- lists ------------------------------------------- */
+
+.layout-block ul, .layout-block ol {
+  margin-top: var(--gap-2);
+  margin-bottom: var(--gap-2);
+}
+
 /* ---- columns ----------------------------------------- */
 
 .column-normal {

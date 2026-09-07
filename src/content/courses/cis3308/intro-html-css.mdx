@@ -7,13 +7,9 @@ import BoxModel1 from "./examples/BoxModel1.astro";
 import ImageRow from "@components/ImageRow.astro";
 import { Image } from 'astro:assets';
 
-# Introduction to HTML and CSS
-
 This page is a brief introduction to the most important HTML/CSS concepts, with links to other web pages where you can read about each topic in more detail.
 
-## HTML Elements
-
-## Box Model
+# Box Model
 
 Every element of a web page is a **box**.  A box may contain other boxes, or it may be empty.  Every box consists of four layers, from inside to outside:
 
@@ -41,26 +37,93 @@ With `box-sizing: border-box`, the _width_ and _height_ of boxes will instead co
   <Image layout="constrained" src={imageCssBorderBox} alt="layers of the css box model"/>
 </ImageRow>
 
-## Layout Algorithms
+# Layout Algorithms
 
 _Read More:_  MDN, ["Layout Mode"](https://developer.mozilla.org/en-US/docs/Glossary/Layout_mode)
 
-### Block and Inline
+  CSS implements many different **layout algorithms** for determining the position and size of boxes on the page.
 
-### _Normal Flow_ Layout
+  - Normal Flow Layout (including Block Layout and Inline Layout)
+  - Table Layout
+  - Float Layout
+  - Positioned Layout
+  - Multi-Column Layout
+  - Flexible Box Layout
+  - Grid Layout
 
-#### Block Layout
-#### Inline Layout
+  For technical details, see MDN, [Layout Algorithms](https://developer.mozilla.org/en-US/docs/Glossary/Layout_mode).
 
-### _Flexbox_ Layout
+## Normal Flow
 
-### _Grid_ Layout
+The default layout algorithm is **normal flow**.  This algorithm distinguishes between two kinds of elements:
 
-### Other Layouts
+* **Block Elements** consume all available horizontal space, and are stacked in the _block direction_ (top to bottom) in the same order they appear in the HTML.
 
-- Table Layout
-- Positioned Layout
-- Float Layout
+  - Examples:  `<p>`, `<h1>`, `<ul>`, `<ol>`, `<table>`, `<blockquote>`
+  - Use a `<div>` if you need a generic block container.
+
+* **Inline Elements** are flow in the _inline direction_ (left to right) like text.  By default, they take up only as much space as needed to display their contents.
+
+  - Examples:  `<strong>`, `<em>`, `<a>`
+  - Use a `<span>` if you need a generic inline container.
+
+You can use the [`display` property](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/display) to change whether an element displays inline or as a block.
+
+
+
+
+## Positioned Layout
+
+You can use the `position` property to 
+
+## Multi-Column Layout
+
+## Flexbox Layout
+
+## Grid Layout
+
+## Table Layout
+
+Historically, the table layout was the only way to achieve complex page layouts.  
+
+- The use of tables for page layouts is **no longer recommended**.
+- Instead, use a more modern layout like **flexbox** or **grid** to lay out your pages.
+- Only use the table layout if you need to display tabular data (like a spreadsheet).
+
+References for Table Layout
+
+## Float Layout
+
+Use the [`float:` property](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/float) to enable _text wrapping_ around an element, as in a traditional magazine layout.
+
+import FloatLayoutExample from "./examples/FloatLayoutExample.astro";
+
+<FlexRow>
+  ```css
+  .container {
+    position: relative;
+    font-size: 0.6em;
+    background: #eee;
+    color: #666;
+    padding: 1em;
+  }
+
+  .circle, .rectangle {
+    width: 8em;
+    height: 8em;
+    background-color: gray;
+  }
+
+  .rectangle { float: left;  margin-right: 1em; }
+  .circle    { float: right; border-radius: 50%; }
+  ```
+  <FloatLayoutExample />
+</FlexRow>
+
+References for Float Layouts
+
+* Chris Coyier 2009 @ CSS Tricks, ["All About Floats"](https://css-tricks.com/all-about-floats/)
+
 
 ## Additional Resources
 
