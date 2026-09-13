@@ -193,7 +193,7 @@ The `@FunctionalInterface` annotation is optional to express our intent to whoev
 
 During class, we built `ElasticArray<T>`, which uses an ordinary `T[]` array to implement the `List<T>` abstract data type.  Whenever the user exceeds the capacity of the fixed-size storage array, our class allocates a new, larger storage array to make room for new elements.  We left one question unanswered:  **How much larger should we make the new storage array?**  We came up with several different **growth strategies**, including:
 
-- **Additive:** When we exceed capacity, always create room for at least `N=10` more elements.
+- **Additive:** When we exceed capacity, always create room for at least `N=1000` more elements.
 - **Doubling:** When we exceed capacity, _double_ the size of the storage space.
 
 ### Modified `ElasticArray.java`
@@ -324,7 +324,7 @@ public static long experiment(
 
 ### Part B:  Measure Runtime for Different `numElements`
 
-We would like to visualize the relationship between `numElements` and `runtime` for both the `doubling` and `additive+10` growth strategies.  This will help us make predictions about the runtime for different list sizes.  Before we can make a graph, we need to record runtimes for many different values of `numElements`, and store them in a table.  One of the simplest file formats for representing tables is a [**Comma-Separated Values (CSV)** file](https://en.wikipedia.org/wiki/Comma-separated_values#Specification).
+We would like to visualize the relationship between `numElements` and `runtime` for both the `doubling` and `additive+1000` growth strategies.  This will help us make predictions about the runtime for different list sizes.  Before we can make a graph, we need to record runtimes for many different values of `numElements`, and store them in a table.  One of the simplest file formats for representing tables is a [**Comma-Separated Values (CSV)** file](https://en.wikipedia.org/wiki/Comma-separated_values#Specification).
 
 The following `generateRuntimeCsv` function will call your `experiment` function from Part A many times with different values for `numElements`.
 
@@ -348,8 +348,8 @@ public static void generateRuntimeCsv(Path path) {
     // measure runtime with the doubling strategy
     long doublingRuntime = experiment(numElements, n -> n * 2);
 
-    // measure runtime with the additive+10 strategy
-    long additiveRuntime = experiment(numElements, n -> n + 10);
+    // measure runtime with the additive+1000 strategy
+    long additiveRuntime = experiment(numElements, n -> n + 1000);
 
     // write new line to CSV
     csvLines.add(numElements + "," + doublingRuntime + "," + additiveRuntime);
@@ -402,7 +402,7 @@ Now, use your spreadsheet software to compute a **line of best fit** for your gr
 
 - Which trendline fits best for the `doubling` strategy?  Report the equation for your curve, and the R2 value.
 
-- Which trendline fits best for the `additive+10` strategy?  Report the equation for your curve, and the R2 value.
+- Which trendline fits best for the `additive+1000` strategy?  Report the equation for your curve, and the R2 value.
 
 - Use the trendline to predict the runtime when `numElements=1,000,000` for both growth strategies.  Which one do you think will be faster to `add()` one million elements to the list?  How much faster?
 
