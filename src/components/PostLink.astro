@@ -1,6 +1,6 @@
 ---
 import { getEntry, type CollectionEntry } from 'astro:content';
-import { isPublished } from "../util/query.ts";
+import { getPostUrl, isPublished } from "../util/query.ts";
 
 interface Props {
   postId: CollectionEntry<'post'>["id"]
@@ -13,7 +13,7 @@ const post = await getEntry({ collection: "post", id: postId })!;
 
 <div>
   <a
-    href={`${post.id}`}
+    href={getPostUrl(post.id)}
     class={!isPublished(post) ? "unpublished" : ""}
   >{post.data.title}</a>
 </div>

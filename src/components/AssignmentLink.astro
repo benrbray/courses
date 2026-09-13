@@ -1,6 +1,6 @@
 ---
 import { getEntry, type CollectionEntry } from 'astro:content';
-import { isPublished } from "../util/query.ts";
+import { getAssignmentUrl, isPublished } from "../util/query.ts";
 
 interface Props {
   assignmentId: CollectionEntry<'assignment'>["id"]
@@ -10,14 +10,14 @@ const { assignmentId } = Astro.props;
 
 const assignment = await getEntry({ collection: "assignment", id: assignmentId })!;
 
-const course = assignment.data.course.id;
-const kind = assignment.data.kind;
-const id = assignment.id.split("/")[2];
+// const course = assignment.data.course.id;
+// const kind = assignment.data.kind;
+// const id = assignment.id.split("/")[2];
 ---
 
 <div>
   <a
-    href={`${course}/${kind}/${id}`}
+    href={getAssignmentUrl(assignment)}
     class={!isPublished(assignment) ? "unpublished" : ""}
   >{assignment.data.title}</a>
 </div>

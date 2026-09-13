@@ -31,6 +31,24 @@ export const getAssignments = getEntries("assignment");
 export const getCourseAssignments =
   (course: string) => getAssignments(entry => entry.data.course.id == course);
 
+/* ------------------------------------------------------ */
+
 export const getPosts = getEntries("post");
 export const getCoursePosts =
   (course: string) => getPosts(entry => entry.data.course.id == course);
+
+////////////////////////////////////////////////////////////
+
+const BASE_URL = import.meta.env.BASE_URL.replace(/\/$/, ''); // Remove trailing slash if present
+
+export const getPostUrl = (id: string) => {
+  return `${BASE_URL}/temple/${id}`;
+}
+
+export const getAssignmentUrl = (assignment: CollectionEntry<'assignment'>) => {
+  const course = assignment.data.course.id;
+  const kind = assignment.data.kind;
+  const id = assignment.id.split("/")[2];
+
+  return `${BASE_URL}/temple/${course}/${kind}/${id}`;
+}
