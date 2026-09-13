@@ -6,4 +6,410 @@ kind: lab
 
 import { Image } from "astro:assets"
 
-abc
+## Starter Code on GitHub
+
+Starter code for this lab can be found in the [CIS 2168 GitHub Repository](https://github.com/benrbray/cis2168-fall2026/tree/master/src/tuj/cis2168/lab02).
+
+## Problem #1:  `List<T>` Practice
+
+In this problem, you will practice working with the built-in [`java.util.List<T>`](https://docs.oracle.com/javase/8/docs/api/java/util/List.html) abstract data type.  The questions below match the difficulty of questions you might encounter on an exam.
+
+### Part A (Unique)
+
+Write a `static`, generic method named `unique()` which takes in a `java.util.List<T>` as input, and returns `true` if all elements of the list are unique, or `false` if the list contains duplicates.  Use the `.equals()` method to check where two elements have the same value.
+
+```java
+public static <T> boolean unique(List<T> list) {
+  // TODO: Implement me!
+}
+```
+
+### Part B (String to List of Words)
+
+Write a method called `stringToWords()` that takes a `String` as input, and returns a `List<String>` representing the words in the string.  Feel free to use the [`String.split()` method](https://docs.oracle.com/javase/8/docs/api/java/lang/String.html#split-java.lang.String-), which splits a string according to a [regular expression](https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html#sum).  Assume words contain only numbers `0-9` and letters `A-Z` in either uppercase or lowercase.  Ignore any whitespace or symbols between words.  For example:
+
+```java
+public static List<String> stringToWords(String s) {
+  // TODO: Implement me!
+}
+```
+
+```java
+stringToWords("Hello, CIS 2168!")
+// Returns: ["Hello", "CIS", "2168"]
+```
+
+### Part C (Redacted)
+
+Write a static method named `redact` that replaces all occurrences of a `secretWord` from a `List<String>` with asterisks.  The redacted string should have the same length as the original word that was replaced.
+
+```java
+public static void redact(List<String> words, String secretWord) { 
+  // TODO: Implement me!
+}
+```
+
+Below is an example showing how the `redact` and `stringToWords` methods might be used together.
+
+```java
+List<String> words = stringToWords("My name is Bond, James Bond!");
+System.out.println("Original: " + words);
+redact(words, "Bond");
+System.out.println("Redacted: " + words);
+```
+
+```console title="Example Output"
+Original: [My, name, is, Bond, James, Bond]
+Redacted: [My, name, is, ****, James, ****]
+```
+
+<Submit>
+**Submit:**  A single file containing your implementations of `unique()`, `stringToWords()`, and `redact()`.
+</Submit>
+
+## Problem #2:  Functional Interfaces
+
+The `redact` operation is an example of a **filter** operation -- removing or changing the values of list based on the result of a `boolean` test.  For `redact`, the test was hard-coded to the function.  Instead, what if we want to define a generic `filter()` operation that allows the user to pass in their own test?
+
+### Part A:  Implementing `filter()`
+
+One way to achieve this is to define a new **abstract data type** called `Predicate<T>` representing `boolean` tests on values of any generic type `T`, chosen by the user.  Below is a simplified version of [`java.util.Predicate<T>`](https://docs.oracle.com/javase/8/docs/api/java/util/function/Predicate.html).
+
+```java
+interface Predicate<T> {
+  boolean test(T t);
+}
+```
+
+Implement a `static` generic `filter()` method that takes a `List<T>` and a `Predicate<T>` as inputs.  Your method should return a **new list** that includes only the elements that **pass** the test (i.e. `test()` returns `true`).
+
+```java
+public static <T> List<T> filter(List<T> list, Predicate<T> pred) {
+  // TODO: Implement me!
+}
+```
+
+<Submit>**Submit:**  Your implementation of `filter()`.</Submit>
+
+### Usage Example:  `filter()`
+
+Using only what we know so far, actually _calling_ the `filter()` function is a bit cumbersome.  As an example, suppose we want to use `filter` to remove all odd numbers from a list.
+
+First, the user needs to define a new `IsEven` class that implements `Predicate<T>`:
+
+```java
+class IsEven implements Predicate<Integer> {
+  public boolean test(Integer t) {
+    return t % 2 == 0;
+  };
+}
+```
+
+Then, the user needs to create an instance of `IsEven` and pass it as input to the `filter` function:
+
+```java
+List<Integer> numbers = List.of(8, 3, 2, -1, 7, 4, 5);
+List<Integer> evenNumbers = filter(numbers, new IsEven());
+
+System.out.println("Original: " + numbers);
+System.out.println("Even: " + evenNumbers);
+```
+
+The program above works, but it's very verbose!  We shouldn't need to manually define an _entirely new class_ just so we can create a _single_ instance of it, to be used _only once_!  Thankfully, Java 8 introduced syntax for [**lambda expressions**](https://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html), making it easier to define new _anonymous_ functions.  
+
+The example below uses a lambda expression to define the `isEven` predicate on a single line, without the need for a separate class definition!  Much better!
+
+```java {2}
+List<Integer> numbers = List.of(8, 3, 2, -1, 7, 4, 5);
+Predicate<Integer> isEven = (x -> x % 2 == 0);
+List<Integer> evenNumbers = filter(numbers, isEven);
+
+System.out.println("Original: " + numbers);
+System.out.println("Even: " + evenNumbers);
+```
+
+Below are a few more interesting predicates that could be used with `filter`:
+
+```java
+Predicate<Integer> isEven = (x -> x % 2 == 0);
+Predicate<Integer> isOdd  = (x -> x % 2 == 1);
+Predicate<Integer> isPositive = (x -> (x > 0));
+
+Predicate<String> isAllUpperCase = s -> {
+  for(char c : s.toCharArray()) {
+    if(!Character.isUpperCase(c)) {
+      return false;
+    }
+  }
+  return true;
+};
+```
+
+### _Syntax:_ Lambda Expressions
+
+Lambda expressions are written with an arrow `->` that points from inputs to outputs.  A function that takes one input and returns a simple expression as output can be written succinctly like below.
+
+```
+input -> expression
+```
+
+To accept more than one parameter, use parentheses and commas:
+
+```
+(input1, input2) -> expression
+```
+
+For multi-line lambdas that require control flow like `if` or `for`, the lambda can be written with curly braces `{ }` and a `return` statement.
+
+```
+(input1, input2) -> {
+  statement;
+  statement;
+  return expression;
+}
+```
+
+### Functional Interfaces
+
+In Java, any `interface` with a _single abstract method_ is called a **functional interface**.  Lambda expressions can be used to create new implementations of any functional interface.
+
+```java
+// BinaryOp is a functional interface
+// because it has only one abstract method
+@FunctionalInterface
+interface BinaryOp<T> {
+  T calculate(T a, T b);
+}
+
+// usage example
+BinaryOp<Integer> addition = (x, y) -> x + y;
+addition.calculate(4, 7);
+```
+
+The `@FunctionalInterface` annotation is optional to express our intent to whoever is reading the code, and to guard against unintended breaking changes to the functional interface in the future.
+
+## Problem #3:  `ElasticArray` Growth Strategies
+
+During class, we built `ElasticArray<T>`, which uses an ordinary `T[]` array to implement the `List<T>` abstract data type.  Whenever the user exceeds the capacity of the fixed-size storage array, our class allocates a new, larger storage array to make room for new elements.  We left one question unanswered:  **How much larger should we make the new storage array?**  We came up with several different **growth strategies**, including:
+
+- **Additive:** When we exceed capacity, always create room for at least `N=10` more elements.
+- **Doubling:** When we exceed capacity, _double_ the size of the storage space.
+
+### Modified `ElasticArray.java`
+
+In this problem, you will measure the speed of all three growth strategies and report which one performs best on your machine.  To help, the starter code includes a new version of `ElasticArray.java` with the following modifications:
+
+- `ElasticArray` now defines an internal functional interface named `GrowthStrategy`.
+- The `ElasticArray` constructor now takes a `GrowthStrategy` as parameter.
+- The chosen growth strategy is stored in a private field `growthStrategy`, which is used by the `ensureCapacity()` method to determine the new storage capacity.
+
+The changes are highlighted in green below.
+
+```java title="ElasticArray.java" add={7-11,18,20,23,48-51}
+public class ElasticArray<T> implements Cis2168List<T> {
+
+  private static final int INITIAL_CAPACITY = 4;
+
+  //////////////////////////////////////////////////////////
+
+  @FunctionalInterface
+  public static interface GrowthStrategy {
+    /// Returns the next capacity in the sequence.
+    public int next(int currentCapacity);
+  }
+
+  //////////////////////////////////////////////////////////
+
+  private T[] storage;
+  private int count;
+
+  private GrowthStrategy growthStrategy;
+
+  ElasticArray(GrowthStrategy growthStrategy) {
+    // growth strategy will determine how quickly the
+    // storage array grows when the list exceeds capacity
+    this.growthStrategy = growthStrategy;
+
+    // allocate storage for this instance
+    // In Java, `new` only works with a concrete class, not
+    // with type parameters, so as a hack, create Object[],
+    // and cast to T[], then suppress the resulting warning.
+    @SuppressWarnings("unchecked")
+    T[] storage = (T[]) new Object[INITIAL_CAPACITY];
+    this.storage = storage;
+
+    // initially, the list is empty
+    this.count = 0;
+  }
+
+  //////////////////////////////////////////////////////////
+
+  /// Accepts the desired size of the list as input.
+  /// If there's not enough capacity, grow the storage.
+  void ensureCapacity(int requiredCapacity) {
+    // 0. if there is already enough capacity, do nothing
+    if(this.storage.length >= requiredCapacity) {
+      return;
+    }
+
+    // 1. determine new storage capacity
+    int currentCapacity = this.storage.length;
+    int nextCapacity = this.growthStrategy.next(currentCapacity);
+    nextCapacity = Math.max(nextCapacity, requiredCapacity);
+    assert nextCapacity > currentCapacity;
+    
+    // 2. allocate larger storage array
+    @SuppressWarnings("unchecked")
+    T[] nextStorage = (T[]) new Object[nextCapacity];
+
+    // 3. manually copy the old storage into the new
+    for(int i = 0; i < this.count; i++) {
+      nextStorage[i] = this.storage[i];
+    }
+
+    // 4. replace the old storage with the new
+    this.storage = nextStorage;
+  }
+
+  //////////////////////////////////////////////////////////
+
+  /* implementation of Cis2168List is unchanged */
+}
+```
+
+### Constructing an `ElasticArray`
+
+When creating an instance of `ElasticArray`, we can use a lambda expression to define the growth strategy.
+
+```java
+Cis2168List<String> doublingArray = new ElasticArray<>(n -> n * 2);
+Cis2168List<String> additiveArray = new ElasticArray<>(n -> n + 10);
+```
+
+### Part A:  Defining Our Experiment
+
+For this problem, one **Experiment** will consist of the following steps:
+
+1. Decide on a `numElements` and a `growthStrategy`.
+2. Create an empty `ElasticArray<Integer>` that uses the specified `growthStrategy`.
+3. Repeat `N = numElements` times:
+   - Generate a new random integer.
+   - Use `add()` to append the integer to the list.
+
+Complete the implementation of the following `experiment` method, which uses `System.nanoTime()` to record the total runtime of one experiment, returning a `long`.  (Most of the code is provided for you!  Just complete the `TODO`.)
+
+```java title="Problem3.java"
+public static long experiment(
+  int numElements,
+  ElasticArray.GrowthStrategy gs
+) {
+  // record the starting time, in nanoseconds
+  long startNano = System.nanoTime();
+
+  // TODO:  Implement me!
+  //     1. create an empty ElasticArray<Integer>
+  //     2. use a loop to append N=numElements random integers to the list
+
+  // measure the elapsed time, in nanoseconds
+  long finishNano = System.nanoTime();
+  long elapsedTime = finishNano - startNano;
+  return elapsedTime;
+}
+```
+
+<Submit>
+**Submit:** Your implementation of `experiment()`, in a file named `Problem3.java`.
+</Submit>
+
+### Part B:  Measure Runtime for Different `numElements`
+
+We would like to visualize the relationship between `numElements` and `runtime` for both the `doubling` and `additive+10` growth strategies.  This will help us make predictions about the runtime for different list sizes.  Before we can make a graph, we need to record runtimes for many different values of `numElements`, and store them in a table.  One of the simplest file formats for representing tables is a [**Comma-Separated Values (CSV)** file](https://en.wikipedia.org/wiki/Comma-separated_values#Specification).
+
+The following `generateRuntimeCsv` function will call your `experiment` function from Part A many times with different values for `numElements`.
+
+```java
+public static void generateRuntimeCsv(Path path) {
+  // strings representing lines of CSV file
+  List<String> csvLines = new ArrayList<String>();
+  
+  // header line
+  csvLines.add("numElements,doublingRuntime,additiveRuntime");
+
+  // range of values for numElements
+  final int SIZE_MIN = 5000;
+  final int SIZE_MAX = 150000;
+  final int SIZE_STEP = 5000;
+  
+  // outer loop determines the size of each list
+  for(int numElements = SIZE_MIN; numElements < SIZE_MAX; numElements += SIZE_STEP) {
+  System.out.println("Running Experiment (" + numElements + " / " + SIZE_MAX + ")");
+
+    // measure runtime with the doubling strategy
+    long doublingRuntime = experiment(numElements, n -> n * 2);
+
+    // measure runtime with the additive+10 strategy
+    long additiveRuntime = experiment(numElements, n -> n + 10);
+
+    // write new line to CSV
+    csvLines.add(numElements + "," + doublingRuntime + "," + additiveRuntime);
+  }
+
+  // save the file
+  try {
+    Files.write(path, (Iterable<String>) csvLines::iterator);
+  } catch (IOException e) {
+    e.printStackTrace();
+  }
+}
+```
+
+The following `main` function calls the `generateRuntimeCsv` function and records the results in a CSV file in the `data/` folder of your Java project.  Each CSV file is timestamped, so you can safely run the program multiple times without losing previous results.
+
+```java
+public static void main(){ 
+  // generate timestamp to use in file name
+  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss");
+  String timestamp = LocalDateTime.now().format(formatter);
+  String fileName = "data/growth_strategy_" + timestamp + ".csv";
+  
+  // run experiments and generate csv
+  Path filePath = Path.of(fileName);
+  generateRuntimeCsv(filePath);
+  System.out.println("Saved results to file: " + filePath.toAbsolutePath());
+}
+```
+
+<Submit>
+**Submit:** Include one `growth_strategy.csv` file with your experimental results.
+</Submit>
+
+### Part C:  Graph Runtime
+
+Now, Use your favorite spreadsheet software (Excel or Google Sheets) to import `growth_strategy.csv` and generate a graph visualizing the relationship between `numElements` and `runtime`.  Your graph should look something like this, although the lines in the image below are different from what you will see.
+
+import imageGraph from "../images/growth-strategy-graph-sketch.png";
+
+<Image src={imageGraph} layout="constrained" alt="example graph"/>
+
+<Submit>
+**Submit:** Submit a single graph that shows `numElements` vs `runtime` for both growth strategies.
+</Submit>
+
+### Part D:  Regression Analysis
+
+Now, use your spreadsheet software to compute a **line of best fit** for your graph.  Try both a `Linear` and `Polynomial (Degree 2)` trendline, and answer the following questions:
+
+- Which trendline fits best for the `doubling` strategy?  Report the equation for your curve, and the R2 value.
+
+- Which trendline fits best for the `additive+10` strategy?  Report the equation for your curve, and the R2 value.
+
+- Use the trendline to predict the runtime when `numElements=1,000,000` for both growth strategies.  Which one do you think will be faster to `add()` one million elements to the list?  How much faster?
+
+**Guides:**
+
+- Video:  [How to Add a Trendline in Excel](https://www.youtube.com/watch?v=L9wW3vdRkg4)
+- Video:  [Adding a Trendline in Google Sheets](https://www.youtube.com/watch?v=7jphik4SvjI)
+
+<Submit>
+**Submit:** Your written answers in a `PDF` file.  You can embed the image of your graph in the same `PDF`, if you like.
+</Submit>

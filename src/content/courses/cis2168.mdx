@@ -12,6 +12,8 @@ import ScheduleHoliday from "@components/ScheduleHoliday.astro"
 import ScheduleExam from "@components/ScheduleExam.astro"
 import PostList from "@components/PostList.astro"
 import AssignmentList from "@components/AssignmentList.astro"
+import AssignmentLink from '@components/AssignmentLink.astro';
+import Tentative from '@components/Tentative.astro';
 
 ## Course Description
 
@@ -68,74 +70,124 @@ CIS 1166 (Math Concepts in Computing I)
 
 <AssignmentList course={"cis2168"} />
 
-{/* ## Schedule */}
+## Schedule
 
-{/* <Schedule>
-  <ScheduleWeek weekNumber={1} weekTitle="Introduction" />
+<Schedule>
+  <ScheduleWeek weekNumber={1} />
   <ScheduleEntry date="2026-08-31">Course Introduction</ScheduleEntry>
   <ScheduleEntry date="2026-09-02">Abstract Data Types</ScheduleEntry>
   <ScheduleEntry date="2026-09-04">Abstract Data Types</ScheduleEntry>
-  
-  <ScheduleWeek weekNumber={2} weekTitle="Fundamentals" />
-  <ScheduleEntry date="2026-09-07">Array Lists</ScheduleEntry>
-  <ScheduleEntry date="2026-09-09">Array Lists</ScheduleEntry>
-  <ScheduleEntry date="2026-09-11">Big-O Notation</ScheduleEntry>
-  
-  <ScheduleWeek weekNumber={3} weekTitle="Analysis of Algorithms" />
-  <ScheduleEntry date="2026-09-14">Linked Lists</ScheduleEntry>
-  <ScheduleEntry date="2026-09-16">Linked Lists</ScheduleEntry>
-  <ScheduleEntry date="2026-09-18">Double Linked Lists</ScheduleEntry>
-  
-  <ScheduleWeek weekNumber={4} weekTitle="-" />
-  <ScheduleEntry date="2026-09-21"><ScheduleHoliday>No Class (*National Holiday:* Respect for the Aged Day)</ScheduleHoliday></ScheduleEntry>
-  <ScheduleEntry date="2026-09-23"><ScheduleHoliday>No Class (*National Holiday:* Autumnal Equinox Day)</ScheduleHoliday></ScheduleEntry>
-  <ScheduleEntry date="2026-09-25">Circular Linked Lists</ScheduleEntry>
-  
-  <ScheduleWeek weekNumber={5} weekTitle="-" />
-  <ScheduleEntry date="2026-09-28">Iterators</ScheduleEntry>
-  <ScheduleEntry date="2026-09-30">Stacks and Queues</ScheduleEntry>
-  <ScheduleEntry date="2026-10-02">Stacks and Queues</ScheduleEntry>
-  
-  <ScheduleWeek weekNumber={6} weekTitle="-" />
-  <ScheduleEntry date="2026-10-05">Lab</ScheduleEntry>
-  <ScheduleEntry date="2026-10-07">Lab</ScheduleEntry>
+  {/* -------------------------------------------------- */}
+  <ScheduleWeek weekNumber={2} />
+  <ScheduleEntry date="2026-09-07">
+    <AssignmentLink assignmentId="cis2168/assignments/lab01" />
+  </ScheduleEntry>
+  <ScheduleEntry date="2026-09-09">
+    Array Lists
+  </ScheduleEntry>
+  <ScheduleEntry date="2026-09-11">
+    Singly-Linked Lists
+  </ScheduleEntry>
+  {/* -------------------------------------------------- */}
+  <ScheduleWeek weekNumber={3} />
+  <ScheduleEntry date="2026-09-14">
+    <AssignmentLink assignmentId="cis2168/assignments/lab02" />
+  </ScheduleEntry>
+  <ScheduleEntry date="2026-09-16">Big-O Notation & Algorithm Analysis</ScheduleEntry>
+  <ScheduleEntry date="2026-09-18">Big-O Notation & Algorithm Analysis</ScheduleEntry>
+  {/* -------------------------------------------------- */}
+  <ScheduleWeek weekNumber={4} />
+  <ScheduleEntry date="2026-09-21">
+    <ScheduleHoliday>No Class (*National Holiday:* Respect for the Aged Day)</ScheduleHoliday>
+  </ScheduleEntry>
+  <ScheduleEntry date="2026-09-23">
+    <ScheduleHoliday>No Class (*National Holiday:* Autumnal Equinox Day)</ScheduleHoliday>
+  </ScheduleEntry>
+  <ScheduleEntry date="2026-09-25">
+    Big-O Notation & Algorithm Analysis
+  </ScheduleEntry>
+  {/* -------------------------------------------------- */}
+  <ScheduleWeek weekNumber={5} />
+  <ScheduleEntry date="2026-09-28">Lab #3 (Iterators)</ScheduleEntry>
+  <ScheduleEntry date="2026-09-30">Double-Linked Lists</ScheduleEntry>
+  <ScheduleEntry date="2026-10-02">Circular-Linked Lists</ScheduleEntry>
+  {/* -------------------------------------------------- */}
+  <ScheduleWeek weekNumber={6} />
+  <ScheduleEntry date="2026-10-05">Lab #4 (Stacks and Queues)</ScheduleEntry>
+  <ScheduleEntry date="2026-10-07">Stacks and Queues</ScheduleEntry>
   <ScheduleEntry date="2026-10-08"><ScheduleExam>Test #1</ScheduleExam></ScheduleEntry>
-  
-  <ScheduleWeek weekNumber={7} weekTitle="-" />
+  {/* -------------------------------------------------- */}
+  <ScheduleWeek weekNumber={7} />
   <ScheduleEntry date="2026-10-12"><ScheduleHoliday>No Class (*National Holiday:* Health Sports Day)</ScheduleHoliday></ScheduleEntry>
-  <ScheduleEntry date="2026-10-14">Recursion</ScheduleEntry>
-  <ScheduleEntry date="2026-10-16">Recursion</ScheduleEntry>
-  
-  <ScheduleWeek weekNumber={8} weekTitle="-" />
-  <ScheduleEntry date="2026-10-19">Recursion</ScheduleEntry>
-  <ScheduleEntry date="2026-10-21">Recursion (Backtracking)</ScheduleEntry>
+  <ScheduleEntry date="2026-10-14">
+    <Tentative>Recursion</Tentative>
+  </ScheduleEntry>
+  <ScheduleEntry date="2026-10-16">
+    <Tentative>Recursion</Tentative>
+  </ScheduleEntry>
+  {/* -------------------------------------------------- */}
+  <ScheduleWeek weekNumber={8} />
+  <ScheduleEntry date="2026-10-19">
+    <Tentative>Lab #5 (Recursion)</Tentative>
+  </ScheduleEntry>
+  <ScheduleEntry date="2026-10-21">
+    <Tentative>Trees</Tentative>
+  </ScheduleEntry>
   <ScheduleEntry date="2026-10-23"><ScheduleHoliday>No Class (*National Holiday:* Labor Thanksgiving Day)</ScheduleHoliday></ScheduleEntry>
-  
-  <ScheduleWeek weekNumber={9} weekTitle="???" />
-  <ScheduleEntry date="2026-10-26">Binary Trees</ScheduleEntry>
-  <ScheduleEntry date="2026-10-28">Binary Trees</ScheduleEntry>
-  <ScheduleEntry date="2026-10-30">Heaps</ScheduleEntry>
-  
-  <ScheduleWeek weekNumber={10} weekTitle="TypeScript" />
-  <ScheduleEntry date="2026-11-02">Huffman Encoding</ScheduleEntry>
-  <ScheduleEntry date="2026-11-04">Huffman Encoding</ScheduleEntry>
-  <ScheduleEntry date="2026-11-06">Sets and Maps</ScheduleEntry>
-  
-  <ScheduleWeek weekNumber={11} weekTitle="TypeScript" />
-  <ScheduleEntry date="2026-11-09">Sets and Maps</ScheduleEntry>
-  <ScheduleEntry date="2026-11-11">Wiggle Room</ScheduleEntry>
+  {/* -------------------------------------------------- */}
+  <ScheduleWeek weekNumber={9} />
+  <ScheduleEntry date="2026-10-26">
+    <Tentative>Lab #6 (Trees)</Tentative>
+  </ScheduleEntry>
+  <ScheduleEntry date="2026-10-28">
+    <Tentative>Heaps</Tentative>
+  </ScheduleEntry>
+  <ScheduleEntry date="2026-10-30">
+    <Tentative>Huffman Coding</Tentative>
+  </ScheduleEntry>
+  {/* -------------------------------------------------- */}
+  <ScheduleWeek weekNumber={10} />
+  <ScheduleEntry date="2026-11-02">
+    <Tentative>Lab #7 (More Trees)</Tentative>
+  </ScheduleEntry>
+  <ScheduleEntry date="2026-11-04">
+    <Tentative>Sets</Tentative>
+  </ScheduleEntry>
+  <ScheduleEntry date="2026-11-06">
+    <Tentative>Maps</Tentative>
+  </ScheduleEntry>
+  {/* -------------------------------------------------- */}
+  <ScheduleWeek weekNumber={11} />
+  <ScheduleEntry date="2026-11-09">
+    <Tentative>Lab #8 (Sets and Maps)</Tentative>
+  </ScheduleEntry>
+  <ScheduleEntry date="2026-11-11">
+    <Tentative>Review</Tentative>
+  </ScheduleEntry>
   <ScheduleEntry date="2026-11-13"><ScheduleExam>Test #2</ScheduleExam></ScheduleEntry>
-  
-  <ScheduleWeek weekNumber={12} weekTitle="TypeScript" />
-  <ScheduleEntry date="2026-11-16">Sorting</ScheduleEntry>
-  <ScheduleEntry date="2026-11-18">Sorting</ScheduleEntry>
-  <ScheduleEntry date="2026-11-20">Graphs</ScheduleEntry>
-  
-  <ScheduleWeek weekNumber={13} weekTitle="TypeScript" />
-  <ScheduleEntry date="2026-11-23">Graphs</ScheduleEntry>
-  <ScheduleEntry date="2026-11-25">Graphs</ScheduleEntry>
-  <ScheduleEntry date="2026-11-27">Lab</ScheduleEntry>
-  
-  <ScheduleWeek weekNumber={14} weekTitle="Review" />
+  {/* -------------------------------------------------- */}
+  <ScheduleWeek weekNumber={12} />
+  <ScheduleEntry date="2026-11-16">
+    <Tentative>Lab #9 (Graphs)</Tentative>
+  </ScheduleEntry>
+  <ScheduleEntry date="2026-11-18">
+    <Tentative>Graphs</Tentative>
+  </ScheduleEntry>
+  <ScheduleEntry date="2026-11-20">
+    <Tentative>Graphs</Tentative>
+  </ScheduleEntry>
+  {/* -------------------------------------------------- */}
+  <ScheduleWeek weekNumber={13} />
+  <ScheduleEntry date="2026-11-23">
+    <Tentative>TBD</Tentative>
+  </ScheduleEntry>
+  <ScheduleEntry date="2026-11-25">
+    <Tentative>TBD</Tentative>
+  </ScheduleEntry>
+  <ScheduleEntry date="2026-11-27">
+    <Tentative>TBD</Tentative>
+  </ScheduleEntry>
+  {/* -------------------------------------------------- */}
+  <ScheduleWeek weekNumber={14} />
   <ScheduleEntry date="2026-11-30">Last Day of Class</ScheduleEntry>
-</Schedule> */}
+</Schedule>

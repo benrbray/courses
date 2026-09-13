@@ -41,6 +41,11 @@ p:last-child {
   margin-bottom: var(--gap-2);
 }
 
+.layout-block li > ul, layout-block li > ol {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 /* ---- columns ----------------------------------------- */
 
 .column-normal {
