@@ -5,32 +5,141 @@ kind: project
 published: true
 ---
 
-(this is a draft -- more details will be added to this project spec soon!)
+import SubmitExample from "./SubmitExample.astro";
+import Image from "@components/Image.astro";
 
 ## Part 1:  Choose a Website
 
 First, choose a website that you think has an interesting page layout.  If you can't think of a website, you might find inspiration by visiting [Hacker News](https://news.ycombinator.com/) and opening a few of the linked articles.
 
-## Part 2:  Analyze Your Website
+## Part 2:  Make a Sketch of the Page Structure
 
-- Choose **at least three** interesting features of the website that you think might be interesting to reproduce.
-- Use the browser inspector to understand how those elements are structured with HTML, and how CSS influences their appearance.
+Use the browser inspector to investigate the HTML & CSS of the entire page.  Make a rough sketch showing how the page is divided into a hierarchy of boxes.  Make note of any interesting page layouts you find (for example: Flexbox, Grid, Masonry).
 
-## Part 2:  Website Clone
+Use any software you like to create your sketch (PowerPoint, Google Slides, Canva, Figma, Microsoft Paint, etc.).  If you prefer, a scan of a hand-drawn diagram is also acceptable.
 
-* Build a simple clone of your chosen website.
-* Your clone must match the structure of the original page.
-* Publish the clone as a new page on your GitHub pages site.
-* On your GitHub homepage, include a link to the new page (e.g. `username.github.io/project01.html`)
+## Part 3:  Analyze 3 Interesting Features
 
-## Project Presentation
+Choose **at least three** interesting features of the website that you think might be fun to reproduce.
 
-You will present your results in-class on **Friday, September 25**.  Be prepared to spend 15-20 minutes discussing the structure of the original website, and which elements you chose to clone.
+- Include a screenshot demonstrating each feature.
+- Use the browser inspector to understand how each feature is achieved with HTML and CSS, and explain your findings.
+
+## Part 4:  Clone the Website
+
+The next step is to build a simple clone of the website you chose!
+
+- Your clone must match your sketch and your description of the original page's layout.
+- Your clone must include faithful re-implementations of **all three features** you chose.
+
+Publish your website clone publicly to the **GitHub Pages** website we set up for Project #0.
+
+## Part 5:  Submit to Canvas (_Deadline:_ Friday, September 25 @ 3:10pm)
+
+Your final submission should include three parts:
+
+- A `pdf` file with your written report.
+- A `pdf` file with any slides you used for your presentation.
+- A `url` for the website where your clone is hosted (e.g. `username.github.io/cis3308/project01`)
+
+If you prefer, you can submit the written portion and the slideshow as a single `PDF` file.
+
+## Part 6:  Present In-Class
+
+You will present your results in-class on **Friday, September 25**.  Your presentation should last between *10-15 minutes* and showcase your page layout analysis as well as how you implemented your clone.
 
 ## Grading
 
-TBD
+I will publish more details about grading later.  For now:
 
-{/* Based on the combination your code and your presentation, I will estimate your progress in the following skills:
+- I encourage you to be as creative as possible!  You'll get a lower grade if your chosen features are too simple (e.g. making the website title bold, or changing the font of the page).
 
-- TBD */}
+# Example
+
+<SubmitExample>
+## Website:  FrostKiwi's Secrets
+
+As an example, I chose the following webpage from a graphics programming blog I enjoy:
+
+- FrostKiwi's Secrets @ 3 September 2025, ["Video Game Blurs (and how the best one works)"](https://blog.frost.kiwi/dual-kawase/)
+
+Below is a screenshot showing what the page looks like:
+
+<Image path="/src/assets/cis3308/project01/frostkiwi-article-1.png" />
+
+## Page Layout Sketch
+
+Below is a sketch of the page layout, showing how each element is divided into boxes.
+
+<Image path="/src/assets/cis3308/project01/frostkiwi-page-structure.png" />
+
+## Page Layout Analysis
+
+By using the browser inspector, I was able to determine the following information:
+
+- The `<body>` element has four child elements:
+  - `<header>` contains the website name and logo, the article title, and social media icons.
+  - `<nav>` contains a table of contents for the article.
+  - `<main>` contains the actual 
+  - `<footer>` contains the page comments.  (_We'll skip this one!_)
+- The `<header>` has two children:
+  - One `<div>` for the website name and social icons.
+    - This element uses a **Flexbox Layout** to align the page title left and the social icons right.
+  - One `<div>` for the article title and publication date.
+
+## Feature #1:  Collapsible Table of Contents
+
+By default, the table of contents is hidden, but if you click it, it will expand!  Using the browser inspector, I learned that this is achieved with the [`<details>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/details) element!  No JavaScript required!
+
+```html
+<details>
+  <summary>Details</summary>
+  1. Box Blur
+  2. Gaussian Blur
+  3. Separable Gaussian Blur
+<details>
+```
+
+<Image path="/src/assets/cis3308/project01/frostkiwi-toc.png" />
+
+## Feature #2:  Figures with Captions
+
+This blog includes a lot of images, and often the images have their own caption, like they would in a textbook.  Neat!  By using the browser inspector, I learned that this can be achieved with a special element called `<figure>`.
+
+```html
+<figure>
+  <img
+    src="img/intro.png"
+    alt="Texture coordinates, also called UV Coordinates or UVs for short"
+  >
+  <figcaption>
+    Effect of "<a href="https://en.wikipedia.org/wiki/Bloom_(shader_effect)" target="_blank">Bloom</a>", one of many use-cases for blur algorithms
+  </figcaption>
+</figure>
+```
+
+<Image path="/src/assets/cis3308/project01/frostkiwi-figure.png" />
+
+## Feature #3:  Header with Icon, Title, and Socials
+
+<Image path="/src/assets/cis3308/project01/frostkiwi-page-header.png" />
+
+The header of this website has several parts, and it's not immediately obvious how to achieve this layout!  
+
+- The header includes both the blog name and the title of the article.
+- The blog name is aligned to the right, while the social media icons are aligned to the left.
+
+Using the browser inspector, I found that the HTML looks like this:
+
+<Image path="/src/assets/cis3308/project01/frostwiki-page-header-inspect.png" />
+
+The header contains at least **four different `flex` layouts!**  Some of them appear to be for centering, some of them are for left-right alignment.  I'll need to carefully recreate this behavior in my clone!
+
+## Cloning the Website
+
+The next step is to actually clone the website!  
+
+(I will update this section later with an example)
+
+
+</SubmitExample>

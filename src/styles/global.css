@@ -46,6 +46,15 @@ p:last-child {
   margin-bottom: 0;
 }
 
+/* ---- images ------------------------------------------ */
+
+.layout-block img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-top: var(--gap-2);
+}
+
 /* ---- columns ----------------------------------------- */
 
 .column-normal {
