@@ -1,0 +1,301 @@
+---
+title: "Lab #3:  Iterators & Streams"
+course: cis2168
+kind: lab
+published: true
+---
+
+import { Image } from "astro:assets"
+
+## Problem 1:  Ordered Lists
+
+It is often useful to maintain a list of data in _sorted_ order.  For example, we might have a list of students enrolled in a class, in alphabetical order.  When students add or drop the class, we want to modify the list while preserving the alphabetical order.
+
+```java
+// Example Usage
+OrderedList<String> students = new OrderedList<>();
+students.add("Philip")
+students.add("Emily")
+students.add("Simon")
+students.add("Stephanie")
+students.add("Grace")
+students.add("Dan")
+// Contents:  ["Dan", "Emily", "Grace", "Philip", "Simon", "Stephanie"]
+```
+
+In this problem, you will implement an `OrderedList<E>` class that works with any datatype `E` that implements the `Comparable` interface.  A class definition with the required methods is shown below.
+
+```java
+import java.util.LinkedList;
+
+/// A list which stores elements in _ascending_ order,
+/// smallest to largest, using the Comparable interface.
+public class OrderedList<E extends Comparable<E>> {
+  private LinkedList<E> list;
+
+  OrderedList() {
+    // TODO:  Implement me!
+  }
+
+  /// Inserts a new element into the list, preserving order.
+  /// Time Complexity:  O(n)
+  public void add(E element) {
+    // TODO:  Implement me!
+  }
+
+  /// Returns an `Iterator` for this OrderedList.
+  /// Time Complexity:  O(1)
+  public Iterator<E> iterator() {
+    // TODO:  Implement me!
+  }
+
+  /// Returns the element at `index`, in sorted order.
+  /// Time Complexity:  O(n)
+  public E get(int index) {
+    // TODO:  Implement me!
+  }
+
+  /// Returns the number of elements in the `OrderedList`.
+  /// Time Complexity:  O(1)
+  public int size() {
+    // TODO:  Implement me!
+  }
+
+  /// Removes the first occurrence of `element` from the `OrderedList`.
+  /// Time Complexity:  O(n)
+  public E remove(E element) {
+    // TODO:  Implement me!
+  }
+}
+```
+
+Internally, your implementation should use a [`java.util.LinkedList`](https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html) to store elements of the list.  Java's `LinkedList` class implements the `List` abstract data type using a doubly-linked list.  Just like our example from class, the `Node` used internally by `LinkedList` is `private`, so we cannot manually traverse the list with `.next` and `.prev` like we did in class.  Instead, the `LinkedList.listIterator()` method returns a [`ListIterator`](https://docs.oracle.com/javase/8/docs/api/java/util/ListIterator.html) which can be used to traverse the list in both directions (forwards and backwards).
+
+<Submit>
+**Question:** What is the difference between a [`java.util.ListIterator`](https://docs.oracle.com/javase/8/docs/api/java/util/ListIterator.html#add-E-) and a regular [`java.util.Iterator`](https://docs.oracle.com/javase/8/docs/api/java/util/Iterator.html)?
+</Submit>
+
+### Part A (Implement `OrderedList.add()`)
+
+Your implementation of `add(element)` should use a `ListIterator` to find the first element in the `OrderedList` larger than `element`, according to `Comparable<E>.compareTo()`.  Using the `ListIterator.add()` method, insert the new `element` before the first _larger_ element.
+
+```
+["Apple", "Banana", "Durian"]
+orderedList.add("Cherry")
+["Apple", "Banana", "Cherry", "Durian"]
+```
+
+### Part B (Implement Remaining Methods)
+
+The implementation for the remaining methods `get`, `size`, `remove`, and `iterator` is simpler.  For most of these, you can simply call existing methods on the private `LinkedList`!
+
+### Part C (Testing)
+
+Write a short program that demonstrates that the behavior of your `OrderedList` is correct.  You should test at least the `add` and `remove` operations.
+
+<Submit>
+Your implementations for Parts ABC in a single Java file named `Problem1.java`.
+</Submit>
+
+# Problem 2:  Iterator Combinators
+
+Recall that every implementation of `java.util.Iterator` must include the following methods.
+
+```java
+public interface Iterator<E> {
+   boolean hasNext();
+   E next();
+}
+```
+
+For this problem, you will implement **iterator combinators** -- iterators that combine and transform the elements of one or more other iterators.  The combinators in this problem are fundamental building blocks for efficient data processing with Java's [Stream](https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html) API.
+
+### Part A: Pair Iterator
+
+Implement a `PairIterator<A, B>` class, which combines two iterators for types `A` and `B` into _pairs_, using the `Pair<A,B>` class below.  Your iterator should stop once one of the input iterators runs out of elements.
+
+```java
+class Pair<L, R> {
+  private L left;
+  private R right;
+
+  Pair(L left, R right) {
+    this.left = left;
+    this.right = right;
+  }
+
+  public L getLeft()  { return this.left;  }
+  public R getRight() { return this.right; }
+
+  @Override
+  public String toString() {
+    return "Pair[left=" + this.left +", right=" + this.right + "]";
+  }
+}
+```
+
+```java {3,8,13}
+class PairIterator<A,B> implements Iterator<Pair<A,B>> {
+  PairIterator(Iterator<A> iterA, Iterator<B> iterB) {
+    // TODO: Implement me!
+  }
+
+  @Override
+  public boolean hasNext() {
+    // TODO: Implement me!
+  }
+
+  @Override
+  public Pair<A, B> next() {
+    // TODO: Implement me!
+  }
+}
+```
+
+**Usage Example:**
+
+```java
+public static void pairExample() {
+  List<String> foods = new ArrayList<>(List.of("Milk", "Bread", "Bananas"));
+  List<Integer> prices = new ArrayList<>(List.of(120, 400, 370, 290, 500, 730));
+  Iterator<Pair<String, Integer>> pairs = new PairIterator<>(foods.iterator(), prices.iterator());
+
+  printIterator(pairs);
+
+  // Expected Output:
+  // Pair[left=Milk, right=120]
+  // Pair[left=Bread, right=400]
+  // Pair[left=Bananas, right=370]
+}
+
+public static <E> void printIterator(Iterator<E> it) {
+  while(it.hasNext()) {
+    System.out.println(it.next());
+  }
+}
+```
+
+<Submit>
+**Submit:** Your implementation of the `PairIterator` class.
+</Submit>
+
+### Part B: Double Iterator
+
+Implement a `DoubleIterator<E>` combinator which accepts an `Iterator<E>`, and repeats every element twice.
+
+```java {3, 8, 13}
+class DoubleIterator<E> implements Iterator<E> {
+  DoubleIterator(Iterator<E> it) {
+    // TODO: Implement me!
+  }
+
+  @Override
+  public boolean hasNext() {
+    // TODO: Implement me!
+  }
+
+  @Override
+  public E next() {
+    // TODO: Implement me!
+  }
+}
+```
+
+**Usage Example:**
+
+```java
+public static void doubleExample() {
+  List<String> foods = new ArrayList<>(List.of("Apple", "Banana", "Cherry"));
+  Iterator<String> doubled = new DoubleIterator<>(foods.iterator());
+  printIterator(doubled);
+
+  // Expected Output:
+  // Apple
+  // Apple
+  // Banana
+  // Banana
+  // Cherry
+  // Cherry
+}
+```
+
+<Submit>
+**Submit:** Your implementation of the `DoubleIterator` class.
+</Submit>
+
+### Part C: Filter Iterator
+
+Create a combinator named `FilterIterator<E>` whose constructor takes two arguments:
+
+- An existing `Iterator<E>` instance
+- A `Predicate<E>` instance, representing a boolean test
+
+Your combinator should only return elements that pass the predicate's test, and skip elements where the test fails.
+
+```java {7}
+interface Predicate<T> {
+  boolean test(T t);
+}
+
+class FilterIterator<E> implements Iterator<E> {
+  FilterIterator(Iterator<E> it, Predicate<E> pred) {
+    // TODO: Implement me!
+  }
+}
+```
+
+**Usage Example:**
+
+```java
+public static void filterExample() {
+  List<Integer> numbers = new ArrayList<>(List.of(5, 3, 4, 2, 1, 9, 7, 8));
+  Iterator<Integer> evenNumbers = new FilterIterator<>(numbers.iterator(), n -> n % 2 == 0);
+  printIterator(evenNumbers);
+
+  // Expected Output: 4, 2, 8
+}
+```
+
+<Submit>
+**Submit:** Your implementation of the `FilterIterator` class.
+</Submit>
+
+### Part D: Map Iterator
+
+Consider the following `Function<A,B>` interface, which represents functions that take values of type `A` as input and output values of type `B`.
+
+```java
+@FunctionalInterface
+interface Function<A,B> {
+  B apply(A input);
+}
+```
+
+Create a combinator named `MapIterator<A,B>` whose constructor takes two arguments:
+
+- An existing `Iterator<A>` instance.
+- A `Function<A, B>` instance.
+
+Your `MapIterator<A,B>` class should implement `Iterator<B>`.  To implement `.next()`, you should take the next `A` from the `Iterator<A>` and convert it to to type `B` by applying the `Function<A,B>`.
+
+```java {2}
+class MapIterator<A,B> implements Iterator<B> {
+  // TODO: Implement me!
+}
+```
+
+**Usage Example:**
+
+```java
+public static void mapExample() {
+  List<String> animals = new ArrayList<>(List.of("Dog", "Orangutan", "Elephant", "Lion", "Pigeon"));
+  Iterator<Integer> wordLengths = new MapIterator<>(animals.iterator(), s -> s.length());
+  printIterator(wordLengths);
+
+  // Expected Output: 3, 9, 8, 4, 6
+}
+```
+
+<Submit>
+**Submit:** Your implementation of the `MapIterator` class.
+</Submit>

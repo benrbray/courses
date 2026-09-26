@@ -364,14 +364,14 @@ public static void generateRuntimeCsv(Path path) {
 }
 ```
 
-The following `main` function calls the `generateRuntimeCsv` function and records the results in a CSV file in the `data/` folder of your Java project.  Each CSV file is timestamped, so you can safely run the program multiple times without losing previous results.
+The following `main` function calls the `generateRuntimeCsv` function and records the results in a CSV file root folder of your Java project.  Each CSV file is timestamped, so you can safely run the program multiple times without losing previous results.
 
 ```java
 public static void main(){ 
   // generate timestamp to use in file name
   DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss");
   String timestamp = LocalDateTime.now().format(formatter);
-  String fileName = "data/growth_strategy_" + timestamp + ".csv";
+  String fileName = "growth_strategy_" + timestamp + ".csv";
   
   // run experiments and generate csv
   Path filePath = Path.of(fileName);
