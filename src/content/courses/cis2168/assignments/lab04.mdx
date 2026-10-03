@@ -1,0 +1,114 @@
+---
+title: "Lab #4:  Stacks and Queues"
+course: cis2168
+kind: lab
+published: true
+---
+
+# Problem 1:  Two-Stack Queue
+
+In class, we saw that a `Stack<T>` can be used to _reverse_ an ordered ollection, due to its **Last-In, First-Out** policy.  Since reversing a collection twice restores the original order, can you find a way to implement the `Queue<T>` interface by using two stacks?  
+
+- The `arrivalStack` can be used to hold elements when they are first inserted.
+- The `departureStack` can be used to ensure elements are in the correct order when they are removed.
+
+```java
+public class TwoStackQueue<T> implements Queue<T> {
+  public Stack<T> arrivalStack;
+  public Stack<T> departureStack;
+
+  // TODO: Implement me!
+}
+```
+
+Requirements:
+
+- There are multiple possible solutions.  I will accept any solution that implements `Queue<T>` correctly.
+
+- Your `TwoStackQueue<T>` must only modify its storage using methods defined by the `Stack<T>` ADT.
+
+- Add a comment with a guess about the **runtime complexity** of `enqueue()` and `dequeue()` for your `TwoStackQueue<T>`.  You will still receive full points for an incorrect guess, but you should explain your reasoning.
+
+# Problem 2:  Circular Array Deque
+
+A **double-ended queue ([deque](https://en.wikipedia.org/wiki/Double-ended_queue))** is an ordered collection that generalizes both stacks and queues.  A deque allows insertion and removal at both the *front* and the *back*.  The Java `interface` below lists the operations required by the deque abstract data type.
+
+```java
+public interface Deque<E> {
+  /// Inserts a new element at the front of the queue.
+  /// Requirement:  `element != null`
+  void pushFront(E element);
+
+  /// Inserts a new element at the front of the queue.
+  /// Requirement:  `element != null`
+  void pushBack(E element);
+
+  /// Removes and returns the front element of the deque.
+  E popFront();
+
+  /// Removes and returns the back element of the deque.
+  E popBack();
+
+  /// Returns the front element without removing it.
+  E front();
+  
+  /// Returns the back element without removing it.
+  E back();
+
+  /// The number of elements currently in the deque.
+  int size();
+
+  /// Returns `true` if the deque is empty, otherwise `false`.
+  boolean isEmpty();
+}
+```
+
+## Part A: Implement `CircularArrayDeque<T>`
+
+Write a `CircularArrayDeque<T>` class which implements the `Deque<T>` abstract data type using a circular array.
+
+```java
+class CircularArrayDeque<E> implements Deque<E> {
+  
+  private E[] storage;
+  private int front;
+  private int back;
+  
+  // TODO: Implement me!
+}
+```
+
+Requirements:
+
+1. Your implementation must use an `E[] storage` array with an initial capacity of `2`.
+
+2. You will need to automatically grow the storage array when the current capacity is exceeded.  Use the *doubling* growth strategy to guarantee that `pushFront` and `pushBack` have amortized `O(1)` runtime.
+
+3. All remaining methods (`popFront()`, `popBack()`, `front()`, `back()`, `size()`, `isEmpty()`) should have constant `O(1)` runtime.
+
+Our `ElasticArrayQueue<T>` from class will be a useful guide for implementing your circular array.  Make sure that you carefully keep track of the `front` and `back` as elements are inserted and removed.
+
+## Part B: Implement `DequeStack<T>`
+
+Show how the `Deque<T>` ADT can be used to implement the `Stack<T>` ADT.
+
+```java
+class DequeStack<T> implements Stack<T> {
+  // This class uses a deque for storage.
+  private Deque<T> deque;
+
+  // TODO: Implement me!
+}
+```
+## Part C: Implement `DequeQueue<T>`
+
+Show how the `Deque<T>` ADT can be used to implement the `Queue<T>` ADT.
+
+```java
+class DequeQueue<T> implements Queue<T> {
+  // This class uses a deque for storage.
+  private Deque<T> deque;
+
+  // TODO: Implement me!
+}
+```
