@@ -1,0 +1,283 @@
+---
+title: "Lab #5:  Recursion"
+course: cis2168
+kind: lab
+published: true
+---
+
+import { Image } from "astro:assets"
+
+## Problem 1 (Recursive Functions)
+
+First, implement the following recursive functions.  For each one, identify the **base case** and the **recursive case**, and make a guess about the **runtime complexity** of your implementation.  You may find it helpful to define a _recursive helper function_ with extra arguments as part of your implementation, as we did in class for `binarySearch`.
+
+1. `float listSum(float[] numbers)` should compute the sum of an array of floats.
+2. `float listProduct(float[] numbers)` should compute the product of an array of floats.
+3. `float listMax(float[] numbers)` should compute the largest number in an array of floats.
+4. `int listArgMax(float[] numbers)` should return the **index** of largest number in an array of floats.
+
+<Submit>
+**Submit:**  Your implementations for all functions above in a single file named `Problem1.java`.
+</Submit>
+
+## Problem 2 (Fold)
+
+(_Note: I will not ask about the `fold` operation on an exam._)
+
+You may have noticed that all of the functions from Problem 1 share a similar recursive structure.  The functions above are all instances of the [**fold**](https://en.wikipedia.org/wiki/Fold_(higher-order_function)) operation on lists.  A fold operation on a data type `T` has two ingredients:
+
+1. A **binary operation** `T apply(T left, T right)` which combines two values of type `T`.
+2. An **identity element** (also called the **unit**), which is an _initial value_ for the recursive calculation.
+
+Implement the `fold` operation in Java, based on the following function signature:
+
+```java
+@FunctionalInterface
+interface BinaryOp<T> {
+  T apply(T left, T right);
+}
+
+// Overload:  Calls the helper function with currentIndex equal to zero.
+public static <T> T fold(T[] data, BinaryOp<T> op, T identity) {
+  return fold(data, op, identity, 0);
+}
+
+public static <T> T fold(T[] data, BinaryOp<T> op, T identity, int currentIndex) {
+  // TODO:  Implement me!
+}
+```
+
+We can use `fold` by passing in a lambda expression for the binary operation:
+
+```java
+Float[] numbers = new Float[]{ 2.0f, 10.0f, 8.0f, 99.0f, 20.0f, 12.9f};
+Float sum     = fold(numbers, (x, y) -> x + y, 0.0f);
+Float product = fold(numbers, (x, y) -> x * y, 1.0f);
+Float maximum = fold(numbers, (x, y) -> Math.max(x, y), Float.NEGATIVE_INFINITY);
+```
+
+<Submit>
+**Submit:**  Your implementation of `fold` in a file named `Problem2.java`.
+</Submit>
+
+### _Advanced Topic:_  Monoids
+
+It is desirable for the binary operation and identity element to satisfy the definition of a mathematical [monoid](https://en.wikipedia.org/wiki/Monoid):
+
+1. The binary operation should be **associative**, `apply(a, apply(b, c)) = apply(apply(a,b), c)` for any three elements `a`, `b`, `c`.
+2. The identity element should be **neutral**.  Combining an element `e` with the identity should not change the original element.  In general, for all `e`, we want `apply(e,1) = apply(1,e) = e`.
+
+As an example, *addition* is a binary operation `(a,b) -> a + b`.  
+
+- Addition is associative, `(a + b) + c = a + (b + c)`.
+- The identity element for addition is `1`, since `1 + e = e + 1` for all numbers `e`.
+
+### _Advanced Topic:_  Recursion Schemes
+
+This idea of separating the _recursive structure_ of a program from the actual _operations_ is called **factoring out recursion**.  Factoring out recursion is a useful design pattern when working with recursive data structures like trees.  Languages like Haskell have a type system capable of describing generic [recursion schemes](https://blog.sumtypeofway.com/posts/introduction-to-recursion-schemes.html) for traversing recursive data structures.
+
+## Problem 3 (Postfix Expression Evaluation)
+
+One of the most important applications of _data structures_ is in the implementation of programming language compilers and interpreters.  This problem is an introduction to **parsing** and **expression evaluation**.  We are roughly following Chapter 4.4 of the _Koffman & Wolfgang_ book, which presents the same information in a slightly different way.
+
+### Postfix Expressions
+
+We normally write mathematical expressions using **infix notation**, like `(5 + 3) * (4 / 2) + 9`, where the mathematical operator appears _between_ its arguments (also called _operands_).  Infix notation is easy for humans to read, because we can easily scan left and right to understand the input to each operator.
+
+A computer, however, processes the expression string one character at a time, from left to right.  It will be easier to evaluate an expression if the operands always appear _before_ the operator, as in [**postfix notation**](https://en.wikipedia.org/wiki/Reverse_Polish_notation) (also called _Reverse Polish Notation_).  The table below compares equivalent postfix and infix expressions.
+
+import "./lab05.css";
+
+| Postfix          | Infix         |
+| --------         | -------       |
+| `1 4 +`          | `1 + 4`       |
+| `2 3 *`          | `2 * 3`       |
+| `1 2 + 3 *`      | `(1 + 2) * 3` |
+| `10 2 + 4 1 - *` | `(10 + 2) * (4 - 1)`       |
+
+### Evaluating Postfix Notation with a Stack
+
+Expressions written in postfix notation can be evaluated using a single **operand stack**.
+
+- First, split the input expression (`1 2 * 3 +`) into individual tokens (like `1`, `+`, etc.).
+
+- Next, process each token in the input expression from left to right.
+
+  - If the token is a **number**, add it to the stack.
+  - If the token is an **operator** like `+`, then:
+
+    - Pop one or more values off the stack.  (`+` is a binary operator, so pop two values `1` and `2`)
+    - Compute the result of the operation. (compute `1 + 2`)
+    - Push the computed value (`3`) onto the stack.
+
+The diagram below shows how the postfix expression `(10 2 + 4 1 - *)` is evaluated with a stack.
+
+import imagePostfixDiagram from "../images/postfix-diagram.svg";
+
+<Image layout="constrained" src={imagePostfixDiagram} alt="Step-by-step evaluation of a postfix expression using a stack."/>
+
+### Implementation
+
+Implement the `evaluatePostfix` function, which takes a string in postfix notation as input, and uses the stack-based evaluation algorithm described above to produce an integer output.  Your implementation should use a [`java.util.Stack<Integer>`](https://docs.oracle.com/javase/8/docs/api/java/util/Stack.html).
+
+```java
+public static int evaluatePostfix(String expr) {
+  Stack<Integer> operands = new Stack<>();
+
+  // TODO: Implement me!
+}
+```
+
+Your solution must include error handling for the following special cases.  You can decide what kind of error to throw.
+
+- **Not Enough Operands:** An expression like `1 *` is invalid, because `*` expects two inputs.
+- **Unused Operands:** An expression like `1 2 + 7 * 4` is invalid because the state of the stack will be `21 4` after the algorithm finishes.  The operands `21` and `4` are not ever consumed.
+
+<Submit>
+**Submit:**  Your implementation of `evaluatePostfix` in a file named `Problem3.java`.
+</Submit>
+
+## Problem 4 (Expression Tree)
+
+This problem continues Problem 3.  Instead of *evaluating* the expression, you will use a similar stack-based algorithm to construct a *tree* that represents the structure of a mathematical expression in infix-notation.  Parsing a string into an [**abstract syntax tree**](https://en.wikipedia.org/wiki/Abstract_syntax_tree) is an essential step in the implementation of compilers and interpreters.
+
+### `Expr` Data Type
+
+The following `Expr` interface represents an **expression**.  For the purposes of this problem, an expression is anything that can be **evaluated** to an integer.
+
+```java
+interface Expr {
+  Integer evaluate();
+}
+```
+
+In programming language terminology, a [**literal**](https://en.wikipedia.org/wiki/Literal_(computer_programming)) is the textual representation of a value.  For example, in the postfix notation `3 2 +`, the numbers `3` and `2` are both literals.  Integer literals are the simplest possible expression -- they simply evaluate to the number itself.
+
+```java
+class LiteralExpr implements Expr {
+  Integer literal;
+  
+  public LiteralExpr(Integer literal) {
+    this.value = value;
+  }
+
+  public Integer evaluate() {
+    return this.value;
+  } 
+}
+```
+
+### Binary Expressions
+
+A **binary expression** is an expression that combines two other expressions.  The `BinaryExpr` class has three fields:
+
+* `String op` is a string representing a binary operator (`+`, `-`, `*`, `/`).
+* `Expr left` is the first input to the binary operator.
+* `Expr right` is the second input to the binary operator.
+
+Notice that `BinaryExpr` is a **recursive data structure** -- `left` and `right` might also be `BinaryExpr`s!
+
+
+```java
+class BinaryExpr implements Expr {
+
+  Expr left;
+  Expr right;
+  String op;
+
+  BinaryExpr(Expr left, Expr right, String op) {
+    this.left = left;
+    this.right = right;
+    this.op = op;
+  }
+
+  @Override
+  public Integer evaluate() {
+    // TODO: Implement me!
+  }
+
+  public String toString() {
+    // TODO: Implement me!
+  }
+}
+```
+
+### Part A (Implement `BinaryExpr.evaluate()`)
+
+Implement the `BinaryExpr.evaluate()` method.  Evaluate both the `left` and `right` inputs and read the `op` string to compute the appropriate result (addition, subtraction, multiplication, or division).
+
+<Submit>
+**Submit:**  Your implementation of `BinaryExpr.evaluate()`.
+</Submit>
+
+### Part B (Building Expression Trees)
+
+Modify your code from Problem 3 to convert a postfix `String` into an `Expr` expression tree.  Your implementation should use a [`java.util.Stack<Expr>`](https://docs.oracle.com/javase/8/docs/api/java/util/Stack.html).  
+
+- First, split the input expression (`1 2 * 3 +`) into individual tokens (like `1`, `+`, etc.).
+
+- Next, process each token in the input expression from left to right.
+
+  - If the token is a **number**, push a new `LiteralExpr` onto the stack.
+  - If the token is a **binary operator** like `+`, then:
+
+    - Pop two `Expr` off the stack.
+    - Create a new `BinaryExpr` and push it onto the stack.
+
+(_Note:_ Modifying my Problem 3 solution to work for Problem 4 only required **changing 5 lines of code**.)
+
+```java
+public static Expr parsePostfixExpr(String expr) {
+  Stack<Expr> expressions = new Stack<>();
+
+  // TODO: Implement me!
+}
+```
+
+<Submit>
+**Submit:**  Your implementation of `BinaryExpr.evaluate()`.
+</Submit>
+
+### Expression Tree Visualization
+
+Below is a visualization of the stack-based algorithm to convert postfix notation into an expression tree. 
+
+import imagePostfixTreeDiagram from "../images/postfix-tree-diagram.svg";
+
+<Image layout="constrained" src={imagePostfixTreeDiagram} alt="Step-by-step construction of an expression tree from a postfix expression."/>
+
+
+
+### Part C (Implement `BinaryExpr.toString()`)
+
+Implement the `BinaryExpr.toString()` method.  Your implementation should use an [**in-order traversal**](https://en.wikipedia.org/wiki/Tree_traversal#In-order,_LNR) of the expression tree to print the expression in **infix notation**, with parentheses `(` `)` around each binary expression.
+
+```java
+Expr example = parsePostfixExpr("10 2 + 4 1 - *");
+System.out.println(example);
+// Output: ((10 + 2) * (4 - 1))
+```
+
+<Submit>
+**Submit:**  Your solutions in a single file named `Problem4.java`.
+</Submit>
+
+## _Optional:_ Extensions
+
+For extra practice, I encourage you to try the following extensions to your expression parser:
+
+1. Modify your implementation to support multiple **data types**.  For example, `(5 > 10) and (4 + 1 > 8)` combines both booleans and integers in a single expression.
+
+2. For an `Expr` data type that supports both integer and boolean expressions, implement a **type-checking** function `boolean typeCheck(Expr e)` that returns `true` if all expressions are **well-typed**, and `false` otherwise.  For example, the expression `4 + (3 == 2)` is *not* well-typed because `4` is an integer but `(3 == 2)` is a boolean.
+
+3. At the moment, your implementation probably throws a runtime error for invalid expressions like `5 1 3 +` or `1 +`.  How would you modify your implementation to report a more helpful error to the user?
+
+4. Implement the [Shunting Yard Algorithm](https://en.wikipedia.org/wiki/Shunting_yard_algorithm) to parse expressions in infix notation, producing an expression tree as output.
+
+{/* 
+- Shunting Yard
+- adding boolean expressions
+- error reporting
+- type checking
+- sealed records
+ */}
