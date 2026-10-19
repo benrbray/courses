@@ -1,0 +1,60 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-q3twtqk3><head><title>CIS 3308: Project #2:  TypeScript</title><meta charset="utf-8"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><link rel="icon" href="/courses/favicon.ico"><meta name="viewport" content="width=device-width"><style>.nav[data-astro-cid-wcn3wb46]{margin:var(--gap-2) 0;justify-content:flex-end;display:flex}.nav-courses[data-astro-cid-wcn3wb46]{padding:var(--gap-0) var(--gap-1);border-radius:var(--gap-1);gap:var(--gap-2);background-color:var(--theme-pattern-bg);justify-content:flex-end;font-family:ui-monospace,Cascadia Code,Source Code Pro,Menlo,Consolas,DejaVu Sans;font-size:1.2rem;display:flex}.nav-courses[data-astro-cid-wcn3wb46] a[data-astro-cid-wcn3wb46]{color:#1642a1;font-weight:700;text-decoration:none}.sc[data-astro-cid-wcn3wb46]{font-variant:small-caps}
+</style><link rel="stylesheet" href="/courses/_astro/LayoutBlock.CERbqUlw.css"><style>.submit-instructions{padding:var(--gap-1);margin:var(--gap-2) 0;background-color:#8bbdce;border-radius:.5em}.submit-instructions .submit-label{font-weight:700}.submit-instructions .submit-body p:first-child{margin-top:0}.submit-instructions .submit-body p:last-child{margin-bottom:0}.submit-instructions code{background-color:#b9dbe6}@media (width<=48rem){.flex-row{flex-direction:column}}.flex-row{gap:var(--gap-2);display:flex}.flex-row>*{flex:1}.flex-row img{min-width:0;max-width:100%;height:auto;display:block}
+</style><style>.submit-example[data-astro-cid-7qyukoil]{color:#00008b;background-color:#add8e6;padding:1em}
+</style></head><body class="theme-brown" data-astro-cid-q3twtqk3><div class="column-normal"><nav class="nav" data-astro-cid-wcn3wb46><div class="nav-courses" data-astro-cid-wcn3wb46><div data-astro-cid-wcn3wb46><em data-astro-cid-wcn3wb46>Fall 2026</em></div><div data-astro-cid-wcn3wb46><a href="/courses/temple/cis1051" data-astro-cid-wcn3wb46="true">1051</a></div><div data-astro-cid-wcn3wb46><a href="/courses/temple/cis2168" data-astro-cid-wcn3wb46="true">2168</a></div><div data-astro-cid-wcn3wb46><a href="/courses/temple/cis3308" data-astro-cid-wcn3wb46="true">3308</a></div></div></nav><div class="layout-block"><h1>cis3308</h1>Temple University, Japan Campus</div><div class="layout-block"><h1>Project #2:  TypeScript</h1><p>For this project, you can choose either <strong>Option #1</strong>, <strong>Option #2</strong>, or <strong>Option #3</strong>.</p>
+<p>In addition to submitting your code, you will present your work <strong>In-Class on Friday, October 30</strong>.</p>
+<h2 id="option-1-propose-your-own-idea">Option #1: Propose Your Own Idea!</h2>
+<p>Propose your own idea in-class on or before <strong>Friday, October 23</strong>.</p>
+<ul>
+<li>
+<p>Your idea should have a similar level of difficulty to <strong>Option #2</strong>.</p>
+</li>
+<li>
+<p>Choose a project that you think will demonstrate your knowledge of:</p>
+<ul>
+<li><code>TypeScript</code></li>
+<li>User interaction &amp; events</li>
+<li>Dynamically creating HTML elements with the DOM API</li>
+</ul>
+</li>
+</ul>
+<h2 id="option-2-asteroids-game-difficulty-medium">Option #2: Asteroids Game (Difficulty: Medium)</h2>
+<p>Complete the asteroids game we started in class!</p>
+<p><strong>Required Improvements:</strong></p>
+<ol>
+<li>Currently the player is drawn as a circle.  Use a triangle (or, an image) instead.  The player graphic should always rotate in the direction that the ship is moving.</li>
+<li>Modify the movement logic so that <code>Left</code>/<code>Right</code> rotates the ship, and <code>Up</code>/<code>Down</code> applies forward and backward thrust.</li>
+<li>When the user presses <code>Space</code>, have the ship fire a missile.  When the missile hits an asteroid, the asteroid should disappear (or break into many smaller asteroids!).</li>
+<li>Display the user’s score on the page (as HTML, not Canvas).</li>
+<li>Make it so that any object (player, asteroids, bullets) that leaves the screen automatically <em>wraps around</em> and reappears on the opposite side.</li>
+<li>When the player collides with an asteroid, implement a game over menu (created with HTML, not with Canvas.)  The game over menu should show a <strong>leaderboard</strong> and allow the player to enter their name and save their score to the leaderboard.  Also include a <code>Restart Game</code> button.</li>
+<li>Update the boring CSS of the page to fit the theme of the game!</li>
+<li>In addition, implement at least one of the optional improvements below.</li>
+</ol>
+<p><strong>Optional Improvements:</strong></p>
+<ol>
+<li><strong>Two-Player Mode:</strong> Add a second ship controlled by <code>WASD</code>.</li>
+<li><strong>Power-Ups:</strong> Introduce power-ups that affect the ship’s movement or weapons.</li>
+<li><strong>Planets:</strong> Make the game world larger than just the size of the canvas window.  In addition to asteroids, add planets that have a graviational influence on the asteroids, the player’s ship, and the bullets.  Tune the gravitational force so that the game is still fun (i.e. the planets shouldn’t just act as a black hole).</li>
+<li><strong>Graphics:</strong> Make the game’s graphics more interesting (Exactly how is up to you!  One option could be to learn about WebGL or <a href="https://threejs.org/">ThreeJS</a>).</li>
+</ol>
+<h2 id="option-3-static-site-generator-difficulty-hard">Option #3: Static Site Generator (Difficulty: Hard)</h2>
+<p>Extend the <strong>static site generator</strong> we started in class.</p>
+<p><strong>Required Improvements:</strong></p>
+<ol>
+<li>
+<p>Replace our custom Markdown parser with a production-quality one.  I recommend using <code>remark</code>.  You will need to <code>npm install</code> a few packages and read the online documentation to find examples of how to use it.</p>
+</li>
+<li>
+<p>Generate a homepage for your static website that includes a website title along with a list of all of the published blog posts.  Each blog post should show a title, description, publication date, and list of tags.  All of these details should be parsed from the Markdown file.  (You can use YAML frontmatter for this.)</p>
+</li>
+<li>
+<p>Generate one page for each tag.  For example <code>yourwebsite.github.io/project2/tags/programming</code> should show a list of all of the blog posts tagged with <code>programming</code>.</p>
+</li>
+<li>
+<p>Generate a table of contents for each blog post.  You can either do this manually, or use a <code>remark</code> plugin.</p>
+</li>
+<li>
+<p>You should also put substantial effort into the visual appearance / CSS of your statically generated website.</p>
+</li>
+</ol></div></div></body></html>
