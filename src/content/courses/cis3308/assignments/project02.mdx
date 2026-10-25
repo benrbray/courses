@@ -1,0 +1,62 @@
+---
+title: "Project #2:  TypeScript"
+course: cis3308
+kind: project
+published: true
+---
+
+import SubmitExample from "./SubmitExample.astro";
+import Image from "@components/Image.astro";
+
+For this project, you can choose either **Option #1**, **Option #2**, or **Option #3**.
+
+In addition to submitting your code, you will present your work **In-Class on Friday, October 30**.
+
+## Option #1: Propose Your Own Idea!
+
+Propose your own idea in-class on or before **Friday, October 23**.
+
+- Your idea should have a similar level of difficulty to **Option #2**.
+- Choose a project that you think will demonstrate your knowledge of:
+
+  * `TypeScript`
+  * User interaction & events
+  * Dynamically creating HTML elements with the DOM API
+
+## Option #2: Asteroids Game (Difficulty: Medium)
+
+Complete the asteroids game we started in class!
+
+**Required Improvements:**
+
+1. Currently the player is drawn as a circle.  Use a triangle (or, an image) instead.  The player graphic should always rotate in the direction that the ship is moving.
+2. Modify the movement logic so that `Left`/`Right` rotates the ship, and `Up`/`Down` applies forward and backward thrust.
+3. When the user presses `Space`, have the ship fire a missile.  When the missile hits an asteroid, the asteroid should disappear (or break into many smaller asteroids!).
+4. Display the user's score on the page (as HTML, not Canvas).
+4. Make it so that any object (player, asteroids, bullets) that leaves the screen automatically _wraps around_ and reappears on the opposite side.
+4. When the player collides with an asteroid, implement a game over menu (created with HTML, not with Canvas.)  The game over menu should show a **leaderboard** and allow the player to enter their name and save their score to the leaderboard.  Also include a `Restart Game` button.
+5. Update the boring CSS of the page to fit the theme of the game!
+5. In addition, implement at least one of the optional improvements below.
+
+**Optional Improvements:**
+
+1. **Two-Player Mode:** Add a second ship controlled by `WASD`.
+2. **Power-Ups:** Introduce power-ups that affect the ship's movement or weapons.
+3. **Planets:** Make the game world larger than just the size of the canvas window.  In addition to asteroids, add planets that have a graviational influence on the asteroids, the player's ship, and the bullets.  Tune the gravitational force so that the game is still fun (i.e. the planets shouldn't just act as a black hole).
+4. **Graphics:** Make the game's graphics more interesting (Exactly how is up to you!  One option could be to learn about WebGL or [ThreeJS](https://threejs.org/)).
+
+## Option #3: Static Site Generator (Difficulty: Hard)
+
+Extend the **static site generator** we started in class.
+
+**Required Improvements:**
+
+1. Replace our custom Markdown parser with a production-quality one.  I recommend using `remark`.  You will need to `npm install` a few packages and read the online documentation to find examples of how to use it.
+
+2. Generate a homepage for your static website that includes a website title along with a list of all of the published blog posts.  Each blog post should show a title, description, publication date, and list of tags.  All of these details should be parsed from the Markdown file.  (You can use YAML frontmatter for this.)
+
+3. Generate one page for each tag.  For example `yourwebsite.github.io/project2/tags/programming` should show a list of all of the blog posts tagged with `programming`.
+
+3. Generate a table of contents for each blog post.  You can either do this manually, or use a `remark` plugin.
+
+4. You should also put substantial effort into the visual appearance / CSS of your statically generated website.
