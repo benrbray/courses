@@ -1,0 +1,193 @@
+---
+title: "Lab #6:  Trees"
+course: cis2168
+kind: lab
+published: true
+---
+
+import { Image } from "astro:assets"
+
+## Problem 1 (Measuring Trees)
+
+For this problem, use the following `BinaryTree` class.
+
+```java
+class BinaryTree<E> {
+  
+  public E data;
+  public BinaryTree<E> left;  // null if no left child
+  public BinaryTree<E> right; // null if no right child
+
+  BinaryTree(E data, BinaryTree<E> left, BinaryTree<E> right) {
+    this.data = data;
+    this.left = left;
+    this.right = right;
+  }
+
+}
+
+```
+
+### Part A (Size)
+
+The **size** of a tree is the number of nodes in the tree (including both *internal nodes* and *leaf nodes*).  Implement a recursive function named `size` that calculates the size of a `BinaryTree`.
+
+```java {2}
+public static <E> int size(BinaryTree<E> tree) {
+  // TODO:  Implement me!
+}
+```
+
+### Part B (Height)
+
+The **height** of a tree is the length of the longest path from the **root** to a **leaf node** of the tree.  Implement a recursive function named `height` that calculates the height of a `BinaryTree`.
+
+```java {2}
+public static <E> int height(BinaryTree<E> tree) {
+  // TODO: Implement me!
+}
+```
+
+<Submit>
+**Submit:** Your implementation of `size` and `height` in a file named `Problem1.java`.
+</Submit>
+
+## Problem 2 (Invariants)
+
+### Part A (Binary Search Tree Invariant)
+
+Recall that a **Binary Search Tree (BST)** is a binary tree that satisfies the **Binary Search Tree Invariant**:  Every node `n` must be _larger_ than its left subtree but _smaller_ than its right subtree.  Implement a function `isBinarySearchTree` which returns `true` if the given `BinaryTree` satisfies the BST invariant, and `false` otherwise.
+
+```java {2}
+public static <E extends Comparable<E>> boolean isBinarySearchTree(BinaryTree<E> tree) {
+  // TODO: Implement me!
+}
+```
+
+### Part B (Heap Invariant)
+
+Recall that a **Max-Heap** is a binary tree that satisfies the **Max-Heap Invariant**:  Every node `n` must be _greater than or equal to_ all elements in both its left and right subtrees.  Implement a function `isMaxHeap` which returns `true` if the given `BinaryTree` satisfies the Max-Heap invariant, and `false` otherwise.
+
+```java {2}
+public static <E extends Comparable<E>> boolean isMaxHeap(BinaryTree<E> tree) {
+  // TODO: Implement me!
+}
+```
+
+<Submit>
+**Submit:** Your implementation of `isBinarySearchTree` and `isMaxHeap` in a file named `Problem2.java`.
+</Submit>
+
+## Problem 3 (Tree Traversals)
+
+When implementing iterators for tree data structures, there several different kinds of [tree traversals](https://en.wikipedia.org/wiki/Tree_traversal).  Every traversal must visit the root, explore the left subtree, and explore the right subtree, but we have a choice of the order that these operations are performed.
+
+### Part A (Pre-Order Traversal)
+
+A **pre-order traversal** traverses parents before children.
+
+1. visit the current node
+2. recursively perform a pre-order traversal of the left subtree
+3. recursively perform a pre-order traversal of the right subtree 
+
+For example, the pre-order traversal of the tree below is `A B C D E F`.
+
+import imageTreeTraversal1 from "../images/tree-traversal-1.png";
+
+<Image layout="constrained" src={imageTreeTraversal1} alt="Step-by-step evaluation of a postfix expression using a stack."/>
+
+The following Java method uses a pre-order traversal of a `BinaryTree` to print the data in each node.
+
+```java
+public static <E> void printPreOrder(BinaryTree<E> tree) {
+  if(tree == null) { return; }   // BASE:  empty tree
+  System.out.println(tree.data); // print the root
+  printPreOrder(tree.left);      // recursively print left subtree
+  printPreOrder(tree.right);     // recursively print right subtree
+}
+```
+
+Implement an `Iterator<E>` for the `BinaryTree<E>` class that returns a **pre-order** traversal of the tree.  (_Hint:_ You may want to add a `private Deque<BinaryTree<E>> stack` field to your iterator.  Your solution will look more like a loop iteration than like recursion.)
+
+```java {4}
+class PreOrderIterator<E> implements Iterator<E> {
+  private Deque<BinaryTree<E>> stack;
+
+  // TODO: Implement me!
+}
+```
+
+### Part B (In-Order Traversal)
+
+An **in-order traversal** traverses the tree in the following order:
+
+1. recursively perform an in-order traversal of the left subtree
+2. visit the current node
+3. recursively perform a in-order traversal of the right subtree 
+
+For example, the in-order traversal of the tree below is `C B D A E F`.
+
+<Image layout="constrained" src={imageTreeTraversal1} alt="example tree"/>
+
+The following Java method uses an in-order traversal of a `BinaryTree` to print the data in each node.
+
+```java
+public static <E> void printInOrder(BinaryTree<E> tree) {
+  if(tree == null) { return; }   // BASE:  empty tree
+  printInOrder(tree.left);       // recursively print left subtree
+  System.out.println(tree.data); // print the root
+  printInOrder(tree.right);      // recursively print right subtree
+}
+```
+
+Implement an `InOrderIterator` for the `BinaryTree` class.
+
+```java {2}
+class InOrderIterator<E> implements Iterator<E> {
+  // TODO: Implement me!
+}
+```
+
+### Part C (Post-Order Traversal)
+
+In a **post-order traversal**, all children are visited before their parents.
+
+1. recursively perform a post-order traversal of the left subtree
+2. recursively perform a post-order traversal of the right subtree 
+3. visit the current node
+
+The following Java method uses a post-order traversal of a `BinaryTree` to print the data in each node.
+
+```java
+public static <E> void printPostOrder(BinaryTree<E> tree) {
+  if(tree == null) { return; }   // BASE:  empty tree
+  printPostOrder(tree.left);     // recursively print left subtree
+  printPostOrder(tree.right);    // recursively print right subtree
+  System.out.println(tree.data); // print the root
+}
+```
+
+What is the **post-order traversal** of the example tree below?
+
+<Image layout="constrained" src={imageTreeTraversal1} alt="example tree"/>
+
+No implementation is required for this part!
+
+
+### Part D (Level Order Traversal)
+
+A **level-order traversal** of a tree visits the root node first, then all nodes on **level 1** of the tree, then all nodes on **level 2**, and so on.  The level order of the example tree below is `A B E C D F`.  
+
+<Image layout="constrained" src={imageTreeTraversal1} alt="example tree"/>
+
+Implement a `LevelIterator` that returns all the nodes of a `BinaryTree` in level order.  You may find it helpful to use a `Queue<E> storage` field inside of your iterator.
+
+```java {2}
+class LevelIterator<E> implements Iterator<E> {
+  // TODO: Implement me!
+}
+```
+
+<Submit>
+**Submit:** Your implementations of `PreOrderIterator`, `InOrderIterator`, and `LevelOrderIterator` in a single file named `Problem3.java`.  Include a comment near the top of the file with your written answer for Part C.
+</Submit>
