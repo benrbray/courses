@@ -1,0 +1,135 @@
+---
+title: "Lab #7:  Sorting Algorithms"
+course: cis2168
+kind: lab
+published: true
+---
+
+import { Image } from "astro:assets"
+import imagePartitionQuickSort from "../images/partition-sort.svg";
+import imagePartitionSelect1 from "../images/partition-select1.svg";
+import imagePartitionSelect2 from "../images/partition-select2.svg";
+
+## Problem 1 (Parity Sort)
+
+### Review: Partition Operation
+
+As we discussed in class, the quicksort algorithm relies on the `partition` operation to rearrange elements of an array in relation to the **pivot** element `P`.  After partitioning, the left partition contains all elements `≤ P`, and the right partition contains all elements `≥ P`.  Below is the implementation of `partition` we used in class.
+
+```java
+/// Applies the partition operation to the range `[start, end)` of the input `array`.
+/// The partition is performed in-place, modifying the original array.
+/// Returns the new index of the pivot element (which is in its final, sorted location!).
+///     RUNTIME: O(n) Linear
+///     REQUIRES: `length >= 2` and `0 <= start <= pivot < end <= length`
+public static int partition(int[] array, int start, int end, int pivotIdx) {
+  // swap the pivot with the first element
+  swap(array, pivotIdx, start);
+  // INVARIANT:
+  //   start <= i < L    ==>  array[i] <= array[pivotIdx]
+  //       R <  i < end  ==>  array[i] >= array[pivotIdx]
+  int L = start+1;
+  int R = end-1;
+
+  // advance L and R, swapping elements as needed to maintain the invariant
+  while(L <= R) {
+    if      (array[L] <= array[pivotIdx]) { L++; }
+    else if (array[R] >= array[pivotIdx]) { R--; }
+    else {
+      // both l and r are on the wrong side of pivot, so swap them
+      swap(array, L, R);
+    }
+  }
+
+  // after the loop, R = L-1
+  // the partition boundary is between L and R
+  // so, move the pivot into its final, sorted location (L1)
+  int newPivot = L-1;
+  swap(array, start, newPivot);
+  return newPivot;
+}
+```
+
+The diagram below shows the step-by-step `partition` process for the array `8 4 6 1 7 2 3 6 4 9 0`.
+
+<Image width="600" layout="constrained" src={imagePartitionQuickSort} alt="Step-by-step evaluation of a postfix expression using a stack."/>
+
+### Part A: Implement `paritySort`
+
+Using the `partition` function as inspiration, implement a function called `paritySort` that takes an array of numbers as input, and modifies the list **in-place** to create two partitions:
+
+- The **left** partition should contain all the even numbers in the list.
+- The **right** partition should contain all the odd numbers in the list.
+
+Your implementation should have `O(N)` runtime, just like `partition`.  Your implementation should have `O(1)` space complexity, meaning you can allocate new variables, but the amount of space your algorithm needs should not grow with the size of the array.  (You should not allocate new arrays or lists!)
+
+```java {2}
+// RUNTIME: O(n) linear
+public static void paritySort(int[] array) {
+  // TODO: Implement me!
+}
+```
+
+### Part B: Parity Sort Diagram
+
+Draw a diagram, similar to the one for `partition` above, demonstrating how your `paritySort` function works.  Choose an input array with at least 10 elements that requires at least 2 swaps.
+
+<Submit>
+**Submit:** Your Part A implementation of `paritySort` in a file named `Problem1.java`.  In a comment, explain why you think your solution has `O(N)` runtime.  Include your Part B diagram either as an image or PDF.
+</Submit>
+
+
+## Problem 2 (Selection)
+
+The **Selection Problem** is concerned with selecting the `k`th smallest element from a set of `N` distinct numbers.
+
+- **Input:** A set `A` of `N` distinct numbers and an integer `k`, with `1 <= k <= N`.
+- **Output:** The element `x ∈ A` that is larger than exactly `k - 1` other elements of `A`.
+
+For example, `Select(A=[6,24,7,8,1,4], k=3)` should return `6`, because there are exactly `k-1 = 2` numbers in the list smaller than `6`, namely `1` and `4`.
+
+### Part A (`O(N log N)` Solution)
+
+Propose an algorithm for solving the selection problem that runs in worst-case `O(N log N)` time.  You can submit either a Java implementation, or just a pseudo-code description of your algorithm.  Include an explanation about why you believe your solution will run in `O(N log N)` time.
+
+(_Hint:_ You can re-use any of the sorting algorithms we discussed in class as one step of your algorithm.)
+
+### Part B (Solution with Partitioning)
+
+In this part, you will use the `partition` operation from quicksort to design a linear-time algorithm for the selection problem.  Accordingly, the algorithm will be called [**quick-select**](https://en.wikipedia.org/wiki/Quickselect).
+
+```java {8}
+/// RETURNS:
+///    An integer `x`, such that there are exactly
+///    `k-1` numbers in the array less than `x`.
+/// REQUIRES:
+///     `numbers` has no duplicate elements
+///     1 <= k <= numbers.length
+public static int quickSelect(int[] numbers, int k) {
+  // TODO: Implement me!
+}
+```
+
+To get started, recall that after using `partition` on an array, the **pivot** element will always be in its final, correct position.  The diagram below shows the steps taken by `partition([6,8,3,7,4,1,2,5,0,9])` when `pivotIdx = 0`.
+
+<Image width="600" layout="constrained" src={imagePartitionSelect1} alt="Step-by-step evaluation of a postfix expression using a stack."/>
+
+After partitioning, the pivot value has moved to `pivotIdx = 6`.  There are exactly `6` smaller elements, all located to the left, and exactly `3` larger elements, all located to the right.  The pivot is already in its **final, sorted location** even if the rest of the array is not yet sorted.
+
+This observation is helpful for the **Selection Problem** because if we are looking for the `6th` smallest element, we can already stop and return the pivot value!  Otherwise, if we're looking for the `4th` smallest, we know it _must_ lie in the left partition.  If we're looking for the `8th` smallest, we know it _must_ lie in the right partition.  So, we can solve the **Selection Problem** by repeatedly calling `partition`!
+
+**Implement the `quickSelect` algorithm** by repeatedly calling `partition` on the input array.  You can use either iteration or recursion.  You will need to carefully manage array indexes on each step.  You may want to use the `quickSelect` signature defined above as a wrapper for a different recursive function that takes additional arguments like `start` and `end`, just as we did for `quickSort`.
+
+For this problem, feel free to reference any human-authored resources you can find online about the quick-select algorithm.  (However, I strongly recommend seeing if you can solve it yourself, before looking online for help!)
+
+### Part C (Runtime Analysis)
+
+If implemented correctly, the `QuickSelect` algorithm has an `O(N)` best/average-case runtime and an `O(N^2)` worst-case runtime, just like `QuickSort`.
+
+- **Worst Case:** Give a worst-case input for quick-select that causes the algorithm to run in `O(N^2)` time.
+
+- **Best/Average Case:** Make an informed guess about why the average-case runtime of quick-select is `O(N)`.  To get started, recall that choosing a **good pivot** is essential to the runtime analysis of quicksort.  If every pivot divides the array roughly in half, we end up with `O(log N)` recursive calls, but if the partition is imbalanced, the number of recursive calls grows to `O(N)`.  The same can occurs with quick-select for unlucky inputs.  
+
+  So, for your best-case analysis, **assume that we are always lucky**, and the pivot always divides the array exactly in half.  Under this assumption, can you make an argument that quick-select runs in `O(N)` time?
+
+  (_Hint:_ Use a [geometric series](https://en.wikipedia.org/wiki/Geometric_series).)
