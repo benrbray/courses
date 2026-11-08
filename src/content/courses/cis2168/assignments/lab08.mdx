@@ -1,5 +1,5 @@
 ---
-title: "Lab #8:  Sets and Maps"
+title: "Lab #8:  Maps"
 course: cis2168
 kind: lab
 published: true
@@ -10,22 +10,73 @@ import imagePartitionQuickSort from "../images/partition-sort.svg";
 import imagePartitionSelect1 from "../images/partition-select1.svg";
 import imagePartitionSelect2 from "../images/partition-select2.svg";
 
-## Problem 1
+## Reminder: `Map` Abstract Data Type
 
-- custom hashCode implementatoin
-- hashCode should respect equals
-- show what goes wrong when you store mutable values in a hash table
+```java
+// A collection that contains no duplicate elements.
+public interface Cis2168Map<K,V> extends Iterable<K> {
 
-- measure real performance of hash table
+  /// Updates the map to include the given `(key, value)` pair.
+  /// If the map already contains this key, replaces the old value.
+  /// Otherwise, inserts a new key-value pair.
+  /// REQUIRES: `key != null`
+  void put(K key, V value);
 
-## Problem 2 (Boggle)
+  /// Returns the value associated with the given `key`,
+  /// or `null` if the key is not in the map.
+  /// REQUIRES: `key != null`
+  V get(K key);
 
+  /// Returns `true` if this map has a value for `key`.
+  /// REQUIRES: `key != null`
+  boolean containsKey(K key);
 
+  /// Removes the corresponding key and its value from the map.
+  /// Returns `null` if the key is not in the map.
+  /// REQUIRES: `key != null`
+  V remove(K key);
+  
+  // The number of elements in the set.
+  int size();
+  
+  // Returns `true` if the set has no elements.
+  boolean isEmpty();
+}
+```
 
-## Optional Problems
+## Problem 1 (Implement `SortedArrayMap`)
 
-- Implement `TrieSet.collect()` (make a list of all strings that belong to the `TrieSet`)
+Implement the `Map` abstract data type using a sorted array list.  Try to think it through on your own first, then refer to our [`SortedArraySet` implementation](https://github.com/benrbray/cis2168-fall2026/blob/master/src/tuj/cis2168/lecture13_set/prep/SortedArraySet.java) if you get stuck.
 
-- Implement a `SortedArrayMap<K,V>` using two `ArrayList`s.
-- Implement a `BinarySearchTreeMap<K,V>` using a `Pair<K,V>` with a custom `Compare<K>` implementation.
-- Implement a `HashMap<K,V>` using a custom `Entry<K,V>` class that overrides `hashCode()`.
+```java {6,12}
+import java.util.ArrayList;
+
+public class SortedArrayMap<K extends Comparable<K>, V> implements Cis2168Map<K, V> {
+
+  private static class Entry<K, V> {
+    // TODO: Implement Entry
+  }
+
+  /// An elastic array of key-value pairs.
+  private ArrayList<Entry<K,V>> storage;
+
+  // TODO: Implement SortedArrayMap
+}
+```
+
+## Problem 2 (`TrieMap` Iterator)
+
+Implement the `Iterator<String>` interface for our [`TrieMap` class](https://github.com/benrbray/cis2168-fall2026/blob/master/src/tuj/cis2168/lecture19_map/TrieMap.java).  The iterator should emit all of the *keys* of the `TrieMap`.  You are free to decide which order the keys appear.
+
+```java
+Cis2168Map<String, Integer> wordCounts = new TrieMap<Integer>();
+wordCounts.put("banana", 6);
+wordCounts.put("orangutan", 10);
+wordCounts.put("apple", 2);
+
+// should print "apple", "orangutan", "banana", in no particular order
+for(String word : wordCounts) {
+  System.out.println(word);
+}
+
+```
