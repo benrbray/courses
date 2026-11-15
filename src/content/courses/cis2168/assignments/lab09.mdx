@@ -1,0 +1,128 @@
+---
+title: "Lab #9:  Graphs"
+course: cis2168
+kind: lab
+published: true
+---
+
+## Introduction to Graphs
+
+Today's lab will start with a mini-lecture about graphs, covering Chapters 10.1 - 10.3 of the _Koffman & Wolfgang_ textbook.  Lecture slides are available on Canvas.
+
+## Lab Starter Code
+
+Starter code is available in our [GitHub repository](https://github.com/benrbray/cis2168-fall2026) in the [`lab09_graph` folder](https://github.com/benrbray/cis2168-fall2026/tree/master/src/tuj/cis2168/lab09_graph).
+
+## `DirectedWeightedGraph` Interface
+
+For this lab, we'll use the following `DirectedWeightedGraph` interface.
+
+```java
+import java.util.Iterator;
+
+/// A weighted, directed graph.
+/// - Vertices are represented as integers, starting from zero.
+/// - Edges are represented with the `Edge` class.
+public interface DirectedWeightedGraph {
+  /// Returns |V|, the number of vertices in the graph.
+  int vertexCount();
+  /// Returns |E|, the number of edges in the graph.
+  int edgeCount();
+  /// Returns an iterator to the edges that originate from a given vertex.
+  Iterator<Edge> edgeIterator(int source);
+  /// Returns the `Edge` between two vertices, if it exists.  Otherwise, `null`.
+  Edge getEdge(int source, int target);
+  /// Returns `true` if `source` and `target` are connected by an edge.
+  boolean containsEdge(int source, int target);
+  /// Add a new edge to the graph.
+  void insertEdge(int source, int target, double weight);
+  /// Remove an edge from the graph.
+  void removeEdge(int source, int target);
+
+  /// Number of outgoing edges from this vertex.
+  int degreeOut(int vertex);
+  /// Number of incoming edges from this vertex.
+  int degreeIn(int vertex);
+
+  /// Add a new edge to the graph, with `weight = 1.0`.
+  default void insertEdge(int source, int target) {
+    this.insertEdge(source, target, 1.0);
+  }
+}
+```
+
+The interface above makes use of the `Edge` class, which groups together the `source`, `target`, and optional `weight` of an edge.  In an unweighted graph, we'll use an edge weight of `1.0`.
+
+```java
+/// Immutable class representing an Edge in a graph.
+public class Edge {
+  public final int source;
+  public final int target;
+  public final double weight;
+
+  /// Uses the default `weight = 1.0`.
+  public Edge(int source, int target) {
+    this(source, target, 1.0);
+  }
+
+  public Edge(int source, int target, double weight) {
+    this.source = source;
+    this.target = target;
+    this.weight = weight;
+  }
+}
+```
+
+## Problem 1 (`AdjacencyGraph` In-Degree and Out-Degree)
+
+The *in-degree* of a vertex `v` is the number of edges with `v` as the target.  The *out-degree* of a vertex `v` is the number of edges with `v` as the source.  Implement the `degreeIn` and `degreeOut` methods for the `AdjacencyGraph` class.
+
+```java
+public class AdjacencyGraph implements DirectedWeightedGraph {
+
+  /* ... */
+
+  @Override
+  public int degreeOut(int vertex) {
+    // TODO: Implement me!
+    throw new UnsupportedOperationException("Unimplemented method 'degreeOut'");
+  }
+
+  @Override
+  public int degreeIn(int vertex) {
+    // TODO: Implement me!
+    throw new UnsupportedOperationException("Unimplemented method 'degreeIn'");
+  }
+}
+```
+
+<Submit>
+*Submit:* Your implementation of `AdjacencyGraph.java`.
+</Submit>
+
+## Problem 2 (Implement `MatrixGraph`)
+
+Write a `MatrixGraph` class that uses an adjacency matrix to implement the `DirectedWeightedGraph` interface.  
+
+- You can use a `double[][] matrix` to store the edge weights.
+- An edge weight of `Double.POSITIVE_INFINITY` can be used to represent the absence of an edge.
+
+```java {9, 12}
+public class MatrixGraph implements DirectedWeightedGraph {
+  
+  /// constant representing missing edge in weight matrix
+  public static final double NO_EDGE = Double.POSITIVE_INFINITY;
+
+  private double[][] matrix;
+
+  public MatrixGraph(int numVertices) {
+    // TODO: Implement constructor!
+  }
+
+  // TODO: Implement DirectedWeightedGraph interface!
+}
+```
+
+<Submit>
+*Submit:* Your implementation of `MatrixGraph.java`.
+</Submit>
