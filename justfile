@@ -1,11 +1,26 @@
 dev:
   pnpm run dev
 
-build:
-  pnpm run build
+#### FALL 2026 #############################################
 
-preview: build
-  pnpm run preview
+build-2026fall:
+  pnpm run --filter 2026fall build
+
+preview-2026fall: build-2026fall
+  pnpm run --filter 2026fall preview
+
+#### SPRING 2027 ###########################################
+
+build-2027fall:
+  pnpm run --filter 2027fall build
+
+preview-2027fall: build-2027fall
+  pnpm run --filter 2027fall preview
+
+############################################################
+
+build: build-2026fall
+preview: preview-2026fall
 
 publish:
   pnpm run build
