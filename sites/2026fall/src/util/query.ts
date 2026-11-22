@@ -42,7 +42,7 @@ export const getCoursePosts =
 const BASE_URL = import.meta.env.BASE_URL.replace(/\/$/, ''); // Remove trailing slash if present
 
 export const getPostUrl = (id: string) => {
-  return `${BASE_URL}/temple/${id}`;
+  return `${BASE_URL}/${id}`;
 }
 
 export const getAssignmentUrl = (assignment: CollectionEntry<'assignment'>) => {
@@ -50,5 +50,5 @@ export const getAssignmentUrl = (assignment: CollectionEntry<'assignment'>) => {
   const kind = assignment.data.kind;
   const id = assignment.id.split("/")[2];
 
-  return `${BASE_URL}/temple/${course}/${kind}/${id}`;
+  return `${BASE_URL}/${course}/${kind}/${id}`;
 }

@@ -3,24 +3,19 @@ dev:
 
 #### FALL 2026 #############################################
 
-build-2026fall:
-  pnpm run --filter 2026fall build
-
-preview-2026fall: build-2026fall
-  pnpm run --filter 2026fall preview
-
-#### SPRING 2027 ###########################################
-
-build-2027fall:
-  pnpm run --filter 2027fall build
-
-preview-2027fall: build-2027fall
-  pnpm run --filter 2027fall preview
+# semesters
+mod fall2026 "./sites/2026fall"
+# mod spring2026 "./sites/2027spring"
 
 ############################################################
 
-build: build-2026fall
-preview: preview-2026fall
+############################################################
+
+build:
+  just fall2026 build
+
+preview:
+  just fall2026 preview
 
 publish:
   pnpm run build

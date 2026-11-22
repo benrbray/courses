@@ -1,0 +1,11 @@
+out_dir := "../../../publish/2026fall"
+
+build:
+  pnpm run build
+
+preview: build
+  pnpm run preview
+
+publish:
+  rm -rf {{out_dir}}
+  pnpm astro build --outDir {{out_dir}}
