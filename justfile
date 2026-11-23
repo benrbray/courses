@@ -5,7 +5,7 @@ dev:
 
 # semesters
 mod fall2026 "./sites/2026fall"
-# mod spring2026 "./sites/2027spring"
+mod spring2027 "./sites/2027spring"
 
 ############################################################
 
@@ -14,7 +14,7 @@ mod fall2026 "./sites/2026fall"
 build:
   just fall2026 build
 
-preview:
+preview: build
   just fall2026 preview
 
 publish:

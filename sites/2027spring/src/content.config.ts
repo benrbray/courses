@@ -28,7 +28,7 @@ import { glob } from "astro/loaders";
 // });
 
 const post = defineCollection({
-	loader: glob({ pattern: "*/[^_]*.{md,mdx}", base: "./src/content/courses" }),
+	loader: glob({ pattern: "*/[^_]*.{md,mdx}", base: "./src/content" }),
 	schema: z.object({
 		title: z.string(),
 		course: reference("course"),
@@ -37,7 +37,7 @@ const post = defineCollection({
 })
 
 const assignment = defineCollection({
-	loader: glob({ pattern: "*/assignments/[^_]*.{md,mdx}", base: "./src/content/courses" }),
+	loader: glob({ pattern: "*/assignments/[^_]*.{md,mdx}", base: "./src/content" }),
 	schema: z.object({
 		title: z.string(),
 		course: reference("course"),
@@ -49,7 +49,7 @@ const assignment = defineCollection({
 
 const course = defineCollection({
 	// loader: glob({ pattern: '**/[^_]*.{md,mdx}', base: "./src/content/post" }),
-	loader: glob({ pattern: '[^_]*.{md,mdx}', base: "./src/content/courses" }),
+	loader: glob({ pattern: '[^_]*.{md,mdx}', base: "./src/content" }),
 	schema: z.object({
     subject: z.string(),
     number: z.coerce.string(),

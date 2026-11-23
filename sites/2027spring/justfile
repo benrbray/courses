@@ -1,0 +1,14 @@
+out_dir := "../../../publish/2027spring"
+
+dev:
+  pnpm run dev
+
+build:
+  pnpm run build
+
+preview:
+  pnpm run preview
+
+publish:
+  rm -rf {{out_dir}}
+  pnpm astro build --outDir {{out_dir}}

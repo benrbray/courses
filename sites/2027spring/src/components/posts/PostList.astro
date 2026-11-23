@@ -1,0 +1,30 @@
+---
+import PostLink from './PostLink.astro';
+import { getCoursePosts } from '@util/query';
+
+interface Props {
+  course: string,
+}
+
+const { course } = Astro.props;
+
+// const posts = await getCollection("post", (_post) => {
+//   let match = _post.data.course.id == course
+//   return match;
+// });
+
+const posts = await getCoursePosts(course);
+---
+
+<div>
+{
+  posts.length > 0 ? 
+    posts.map(post => {
+      return (<div>
+        <PostLink postId={post.id} />
+        {/* <a href={`${post.id}`}>{post.data.title}</a> */}
+      </div>)
+    })
+    : <div>(No Posts Published Yet -- Check Back Later!)</div>
+}
+</div>

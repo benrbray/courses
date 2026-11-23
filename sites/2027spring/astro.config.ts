@@ -11,29 +11,33 @@ import solidJs from "@astrojs/solid-js";
 // https://astro.build/config
 export default defineConfig({
   site: 'https://benrbray.com',
-  base: '/courses/2026fall',
+  base: '/courses/2027spring',
   build: {
     format: "file"
   },
-  integrations: [expressiveCode({
-    frames: { showCopyToClipboardButton: false },
-    plugins: [pluginLineNumbers()],
-    defaultProps: {
-      // Optional: Force line numbers on all code blocks automatically
-      showLineNumbers: true, //
-    },
-    themes: [
-      "github-light-default",
-      "one-light", "one-dark-pro", "solarized-dark",
-      "dracula",
-      "material-theme", "material-theme-darker", "material-theme-lighter",
-      "material-theme-ocean", "material-theme-palenight"
-    ],
-    shiki: {
-      // injectLangsIntoNestedCodeBlocks: true,
-      bundledLangs: ["css", "html", "ts", "js", "json", "tsx", "jsx", "bash", "typst", "wasm", "wit", "toml", "markdown", "python", "rust", "haskell", "lean", "coq", "bibtex", "docker", "java", "c", "cpp"],
-    }
-  }), mdx(), solidJs()],
+  integrations: [
+    solidJs(),
+    expressiveCode({
+      frames: { showCopyToClipboardButton: false },
+      plugins: [pluginLineNumbers()],
+      defaultProps: {
+        // Optional: Force line numbers on all code blocks automatically
+        showLineNumbers: true, //
+      },
+      themes: [
+        "github-light-default",
+        "one-light", "one-dark-pro", "solarized-dark",
+        "dracula",
+        "material-theme", "material-theme-darker", "material-theme-lighter",
+        "material-theme-ocean", "material-theme-palenight"
+      ],
+      shiki: {
+        // injectLangsIntoNestedCodeBlocks: true,
+        bundledLangs: ["css", "html", "ts", "js", "json", "tsx", "jsx", "bash", "typst", "wasm", "wit", "toml", "markdown", "python", "rust", "haskell", "lean", "coq", "bibtex", "docker", "java", "c", "cpp"],
+      }
+    }),
+    mdx(), 
+  ],
   markdown: {
     shikiConfig: {
       // theme: "material-theme"
