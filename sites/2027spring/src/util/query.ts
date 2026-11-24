@@ -1,4 +1,4 @@
-import { getCollection, type CollectionEntry, reference, type CollectionKey } from "astro:content";
+import { getCollection, type CollectionEntry, type CollectionKey } from "astro:content";
 // import { asyncFilter } from "./async";
 
 export const IS_PROD = import.meta.env.PROD;
@@ -25,6 +25,8 @@ export const getEntries =
         return filterPred && (isPostPublished || isNotProduction);
       }));
 
+export type CourseId = CollectionEntry<"course">["id"];
+
 ////////////////////////////////////////////////////////////
 
 export const getAssignments = getEntries("assignment");
@@ -33,9 +35,9 @@ export const getCourseAssignments =
 
 /* ------------------------------------------------------ */
 
-export const getPosts = getEntries("post");
-export const getCoursePosts =
-  (course: string) => getPosts(entry => entry.data.course.id == course);
+export const getReading = getEntries("reading");
+export const getCourseReadings =
+  (course: string) => getReading(entry => entry.data.course.id == course);
 
 ////////////////////////////////////////////////////////////
 

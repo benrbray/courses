@@ -25,23 +25,28 @@ export default defineConfig({
         showLineNumbers: true, //
       },
       themes: [
+        "catppuccin-latte",
         "github-light-default",
         "one-light", "one-dark-pro", "solarized-dark",
         "dracula",
         "material-theme", "material-theme-darker", "material-theme-lighter",
-        "material-theme-ocean", "material-theme-palenight"
+        "material-theme-ocean", "material-theme-palenight",
       ],
       shiki: {
         // injectLangsIntoNestedCodeBlocks: true,
         bundledLangs: ["css", "html", "ts", "js", "json", "tsx", "jsx", "bash", "typst", "wasm", "wit", "toml", "markdown", "python", "rust", "haskell", "lean", "coq", "bibtex", "docker", "java", "c", "cpp"],
+      },
+      styleOverrides: {
+        codeFontFamily: "DejaVu Sans Mono"
       }
     }),
     mdx(), 
   ],
   markdown: {
     shikiConfig: {
+      // theme: "github-light-default",
+      theme: "catppuccin-latte"
       // theme: "material-theme"
-      theme: "github-light-default",
       // themes: {
       //   light: "material-theme-darker",
       //   dark: "material-theme",

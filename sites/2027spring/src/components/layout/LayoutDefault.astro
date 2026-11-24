@@ -1,13 +1,22 @@
 ---
+import type { CourseId } from "@util/query";
 import IncludeCss from "./IncludeCss.astro";
+import { getAssignmentUrl, getCourseAssignments } from "@util/query";
+
+/* ---- */
 
 interface Props {
 	pageTitle: string,
+	courseId: CourseId,
 	theme?: string|undefined,
 }
 
-const { pageTitle, theme } = Astro.props;
+const { pageTitle, theme, courseId } = Astro.props;
 const baseUrl = import.meta.env.BASE_URL;
+
+/* ---- */
+
+let assignments = await getCourseAssignments(courseId);
 ---
 
 <!doctype html>
@@ -30,22 +39,28 @@ const baseUrl = import.meta.env.BASE_URL;
 		</div>
 		<!-- Sidebar -->
 		<div class="left-side">
-			<nav class="sidebar-nav">
-				<details class="nav-section" open>
-					<summary>Syllabus</summary>
-					<nav class="section-nav">
-						<div class="section-nav-item"><a href="#">Description</a></div>
-						<div class="section-nav-item"><a href="#">Schedule</a></div>
-					</nav>
-				</details>
-				<details class="nav-section">
-					<summary>Homework</summary>
-					<nav class="section-nav">
-						<div class="section-nav-item"><a href="#">HW1 (Ordered Lists & Iterators)</a></div>
-					</nav>
-				</details>
-			</nav>
 		</div>
+		<nav class="sidebar-nav">
+			<details class="nav-section" open>
+				<summary>Syllabus</summary>
+				<nav class="section-nav">
+					<div class="section-nav-item"><a href="#">Description</a></div>
+					<div class="section-nav-item"><a href="#">Schedule</a></div>
+				</nav>
+			</details>
+			<details class="nav-section" open>
+				<summary>Assignments</summary>
+				<nav class="section-nav">
+					{
+						assignments.map(a => {
+							return <div class="section-nav-item">
+								<a href={getAssignmentUrl(a)}>{a.data.title}</a>
+							</div>
+						})
+					}
+				</nav>
+			</details>
+		</nav>
 		<!-- Content -->
 		<div class="content">
 			<slot />
@@ -61,18 +76,14 @@ const baseUrl = import.meta.env.BASE_URL;
 body {
 	display: grid;
 	grid-template-rows: auto 1fr;
-	grid-template-columns: 1fr minmax(24em, auto) 1fr;
+	grid-template-columns: 1fr auto 60rem auto 1fr;
 	grid-template-areas:
-		"header header header"
-		"left content right"
-		"footer footer footer";
+		"header header header header header"
+		"left sidebar content right right"
+		"footer footer footer footer footer";
 	
 	min-height: 100vh;
 	margin: 0;
-	gap: 0 2em;
-
-	font-family: Optima, Candara, 'Noto Sans', source-sans-pro, sans-serif;
-	font-weight: normal;
 }
 
 /* ---- header ---- */
@@ -80,8 +91,6 @@ body {
 .header {
 	grid-area: header;
 	background-color: rgb(68, 68, 124);
-
-	
 }
 .header-title {
 	font-size: 1.2rem;
@@ -101,7 +110,8 @@ body {
 }
 
 .sidebar-nav {
-	flex-basis: 18em;
+	grid-area: sidebar;
+	background-color: rgb(243, 243, 243);
 }
 
 .nav-section summary {
@@ -132,6 +142,7 @@ body {
 	grid-area: content;
 	padding: var(--gap-1);
 	max-width: 60rem;
+	margin-left: 2em;
 }
 .footer {
 	grid-area: footer;

@@ -1,0 +1,60 @@
+---
+import ColumnNormal from '@layout/ColumnNormal.astro';
+import LayoutBlock from '@layout/LayoutBlock.astro';
+import LayoutDefault from '@layout/LayoutDefault.astro';
+
+import { getEntry } from 'astro:content';
+import { type CollectionEntry, render } from 'astro:content';
+import { getReading } from '@util/query';
+
+// default components available to every page
+import * as Components from "@components/default";
+
+export async function getStaticPaths() {
+	const posts = await getReading();
+
+	return posts.map((post) => {
+		// assume post.id has the format
+		// cisXXXX/slug
+		const parts = post.id.split("/")
+		const courseNumber = parts[0]!
+		const slug = parts[2]
+
+		console.log("------")
+		console.log(courseNumber)
+    console.log(parts)
+		console.log("------")
+
+		return {
+			params: { courseNumber: courseNumber, id: slug },
+			props: post
+		};
+	});
+}
+
+type Props = CollectionEntry<'reading'>;
+
+const params = Astro.params;
+const post = Astro.props;
+const course = await getEntry(post.data.course);
+const { Content } = await render(post);
+---
+
+<LayoutDefault
+	pageTitle={`${course.data.subject} ${course.data.number}: ${post.data.title}`}
+  courseId={params.courseNumber}
+	theme={course.data.theme}
+>
+	<ColumnNormal>
+		<!-- header -->
+		<!-- <LayoutBlock>
+			<h1>{params.courseNumber}</h1>
+			Temple University, Japan Campus
+		</LayoutBlock> -->
+		<!-- main -->
+		<LayoutBlock>
+			<h1>{post.data.title}</h1>
+			<Content components={Components} />
+		</LayoutBlock>
+	</ColumnNormal>
+</LayoutDefault>

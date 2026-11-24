@@ -1,0 +1,17 @@
+.submit-instructions {
+  padding: var(--gap-1);
+  margin: var(--gap-2) 0;
+  background-color: #8bbdce;
+  border-radius: 0.5em;
+}
+
+.submit-instructions .submit-label {
+  font-weight: bold;
+}
+
+.submit-instructions .submit-body p:first-child { margin-top: 0; }
+.submit-instructions .submit-body p:last-child  { margin-bottom: 0; }
+
+.submit-instructions code {
+  background-color: #b9dbe6;
+}

@@ -27,8 +27,8 @@ import { glob } from "astro/loaders";
 // 	priority: z.enum(["normal", "low"]).default("normal")
 // });
 
-const post = defineCollection({
-	loader: glob({ pattern: "*/[^_]*.{md,mdx}", base: "./src/content" }),
+const reading = defineCollection({
+	loader: glob({ pattern: "*/reading/[^_]*.{md,mdx}", base: "./src/content" }),
 	schema: z.object({
 		title: z.string(),
 		course: reference("course"),
@@ -60,5 +60,5 @@ const course = defineCollection({
 });
 
 export const collections = {
-	course, post, assignment
+	course, reading, assignment
 };

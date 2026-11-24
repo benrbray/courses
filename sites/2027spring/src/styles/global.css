@@ -1,3 +1,39 @@
 body {
-  font-family: sans-serif;
+  /* font-family: 'Libertinus Serif', serif; */
+  /* font-family: 'DejaVu Sans', sans-serif; */
+  /* font-family: 'Inter Variable', sans-serif; */
+  /* font-family: 'IBM Plex Serif', serif; */
+  /* font-family: 'Geist Variable', sans-serif; */
+    font-family: 'Atkinson Hyperlegible', sans-serif;
+  font-weight: 400;
+  font-size: 1.1rem;
+  font-style: normal;
+}
+
+pre, code {
+  font-family: "DejaVu Sans Mono", monospace;
+  font-weight: 400;
+  font-size: 0.9em;
+  /* background: #f0f0f0;
+  border-radius: 0.25em; */
+  /* padding: 0.1em 0.2em; */
+  font-style: normal;
+}
+
+p {
+  line-height: 1.4;
+}
+
+h3, h4, h5 {
+  text-decoration: underline;
+  color: rgb(68, 68, 170);
+  text-decoration-thickness: 2pt;
+}
+
+h2 {
+  font-size: 1.6em;
+  background-color: rgb(224, 224, 255);
+  color: rgb(68, 68, 170);
+
+  margin-top: 4em;
 }
